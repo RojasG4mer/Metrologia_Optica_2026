@@ -1,0 +1,5 @@
+venv/
+/venv/
+*.xml
+.idea/PCO_PixelFly.iml
+*.pyc
