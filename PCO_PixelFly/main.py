@@ -1,6 +1,7 @@
 import sys
 from PyQt5 import QtWidgets
 from gui.ventana_principal import VentanaPrincipal
+import cv2
 
 def iniciar_aplicacion():
     # Inicializa el motor de la interfaz gráfica

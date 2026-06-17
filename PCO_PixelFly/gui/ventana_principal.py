@@ -3,6 +3,9 @@ import numpy as np
 from core.pco_camera import CamaraSimulada
 from procesamiento.operaciones_basicas import restar_consecutivas, normalizar_float_a_uint8
 from procesamiento.filtros_en_frecuencia import filtro_pasa_bajas_frecuencia
+import cv2
+import pco
+
 
 class VentanaPrincipal(QtWidgets.QMainWindow):
     def __init__(self):
@@ -36,13 +39,18 @@ class VentanaPrincipal(QtWidgets.QMainWindow):
         self.btn_resta = QtWidgets.QPushButton("Activar Resta: OFF")
         self.btn_filtro = QtWidgets.QPushButton("Activar Pasa Bajas: OFF")
         
-        # Deshabilitar botones de procesamiento hasta que empiece la captura
+        # NUEVO: Botón para guardar
+        self.btn_guardar = QtWidgets.QPushButton("Guardar Imagen Actual")
+        
+        # Deshabilitar botones hasta que empiece la captura
         self.btn_resta.setEnabled(False)
         self.btn_filtro.setEnabled(False)
+        self.btn_guardar.setEnabled(False) # NUEVO
 
         layout_botones.addWidget(self.btn_iniciar)
         layout_botones.addWidget(self.btn_resta)
         layout_botones.addWidget(self.btn_filtro)
+        layout_botones.addWidget(self.btn_guardar) # NUEVO
         
         self.label_imagen = QtWidgets.QLabel("Esperando hardware...")
         self.label_imagen.setAlignment(QtCore.Qt.AlignCenter)
@@ -54,6 +62,7 @@ class VentanaPrincipal(QtWidgets.QMainWindow):
         self.btn_iniciar.clicked.connect(self.toggle_captura)
         self.btn_resta.clicked.connect(self.toggle_resta)
         self.btn_filtro.clicked.connect(self.toggle_filtro)
+        self.btn_guardar.clicked.connect(self.guardar_imagen) # NUEVO
 
     def toggle_captura(self):
         if not self.capturando:
@@ -67,7 +76,8 @@ class VentanaPrincipal(QtWidgets.QMainWindow):
             self.btn_iniciar.setText("Detener Captura")
             self.btn_resta.setEnabled(True)
             self.btn_filtro.setEnabled(True)
-            self.timer_video.start(30) # Ejecutar cada 30 ms
+            self.btn_guardar.setEnabled(True) # NUEVO
+            self.timer_video.start(30)
         else:
             # Apagar cámara y temporizador
             self.timer_video.stop()
@@ -77,6 +87,7 @@ class VentanaPrincipal(QtWidgets.QMainWindow):
             self.btn_iniciar.setText("Iniciar Captura")
             self.btn_resta.setEnabled(False)
             self.btn_filtro.setEnabled(False)
+            self.btn_guardar.setEnabled(False) # NUEVO
             self.label_imagen.setText("Captura detenida")
 
     def toggle_resta(self):
@@ -111,6 +122,12 @@ class VentanaPrincipal(QtWidgets.QMainWindow):
         if self.estado_filtro:
             imagen_a_mostrar = filtro_pasa_bajas_frecuencia(imagen_a_mostrar, radio_corte=80)
 
+        # # 4. Visualización
+        # self.mostrar_imagen(imagen_a_mostrar)
+
+        # NUEVO: Guardamos la matriz en la memoria de la clase
+        self.matriz_actual_para_guardar = imagen_a_mostrar
+
         # 4. Visualización
         self.mostrar_imagen(imagen_a_mostrar)
 
@@ -127,3 +144,44 @@ class VentanaPrincipal(QtWidgets.QMainWindow):
             self.timer_video.stop()
             self.camara.__exit__(None, None, None)
         event.accept()
+
+    def guardar_imagen(self):
+        """Abre un diálogo para guardar la imagen en el disco duro."""
+        # Verificamos que haya una imagen para guardar
+        if not hasattr(self, 'matriz_actual_para_guardar') or self.matriz_actual_para_guardar is None:
+            return
+
+        # Congelamos temporalmente el timer para que la ventana de guardado no cause conflictos
+        estado_timer = self.timer_video.isActive()
+        if estado_timer:
+            self.timer_video.stop()
+
+        # Abrimos el explorador de archivos
+        opciones = QtWidgets.QFileDialog.Options()
+        ruta_archivo, _ = QtWidgets.QFileDialog.getSaveFileName(
+            self,
+            "Guardar Imagen Resultante",
+            "captura_metrologia", # Nombre por defecto
+            "Imágenes Científicas TIFF (*.tif *.tiff);;Imágenes Comunes PNG (*.png);;Todos los archivos (*)",
+            options=opciones
+        )
+
+        if ruta_archivo:
+            try:
+                # Si es TIFF, guardamos la matriz flotante cruda (mantiene toda la precisión matemática)
+                if ruta_archivo.lower().endswith(('.tif', '.tiff')):
+                    cv2.imwrite(ruta_archivo, self.matriz_actual_para_guardar)
+                    print(f"TIFF de alta resolución guardado en: {ruta_archivo}")
+                
+                # Si es PNG u otro formato, OpenCV requiere que la imagen sea de 8 bits (0-255)
+                else:
+                    img_8bits = normalizar_float_a_uint8(self.matriz_actual_para_guardar)
+                    cv2.imwrite(ruta_archivo, img_8bits)
+                    print(f"PNG de visualización guardado en: {ruta_archivo}")
+
+            except Exception as e:
+                print(f"Error al intentar guardar la imagen: {e}")
+
+        # Reactivamos el video si estaba corriendo
+        if estado_timer:
+            self.timer_video.start(30)
