@@ -1,0 +1,48 @@
+\documentclass[12pt, letterpaper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage[spanish]{babel}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{tikz}
+\usetikzlibrary{optics, positioning, arrows.meta, babel}
+\usepackage{listings}
+\usepackage{xcolor}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+	backgroundcolor=\color{backcolour},   
+	commentstyle=\color{codegreen},
+	keywordstyle=\color{magenta},
+	numberstyle=\tiny\color{codegray},
+	stringstyle=\color{codepurple},
+	basicstyle=\ttfamily\footnotesize,
+	breakatwhitespace=false,         
+	breaklines=true,                 
+	captionpos=b,                    
+	keepspaces=true,                 
+	numbers=left,                    
+	numbersep=5pt,                  
+	showspaces=false,                
+	showstringspaces=false,
+	showtabs=false,                  
+	tabsize=4
+}
+\lstset{style=mystyle}
+
+\begin{document}
+	
+	
+	$$  I_{dc} = I_{T} = I_O + I_R  \text{ corriente directa / de fondo, porque no lleva información de la fase }$$
+	
+	$$ I_{ac} = 2\sqrt{I_OI_R} \text{ la amplitud de la parte de la inferferencia } $$
+	
+	$$ \gamma = \frac{2\sqrt{I_OI_R}}{I_O + I_R}  \text{ es el contraste de la imagen } $$
+	
+	El $\alpha(t)$ es agregar un valor a la fase, experimentalmente se pone una placa de media o cuarto de onda en el haz objeto o haz de referencia. Tambien se le puede poner un pizoelectrico que dependiendo de la corriente que se aplique va a cambiar la posición.
+	
+\end{document}
