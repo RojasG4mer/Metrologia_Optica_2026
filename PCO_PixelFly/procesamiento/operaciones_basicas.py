@@ -6,7 +6,7 @@ def restar_consecutivas(frame_actual, frame_anterior):
     img_act = frame_actual.astype(np.float32)
     img_ant = frame_anterior.astype(np.float32)
     
-    return img_act - img_ant
+    return np.abs(img_act - img_ant)
 
 def normalizar_float_a_uint8(imagen_float):
     """Convierte la matriz flotante resultante a 8 bits (0-255) para visualización."""
