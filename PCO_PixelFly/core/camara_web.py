@@ -29,8 +29,18 @@ class CamaraWebUSB:
             print(f"[{self.camera_name}] Puerto USB liberado.")
 
     def record(self, number_of_images=1, mode='sequence'):
-        # Como OpenCV lee el flujo constante por USB, no hacemos nada aquí
         pass 
+
+    def set_focus(self, focus_value):
+        """Intenta forzar el enfoque manual mediante comandos UVC."""
+        if self.cap and self.cap.isOpened():
+            # 0 desactiva el autoenfoque, permitiendo el control manual
+            self.cap.set(cv2.CAP_PROP_AUTOFOCUS, 0)
+            # print('Si nos metimos al metodo ')
+            
+            # Aplica el valor del enfoque (el rango típico en OpenCV es de 0 a 255)
+            self.cap.set(cv2.CAP_PROP_FOCUS, focus_value)
+            # print(f'Aplicamos el valor de enfoque {focus_value} ')
 
     def image(self):
         ret, frame = self.cap.read()

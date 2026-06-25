@@ -81,17 +81,30 @@ class VentanaPrincipal(QtWidgets.QMainWindow):
         self.slider_filtro.setRange(1, 500)   # Rango de apertura de la máscara circular
         self.slider_filtro.setValue(80)       # Valor inicial
         
-        # Deshabilitar botones y slider al inicio
+        self.slider_filtro.setValue(80)
+        
+        # NUEVO: Control dinámico para el Enfoque (Solo compatible con Webcams UVC)
+        self.label_enfoque = QtWidgets.QLabel("Enfoque (Solo WebCam): Auto")
+        self.label_enfoque.setAlignment(QtCore.Qt.AlignCenter)
+        
+        self.slider_enfoque = QtWidgets.QSlider(QtCore.Qt.Horizontal)
+        self.slider_enfoque.setRange(0, 255) # Rango estándar de OpenCV
+        self.slider_enfoque.setValue(128)    # Valor a la mitad
+        
+        # Deshabilitar botones y sliders al inicio
         self.btn_resta.setEnabled(False)
         self.btn_filtro.setEnabled(False)
-        self.slider_filtro.setEnabled(False)  # NUEVO
+        self.slider_filtro.setEnabled(False) # Slider del filtro
+        self.slider_enfoque.setEnabled(False) # Slider del enfoque
 
         layout_derecho.addWidget(label_hardware)
         layout_derecho.addWidget(self.btn_iniciar)
         layout_derecho.addWidget(self.btn_resta)
         layout_derecho.addWidget(self.btn_filtro)
-        layout_derecho.addWidget(self.label_radio)   # NUEVO
-        layout_derecho.addWidget(self.slider_filtro) # NUEVO
+        layout_derecho.addWidget(self.label_radio)   # filtro
+        layout_derecho.addWidget(self.slider_filtro) # filtro
+        layout_derecho.addWidget(self.label_enfoque)  # enfoque
+        layout_derecho.addWidget(self.slider_enfoque) # enfoque
     
         # Separador visual entre secciones
         linea = QtWidgets.QFrame()
@@ -150,10 +163,20 @@ class VentanaPrincipal(QtWidgets.QMainWindow):
         
         # NUEVO: Conectar el movimiento del slider
         self.slider_filtro.valueChanged.connect(self.actualizar_etiqueta_filtro)
+        
+        # NUEVO: Conectar el movimiento del slider de enfoque
+        self.slider_enfoque.valueChanged.connect(self.actualizar_enfoque)
 
     # NUEVO: Función para actualizar el texto visual
     def actualizar_etiqueta_filtro(self, valor):
         self.label_radio.setText(f"Radio de Corte: {valor} px")
+
+    def actualizar_enfoque(self, valor):
+        self.label_enfoque.setText(f"Enfoque (Solo WebCam): {valor}")
+        
+        # Solo envía el comando si la cámara actual tiene el método 'set_focus' programado
+        if self.camara and hasattr(self.camara, 'set_focus'):
+            self.camara.set_focus(valor)
 
     def actualizar_velocidad(self):
         """Ajusta el reloj interno si el usuario cambia el valor mientras corre."""
@@ -180,7 +203,8 @@ class VentanaPrincipal(QtWidgets.QMainWindow):
             self.btn_tomar_inicio.setEnabled(True)
             self.spin_cantidad.setEnabled(True)
             self.spin_velocidad.setEnabled(True)
-            self.slider_filtro.setEnabled(True) # NUEVO
+            self.slider_filtro.setEnabled(True) # Filtro
+            self.slider_enfoque.setEnabled(True) # Enfoque
             
             self.timer_video.start(self.spin_velocidad.value())
         else:
@@ -192,11 +216,15 @@ class VentanaPrincipal(QtWidgets.QMainWindow):
             # Deshabilitar botones
             self.btn_resta.setEnabled(False)
             self.btn_filtro.setEnabled(False)
-            self.slider_filtro.setEnabled(False)
+            self.slider_filtro.setEnabled(False) # Filtro
+            self.slider_enfoque.setEnabled(False) # Enfoque
+
+            
             self.btn_tomar_inicio.setEnabled(False)
             self.btn_tomar_secuencia.setEnabled(False)
             self.spin_cantidad.setEnabled(False)
             self.spin_velocidad.setEnabled(False)
+
             self.label_imagen.setText("Cámara apagada.")
 
     def toggle_resta(self):
