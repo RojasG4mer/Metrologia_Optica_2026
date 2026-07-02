@@ -1,0 +1,1341 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\geometry{a4paper, margin=1in}
+
+\title{\textbf{Notas de Clase: Ondas Electromagnéticas y Óptica Coherente}}
+\author{}
+\date{}
+
+\begin{document}
+	
+	\maketitle
+	
+	\section{Características de las ondas Electromagnéticas (EM)}
+	\begin{enumerate}
+		\item Cuando una carga eléctrica vibra, el campo eléctrico a su alrededor cambia creando un campo magnético cambiante.
+		\item Los campos magnético y eléctrico se crean entre sí una y otra vez.
+		\item Una onda EM viaja en todas direcciones, i.e. son tridimensionales.
+		\item Los campos eléctricos y magnéticos vibran en ángulo recto con respecto a la dirección en la que viaja la onda, por lo que es una onda transversal.
+		\item Toda la materia contiene partículas cargadas que siempre se mueven; por lo tanto, todos los objetos emiten ondas EM.
+		\item Las longitudes de onda se acortan a medida que aumenta la temperatura del material.
+		\item Las ondas EM transportan energía radiante.
+		\item La luz no se puede producir como una onda continua, sino que está formada por fotones que se emiten continuamente en haces.
+	\end{enumerate}
+	
+	\subsection{Representación en Notación Compleja}
+	\textit{Las ondas electromagnéticas son ondas transversales de campos eléctricos y magnéticos entrelazados que oscilan en unidades angulares (radianes, grados).}
+	
+	\vspace{0.5cm}
+	\begin{minipage}{0.45\textwidth}
+		\begin{align*}
+			E &= E_0 e^{i[\varphi(z) \pm (\omega t)]} \\
+			E_0 &= \sqrt{\frac{2P_0}{\varepsilon c A}} \\
+			\varphi(z) &= \frac{2\pi z n}{\lambda} + \theta_0 = \kappa z n + \theta_0 \\
+			\omega &= 2\pi f \quad \lambda = c t \\
+			\kappa &= 2\pi/\lambda
+		\end{align*}
+	\end{minipage}
+	\hfill
+	\begin{minipage}{0.5\textwidth}
+		\begin{itemize}
+			\item $E_0$ es la amplitud de la onda.
+			\item $P_0$ es la potencia óptica del haz
+			\item $\varepsilon$ es la permitividad del medio.
+			\item $A$ es el area del haz.
+			\item $c$ es la velocidad de la luz ($3\times10^8$ m/s)
+			\item $\omega$ es la frecuencia angular
+			\item ($\lambda$) longitude de onda = distancia desde cresta a cresta.
+			\item ($f$) Frecuencia = numero de longitudes de onda que pasas en un punto dado en 1 s. Si la frecuencia se incrementa la $\lambda$ se hace mas pequeña.
+			\item $\varphi(z)$ es la fase instantánea.
+			\item $z$ es la longitude del camino físico recorrido por la onda
+			\item $\theta_0$ es la fase inicial de la onda (fase constante)
+			\item $n$ indice de refracción.
+			\item $\kappa$ numero de onda(rad/m)
+		\end{itemize}
+	\end{minipage}
+	
+	\subsection{Fase Instantánea y Amplitud}
+	\textbf{La fase instantánea ($\varphi(z)$) es proporcional a la distancia recorrida a lo largo del camino óptico.} El camino óptico es la trayectoria que sigue la luz entre dos puntos. Se define como el producto de la distancia geométrica real y el índice de refracción del medio.
+	
+	\begin{equation*}
+		E = E_0 e^{i\varphi(z) \pm i\omega t} = E_0 e^{i[\varphi(z) \pm (\omega t)]} = E_0 e^{i\theta} = E_0 (\cos\theta + i\sin\theta)
+	\end{equation*}
+	
+	\begin{minipage}{0.5\textwidth}
+		\begin{align*}
+			\theta &= \varphi(z) \pm \omega t = \kappa z n + \theta_0 \pm \omega t \\
+			\omega t &\text{ es la depedencia temporal} \\
+			\varphi(z) &\text{ es la dependencia espacial} \\
+			\varphi(z) &= \frac{2\pi z n}{\lambda} + \theta_0
+		\end{align*}
+	\end{minipage}
+	\hfill
+	\begin{minipage}{0.45\textwidth}
+		\begin{align*}
+			E &= x + iy \\
+			x, y &\text{ son números reales} \\
+			x &= E_0 \cos\theta \quad y = E_0 \sin\theta
+		\end{align*}
+	\end{minipage}
+	
+	\vspace{0.5cm}
+	\textbf{De esta forma la información de la fase se puede recuperar fácilmente mediante la expresión:}
+	\begin{equation*}
+		\tan\theta = \frac{y}{x} = \frac{\text{imaginaria}}{\text{real}} = \frac{\sin\theta}{\cos\theta}
+	\end{equation*}
+	
+	\textbf{Además, la amplitud también se puede recuperar mediante la expresión :}
+	\begin{equation*}
+		E_0^2 = E E^* = (x+iy)(x-iy) = x^2 - ixy + ixy - i^2 y^2 = x^2 + y^2
+	\end{equation*}
+	\begin{equation*}
+		E_0 = |x^2 + y^2|^{1/2}
+	\end{equation*}
+	
+	\textbf{Si tomamos la parte real de la ecuación de la onda:}
+	\begin{align*}
+		E &= Re(E_0 e^{i\theta}) & \varphi(zp) &= \frac{2\pi z}{\lambda} + \theta_0 = \kappa z + \theta_0 \\
+		E &= E_0 \cos\theta & E &= E_0 \cos(\varphi(z) \pm \omega t)
+	\end{align*}
+	
+	Tambien podemos usar la function $\sin$ ya que $E = E_0 \sin(\theta + \frac{\pi}{2}) = E_0 \cos(\theta)$
+	
+	\subsection{Representación Gráfica}
+	La representación gráfica $E(x,t) = E_0 \sin(\theta)$ según el alargamiento para un momento dado ($t=0$)
+	\begin{equation*}
+		E(x,0) = E_0 \sin(2\pi x / \lambda)
+	\end{equation*}
+	\textit{[Imagen: diagrama\_onda\_senoidal\_espacio.png]}
+	
+	\begin{itemize}
+		\item Ahora si establecemos $x=0$, en lugar del tiempo.
+	\end{itemize}
+	\begin{equation*}
+		E(0,t) = E_0 \sin(\omega t)
+	\end{equation*}
+	\textit{[Imagen: diagrama\_oscilacion\_tiempo.png]}
+	
+	\section{Naturaleza de la Luz y Propagación}
+	
+	\subsection{Dualidad Onda-Partícula}
+	Desde la perspectiva de la física moderna, la luz presenta una dualidad onda-partícula:
+	\begin{itemize}
+		\item \textbf{Naturaleza ondulatoria:} La luz son oscilaciones de campos eléctricos y magnéticos perpendiculares entre sí, capaces de propagarse en el vacío.
+		\item \textbf{Naturaleza corpuscular:} Se comporta como un flujo de partículas discretas o "cuantos" de energía llamados fotones
+		\item La visión heurística que sugiere esta descripción es simple: mientras se trata de un campo —digamos electromagnético para fijar ideas— de muy baja densidad, tal que dominan los procesos de interacción entre un fotón y un átomo, se requiere describir a este campo en términos discretos, es decir, cuánticos. Cuando, por lo contrario, se trata de un campo de alta densidad, donde interviene un enorme número de fotones, el fenómeno se nos manifiesta como un continuo, y debemos describirlo en los términos clásicos iniciales. La analogía con el agua es inmediata: a escala molecular, el agua se manifiesta como una estructura discreta; a escala macroscópica (un vaso de agua, por ejemplo) se nos presenta como un continuo.
+	\end{itemize}
+	
+	\subsection{Ecuación de Onda 3D y Ondas Planas}
+	\begin{equation*}
+		E(x,y,z,t) = E_0 e^{i[\vec{k}\cdot\vec{r} \pm \omega t + \theta_0]}
+	\end{equation*}
+	\begin{equation*}
+		E = E_0 e^{i[\varphi(z) \pm (\omega t)]} \qquad \varphi(z) = \frac{2\pi z n}{\lambda} + \theta_0 = \kappa z n + \theta_0
+	\end{equation*}
+	
+	Una onda que puede propagarse en cualquier dirección en el espacio.
+	
+	\begin{center}
+		\fbox{
+			\begin{minipage}{0.85\textwidth}
+				\begin{equation*}
+					E(x,y,z,t) = E_0 e^{i[\vec{k}\cdot\vec{r} \pm \omega t + \theta_0]} = E_0 e^{i[\vec{k}\cdot\vec{r} \pm \omega t + \theta_0]}
+				\end{equation*}
+				\begin{align*}
+					\vec{k} &= (k_x, k_y, k_z) & \vec{r} &= (x, y, z) \\
+					\text{\small Vector de onda,} & \quad \text{\small dirección de propagación} & \text{\small Vector de } & \text{\small posición en el espacio}
+				\end{align*}
+				\begin{equation*}
+					k^2 = k_x^2 + k_y^2 + k_z^2
+				\end{equation*}
+				\begin{align*}
+					\vec{k}\cdot\vec{r} &= k_x x + k_y y + k_z z & |k| &= \sqrt{k_x^2 + k_y^2 + k_z^2}
+				\end{align*}
+			\end{minipage}
+		}
+	\end{center}
+	
+	\vspace{0.5cm}
+	\textbf{"Onda plana"}\\
+	Una onda plana es un caso especial de onda: una cantidad física cuyo valor, en cualquier momento, es constante sobre cualquier plano que sea perpendicular a una dirección fija en el espacio.
+	
+	Los contornos de una onda plana de fase máxima, llamados "frentes de onda" o "frentes de fase", son planos. Se extienden por todo el espacio.
+	
+	\begin{itemize}
+		\item Los frentes de onda son útiles para dibujar imágenes de ondas que interfieren.
+		\item Los frentes de onda se desplazan a la velocidad de la luz.
+		\item Los frentes de onda de las ondas planas están igualmente espaciados, separados por una longitud de onda. Son perpendiculares a la direccion de propagacion.
+		\item Usualmente, se dibujan como lineas.
+	\end{itemize}
+	
+	\textit{[Imagen: diagramas\_frentes\_de\_onda.png]}
+	
+	\begin{equation*}
+		\vec{k}\cdot\vec{r} = \text{constant}
+	\end{equation*}
+	
+	En el espacio libre, la onda plana se propaga con velocidad $c$ en direccion del vector de onda $\vec{k} = (k_x, k_y, k_z)$. El vector del campo electrico $E_0$, el vector del campo magnetico $H_0$, and $k$ son perpendiculares el uno al otro.
+	
+	\subsubsection*{Rayos láser y frentes de ondas}
+	A plane wave has flat wave-fronts throughout all space. It also has infinite energy. It doesn't exist in reality. \\
+	Una onda plana tiene frentes de onda planos en todo el espacio. No existe en la realidad.
+	
+	\textit{[Imagen: frentes\_onda\_planos\_espacio.png]}
+	
+	\vspace{0.3cm}
+	A laser beam is more localized. We can approximate a laser beam as a plane wave vs. z times a Gaussian in x and y: \\
+	Un rayo láser está más localizado. Podemos aproximar un rayo láser como un frente de onda plana en la dirección $z$ multiplicada por una distribución gaussiana en las direcciones $x$ e $y$:
+	
+	\begin{equation*}
+		\underline{E}(x,y,z,t) = \underline{E}_0 \exp\left[-\frac{x^2+y^2}{w^2}\right] \exp[i(kz - \omega t)]
+	\end{equation*}
+	
+	\textit{[Imagen: frentes\_onda\_localizadas\_haz\_laser.png]}
+	
+	\section{Superposición e Interferencia de Ondas}
+	
+	\subsection{Superposición}
+	\begin{itemize}
+		\item Cuando dos ondas se juntan, ¿qué sucede?
+		\begin{itemize}
+			\item El desplazamiento (o perturbaciones) se sumaran (SUPERPOSICION)
+			\item Si en un punto del medio, dos ondas jalan (empujan hacia arriba) en la misma dirección, el desplazamiento será la suma de los dos desplazamientos individuales.
+			\item Si dos ondas estiran en direcciones opuestas, el desplazamiento resultante es la diferencia.
+		\end{itemize}
+	\end{itemize}
+	
+	\textbf{Principio de superposición:}\\
+	Si varias ondas viajan a través de un medio, entonces la perturbación resultante en un punto del medio es la suma algebraica de las perturbaciones individuales producidas por cada onda en ese punto. Cuando 2 ondas o más ondas se superponen, el desplazamiento resultante es la suma de los desplazamientos individuales producidos por cada una de ellas.
+	
+	\subsubsection*{Relación de Fase}
+	\begin{itemize}
+		\item El resultado de la superposición de dos ondas depende no sólo de la magnitud de las ondas, sino también de la relación de fase.
+		\item A) Cuando las ondas están en fase, las dos crestas coinciden, se refuerzan mutuamente, el resultado es un gran movimiento.
+		\item B) Cuando las dos ondas están desfasadas, la cresta de una onda se encuentra con el valle de la otra, el resultado es una anulación.
+	\end{itemize}
+	\textit{[Imagen: sumas\_y\_cancelacion\_amplitudes.png]}
+	
+	\subsubsection*{Superposición de Dos Ondas Armónicas}
+	Una viajando a la derecha a lo largo del eje x:\\
+	$E_1 = E\sin(kx - \omega t)$
+	
+	Otra viajando a la izquierda lo largo del eje x:\\
+	$E_2 = E\sin(kx + \omega t)$
+	
+	De acuerdo al principio de superposicion:
+	\begin{equation*}
+		E_R = E_1 + E_2 = E\sin(kx - \omega t) + E\sin(kx + \omega t)
+	\end{equation*}
+	
+	Usando las identidades trigonometricas, la onda resultante es:
+	\begin{equation*}
+		E_R = E(\sin(kx)\cos(\omega t) - \cos(kx)\sin(\omega t)) + E(\sin(kx)\cos(\omega t) + \cos(kx)\sin(\omega t))
+	\end{equation*}
+	
+	\begin{equation*}
+		E_R = 2E\sin(kx)\cos(\omega t) \qquad E_R = 2E_T\cos(\omega t)
+	\end{equation*}
+	
+	Para una amplitude maxima $E_{Tmax} = 2E_T$\\
+	donde $\sin(kx) = 1$
+	
+	\subsubsection*{Superposicion con Diferente Amplitud}
+	Encuentre la onda resultante de dos ondas con la misma frecuencia y diferente amplitud.
+	
+	\begin{minipage}{0.4\textwidth}
+		\begin{align*}
+			\vec{E}_1 &= E_{01}\cos(\omega t + kr_1)\hat{r} \\
+			\vec{E}_2 &= E_{02}\cos(\omega t + kr_2)\hat{r}
+		\end{align*}
+	\end{minipage}
+	\begin{minipage}{0.5\textwidth}
+		\fbox{$\Delta\theta = k(r_1 - r_2) = \frac{2\pi}{\lambda}(r_1 - r_2)$} \textbf{Desfase inicial} Entre las dos ondas.
+	\end{minipage}
+	
+	\vspace{0.5cm}
+	In phase: $\Delta\theta = 2m\pi$ \qquad \qquad Out of phase: $\Delta\theta = (2m+1)\frac{\pi}{2}$
+	
+	\textit{[Imagen: representacion\_in\_phase\_out\_of\_phase.png]}
+	
+	\vspace{0.5cm}
+	$\rightarrow$ suma
+	\begin{center}
+		\fbox{
+			\begin{minipage}{0.9\textwidth}
+				\begin{align*}
+					\vec{E} &= \vec{E}_1 + \vec{E}_2 = E_{01}\cos(\omega t + kr_1)\hat{r} + E_{02}\cos(\omega t + kr_2)\hat{r} \\
+					&= E_{01}(\cos(\omega t)\cos(kr_1) - (\sin(\omega t)\sin(kr_1))) + \\
+					&\quad E_{02}(\cos(\omega t)\cos(kr_2) - (\sin(\omega t)\sin(kr_2))) \\
+					&= \cos(\omega t)(E_{01}\cos(kr_1) + E_{02}\cos(kr_2)) - \sin(\omega t)(E_{01}\sin(kr_1) + E_{02}\sin(kr_2)) \\
+					\text{tg } \theta &= \frac{E_{01}\sin(kr_1) + E_{02}\sin(kr_2)}{E_{01}\cos(kr_1) + E_{02}\cos(kr_2)}
+				\end{align*}
+			\end{minipage}
+		}
+	\end{center}
+	
+	\begin{align*}
+		E_0^2 &= E E^* \\
+		&= (E_{01}e^{i(\omega t + kr_1)} + E_{02}e^{i(\omega t + kr_2)})(E_{01}e^{-i(\omega t + kr_1)} + E_{02}e^{-i(\omega t + kr_2)}) \\
+		&= E_{01}^2 + E_{02}^2 + 2E_{01}E_{01}\cos\Delta\theta \\
+		E_0 &= \sqrt{E_{01}^2 + E_{02}^2 + 2E_{01}E_{01}\cos\Delta\theta}
+	\end{align*}
+	\textit{Nota: Existe un error tipográfico en la ecuación original al escribir $E_{01}E_{01}$ en los dos últimos renglones en lugar de $E_{01}E_{02}$. Se transcribió tal cual aparece en la imagen de la presentación.}
+	
+	\vspace{0.5cm}
+	$\vec{E} = E_0 \cos(\omega t - \theta)\hat{r}$
+	
+	\subsection{Interferencia}
+	Se denomina interferencia a la superposición coherente, tanto espacial como temporal, de dos o más ondas ondulatorias en un punto dado, resultando un patrón de intensidad con valores máximos y mínimos, al cual se le denomina patrón de interferencia. Se produce cuando las ondas pasan por una misma región del espacio y tiempo.
+	
+	\begin{itemize}
+		\item Máximos (interferencia constructiva): cuando las ondas están en fase.
+		\item Mínimos (interferencia destructiva): cuando las ondas están desfasadas.
+	\end{itemize}
+	
+	Hablar de franjas de interferencia no se refiere a un solo punto en el espacio, sino a un plano donde se superponen las ondas, lo que permite definir la forma del patrón de interferencia.
+	
+	\textit{[Imagen: patron\_interferencia\_dos\_fuentes.png]}
+	
+	\textbf{Interferencia de ondas occure cuando las ondas se superponen. Hay dos formas para producer un patron de interferencia de la luz:}
+	\begin{enumerate}
+		\item División de amplitud
+		\item División de frente de onda
+	\end{enumerate}
+	Ambos implican dividir la luz de una sola fuente en dos haces.
+	
+	\underline{Division de amplitud}\\
+	Consiste en reflejar parcialmente una parte del frente de ondas y transmitir el resto, por lo que este método recibe el nombre de división de amplitud.
+	
+	\underline{Division de frente de onda}\\
+	El método consiste en crear, a partir de un único frente de ondas, dos frentes de onda que luego se recombinan. El paradigma de este tipo de interferencias es la experiencia de Young.
+	
+	La Interferencia resultante depende de la faase relativa de la superposición de las ondas.
+	\begin{itemize}
+		\item Maxima (constructive interference): when the waves are in phase.
+		\item Minima (destructive interference): when the waves are out of phase.
+	\end{itemize}
+	
+	\textit{[Imagen: graficas\_interferencia\_constructiva\_destructiva\_normal.png]}
+	\begin{itemize}
+		\item \textbf{Constructive interference}: $\phi = 0^\circ$. $y_1$ and $y_2$ are identical, resultant wave has maximum amplitude.
+		\item \textbf{Destructive interference}: $\phi = 180^\circ$. Waves cancel out to zero.
+		\item \textbf{Normal interference}: $\phi = 60^\circ$. Resultant wave is a combination.
+	\end{itemize}
+	
+	\subsubsection*{Interferencias de Dos Fuentes}
+	\begin{center}
+		\begin{tabular}{|p{0.45\textwidth}|p{0.45\textwidth}|}
+			\hline
+			\textbf{Constructivas} & \textbf{Destructivas} \\
+			\hline
+			\begin{itemize}
+				\item Se refuerza el movimiento ondulatorio $\cos(\theta) = 1$
+			\end{itemize}
+			$\Delta\theta = 2\pi N$ \newline
+			$DCO = N\lambda$ &
+			\begin{itemize}
+				\item Se atenúa el movimiento ondulatorio $\cos(\theta) = -1$
+			\end{itemize}
+			$\Delta\theta = (2N+1)\pi$ \newline
+			$DCO = (2N+1)\lambda/2$ \\
+			\hline
+		\end{tabular}
+	\end{center}
+	\textit{[Imagen: diagramas\_interferencia\_dos\_fuentes\_constructiva\_destructiva.png]}
+	
+	\subsubsection*{Propiedades Generales de la Interferencia}
+	Las dos fuentes deben ser coherentes i.e. deben tener una diferencia de fase constante. Por lo tanto, tendrán la misma frecuencia. Para producir un patrón de interferencia para las ondas de luz, los dos, o más, haces superpuestos siempre provienen de una única misma fuente.
+	
+	\section{Intensidad (I) de la Radiación Electromagnética}
+	No hay ningún sensor que responda con la suficiente rapidez para seguir las oscilaciones de altísima frecuencia del vector del campo eléctrico. El campo electromagnético de una onda varía extremadamente rápido en el tiempo haciendo que el campo eléctrico actual sea una cantidad poco práctica de detectar, $\sim 4.3 \times 10^{14} \text{Hz} ------- 7.5 \times 10^{14} \text{Hz}$.
+	
+	Sabemos que no hay ningún medio para registrar la amplitud de la onda, los detectores más comunes son el ojo, los fotodiodos, los tubos multiplicadores, la película fotográfica. etc. Estos registran la irradiancia (flujo energético por unidad de superficie) que es proporcional al cuadrado del valor absoluto del campo de amplitud resultante. $I = |E_T|^2 = E_T E_T^*$
+	
+	$I$ es una medida de la cantidad de potencia de la onda (radiación electromagnetica) que fluye atraves de un m\textsuperscript{2}, perpendicular a la dirección de propagación de la onda.
+	
+	\begin{align*}
+		I &= \frac{\text{power}}{\text{area}} & W/m^2 \\
+		&= \frac{\text{energy}}{\text{time} \times \text{area}} & J/sm^2 \\
+		&= \frac{\text{energy} \times \text{length}}{\text{time} \times \text{volume}} & Jm/sm^3 \\
+		I &= \left(\frac{\text{energy}}{\text{volume}}\right) \times (\text{wave speed}) & Jm/m^3 s
+	\end{align*}
+	
+	La energía de las ondas proviene del simple movimiento armónico de sus partículas. La energía total será igual a la energía cinética máxima.
+	
+	\begin{minipage}{0.5\textwidth}
+		\begin{align*}
+			\text{energy} &= \frac{1}{2}mv_{\text{max}}^2 = \frac{1}{2}m(E_0\omega)^2 \\
+			\frac{\text{energy}}{\text{volume}} &= \frac{1}{2}\rho(E_0\omega)^2
+		\end{align*}
+	\end{minipage}
+	\begin{minipage}{0.4\textwidth}
+		\begin{equation*}
+			E(t) = E_0\cos(\varphi(zp) \pm \omega t)
+		\end{equation*}
+		Derivarla para obtener velocidad
+		\begin{equation*}
+			J = \frac{kg m^2}{s^2}
+		\end{equation*}
+	\end{minipage}
+	
+	Integrando estos dos resultados en la ecuación de la I:
+	\begin{minipage}{0.5\textwidth}
+		\begin{align*}
+			I &= \left(\frac{\text{energy}}{\text{volume}}\right) \times (\text{wave speed}) \\
+			&= \frac{1}{2}\rho(E_0\omega)^2 \times c \\
+			I &= \frac{1}{2}\rho c(E_0\omega)^2
+		\end{align*}
+	\end{minipage}
+	\begin{minipage}{0.4\textwidth}
+		\textit{[Imagen: grafica\_dos\_ondas\_amplitudes\_diferentes.png]}
+	\end{minipage}
+	
+	\vspace{0.5cm}
+	\textbf{¿Qué onda es la más rápida, la roja o la azul?}
+	
+	\subsection{Interferencia e Intensidad}
+	\begin{center}
+		\textit{[Imagen: esquema\_interferencia\_constructiva\_destructiva.png]}
+	\end{center}
+	
+	\begin{align*}
+		E_1 &= E_{o1} e^{i\varphi1} \\
+		E_2 &= E_{o2} e^{i\varphi2}
+	\end{align*}
+	
+	\begin{itemize}
+		\item Se superponen y el campo resultante es la suma: $E_T = E_1 + E_2 = E_{o1} e^{i\varphi1} + E_{o2} e^{i\varphi2}$
+	\end{itemize}
+	
+	Pero la cantidad observable es la intensidad $I = |E_T|^2 = E_T E_T^*$
+	\begin{align*}
+		I &= (E_1 + E_2)(E_1^* + E_2^*) = E_1 E_1^* + E_2 E_2^* + E_1 E_2^* + E_2 E_1^* \\
+		&= E_{o1} e^{i\varphi1} E_{o1} e^{-i\varphi1} + E_{o2} e^{i\varphi2} E_{o2} e^{-i\varphi2} + E_{o1} e^{i\varphi1} E_{o2} e^{-i\varphi2} + E_{o2} e^{i\varphi2} E_{o1} e^{-i\varphi1} \\
+		&= E_{o1}^2 + E_{o2}^2 + E_{o1}E_{o2}e^{i(\varphi1 - \varphi2)} + E_{o1}E_{o2}e^{-i(\varphi1 - \varphi2)}
+	\end{align*}
+	
+	\underline{USANDO LA IDENTIDAD}: $e^{ix} + e^{-ix} = 2\cos x$
+	\begin{equation*}
+		I = E_{o1}^2 + E_{o2}^2 + 2E_{o1}E_{o2}\cos(\varphi1 - \varphi2) \text{ con } \varphi1 - \varphi2 = \Delta\theta
+	\end{equation*}
+	\begin{equation*}
+		\mathbf{I = I_1 + I_2 + 2\sqrt{I_1 I_2} \cos(\Delta\theta)}
+	\end{equation*}
+	
+	Entonces, cuando se superponen dos planos de frentes de onda de intensidades $I_1$ E $I_2$, la intensidad varía sinusoidalmente entre un valor máximo $\mathbf{(I_1 + I_2 + 2\sqrt{I_1 I_2})}$ y un mínimo $\mathbf{(I_1 + I_2 - 2\sqrt{I_1 I_2})}$; esta variación de intensidad es conocida como un patron de franjas.
+	
+	\textit{[Imagen: grafica\_intensidad\_patron\_franjas.png]}
+	
+	Hablar de franjas de interferencia no se refiere a un único punto en el espacio, sino a un plano en el que las ondas se superponen, lo que permite definir la forma del patrón de interferencia.
+	
+	\begin{equation*}
+		\text{Cuando } I_1 = I_2 \qquad \mathbf{I = 2I_1 (1 + \cos(\Delta\theta)) = 4I_1 \cos^2(\Delta\theta/2)}
+	\end{equation*}
+	
+	\underline{\textbf{Como vimos}} $\Delta\theta = \varphi1 - \varphi2$ \\
+	\underline{\textbf{Si}} $\varphi1 = kz_1 - \omega t + \theta_0$ \\
+	$\varphi2 = kz_2 - \omega t + \theta_0$ \\
+	$\Delta\theta = k(z_1 - z_2)$ \\
+	\textbf{I = 4I\textsubscript{1} $\cos^2(k(z_1 - z_2)/2)$} \\
+	\textit{\textbf{Para n=1}}
+	
+	\underline{Lo que concluimos que la diferencia de fase entre dos puntos a lo largo de la} \underline{dirección de propagación de una onda es igual a la diferencia del camino} \underline{geométrico multiplicado por el numero de onda.}
+	
+	\section{Camino Geométrico y Camino Óptico}
+	
+	\textcolor{gray}{\textbf{Camino Geométrico (z):}} \textcolor{orange}{Es la distancia física real que recorre la luz (p. ejem en metros).} \\
+	\textcolor{yellow}{\textbf{Longitud de camino óptico (L)}} \textcolor{orange}{Es el producto de la distancia geométrica por el índice de refracción del medio (n). Representa la distancia que recorrería la luz en el vacío en el mismo tiempo que tarda en cruzar el medio.} \\
+	\textcolor{yellow}{\textbf{\textit{L = indice de refracción x longitud de camino geometrico = nz}}} \\
+	\textcolor{yellow}{\textbf{DIFERENCIA DE CAMINO OPTICO (OPD)}} \textcolor{gray}{Es la resta entre los caminos ópticos de dos rayos distintos} \textcolor{yellow}{\textbf{$(L_2 - L_1) = n(z_1 - z_2)$}}
+	
+	\textcolor{yellow}{Formalmente la diferencia de fase es:}
+	\begin{equation*}
+		\textcolor{gray}{\Delta\theta = nk(z_1 - z_2)}
+	\end{equation*}
+	
+	La longitud de camino \textbf{óptico} no debe ser considerado la longitud de camino geometrico.
+	\textit{[Imagen: esquema\_caminos\_optico\_y\_geometrico\_punto\_Q.png]}
+	
+	\colorbox{olive}{\parbox{0.45\textwidth}{\textcolor{black}{\textbf{Diferencia de camino geométrico} \\ \textbf{La fuentes $S_1$ y $S_2$ son 2 fuentes coherentes en aire.}}}}
+	
+	\colorbox{olive}{\parbox{0.4\textwidth}{\textcolor{black}{La longitud geométrica del camino (trayecto) "z" es la distancia entre la fuente ($S_1$ o $S_2$) y Q (donde se produce la interferencia).}}}
+	\hfill
+	\colorbox{olive}{\parbox{0.5\textwidth}{\textcolor{black}{La \textbf{diferencia de camino geométrico} es \textbf{$S_2Q - S_1Q$}. Para que la \textbf{interferencia constructiva} tenga lugar en Q, las ondas deben estar en fase en Q. Por lo tanto, la diferencia de camino geométrico debe ser un número entero de longitudes de onda}}}
+	
+	\vspace{0.5cm}
+	\textcolor{olive}{\textbf{$(S_2Q - S_1Q) = m\lambda$}} \qquad \textbf{donde m = 0, 1, 2, 3, ... (un entero)}
+	
+	\colorbox{olive}{\parbox{\textwidth}{\textcolor{black}{Similarmente, para que se produzca una interferencia destructiva, las ondas deben estar desfasadas en Q en $\lambda/2$ (es decir, una "cresta" de $S_1$ debe encontrarse con una "valle" de $S_2$).}}}
+	
+	\subsection{Ejemplo de Medios con Diferente Índice de Refracción}
+	\textbf{Consideremos dos haces coherentes $S_1$ y $S_2$ donde $S_1Q$ está en el aire y $S_2Q$ está en el acrílico de índice de refracción n = 1.5. El punto Q está en el aire.}
+	
+	\begin{center}
+		\textit{[Imagen: esquema\_dos\_haces\_aire\_acrilico\_punto\_Q.png]}
+	\end{center}
+	
+	\colorbox{violet}{\parbox{\textwidth}{\textcolor{black}{La \textcolor{olive}{longitud del camino geometrico (z)} es la misma para las dos fuentes. \\ Así que, la que la \textcolor{olive}{diferencia de camino geometrico es:}}}}
+	\begin{center}
+		\colorbox{teal}{\textcolor{white}{\textbf{$S_2Q - S_1Q = 0$}}}
+	\end{center}
+	
+	Pero, las ondas podrían no estar en fase. Esto es porque la velocidad y la \textcolor{olive}{longitude de onda} de la luz es reducida cuando entra la acrilico.
+	
+	\begin{minipage}{0.6\textwidth}
+		\begin{align*}
+			\frac{n_2}{n_1} &= \frac{v_1}{v_2} = \frac{\lambda_{air} f}{\lambda_{ac} f} = \frac{\lambda_{air}}{\lambda_{ac}}, \quad n_2 \lambda_{ac} = n_1 \lambda_{air} \\
+			n &= \frac{\lambda_{air}}{\lambda_{ac}} \qquad \qquad \lambda_{ac} = \frac{\lambda_{air}}{1.5}
+		\end{align*}
+	\end{minipage}
+	\begin{minipage}{0.35\textwidth}
+		\textit{[Imagen: esquema\_ondas\_acrilico\_reduccion\_velocidad.png]}
+	\end{minipage}
+	
+	\vspace{0.5cm}
+	Si la distancia $S_1Q$ es exactamente 3 longitudes de onda entonces la distancia $S_2Q$ debe ser:
+	
+	$S_2Q = 1.5 \times 3\lambda = 4.5 \lambda$ (longitud de camino óptico)
+	
+	La \textbf{diferencia de camino óptico (OPD)} se puede calcular:
+	
+	\textcolor{olive}{\textbf{Diferencia de camino óptico} = $n_2z - n_1z$}
+	
+	\begin{center}
+		\colorbox{olive}{\textcolor{white}{$S_2Q n_2 - S_1Q n_1 = 4.5\lambda - 3\lambda = \lambda(1.5)$}}
+	\end{center}
+	
+	Las condiciones para una maxima and minima interferencia son:
+	\begin{align*}
+		(n_2 - n_1)z &= m\lambda \qquad \textcolor{olive}{\text{(constructiva)}} \\
+		y \qquad \qquad (n_2 - n_1)z &= (m+1/2)\lambda \qquad \textcolor{olive}{\text{(destructiva)}}
+	\end{align*}
+	
+	\subsection{Ejemplo Resuelto}
+	\textit{Ejemplo: Dos haces de microondas de longitud de onda $6.00 \times 10^{-3}$m son emitidos por una fuente. Ambos recorren $5$ cm hasta un detector, uno pasa por aire mientras que el otro por cuarzo de índice de refracción 1,54. ¿Provocan interferencia constructiva o destructiva?}
+	
+	\colorbox{olive}{\parbox{\textwidth}{\color{white}
+			Diferencia de camino óptico = $(n_{quartz} - n_{air}) \times z$
+			\begin{align*}
+				\qquad &= (1.54 - 1) \times 0.05 \\
+				\qquad &= 0.027\text{m}
+			\end{align*}
+			Numeero de longitudes de onda = $0.027 / \lambda$
+			\begin{align*}
+				\qquad \qquad \qquad \qquad \qquad &= 0.027 / 6.00 \times 10^{-3} \\
+				\qquad \qquad \qquad \qquad \qquad &= 4.5 \text{ longitudes de onda}
+			\end{align*}
+	}}
+	\colorbox{olive}{\parbox{\textwidth}{\textcolor{white}{Entonces es interferencia \underline{destructiva}.}}}
+	
+	\subsection{Ejercicios Propuestos}
+	\begin{itemize}
+		\item 1) El índice de refracción de la glicerina y el diamante con respecto al aire son 1,46 y 2,42 respectivamente. Calcula la velocidad y la longitud de onda de la luz en la glicerina y en el diamante para una luz que viaja a través de estos materiales con longitud de onda de 5400 $A^\circ$. A partir de ellas calcular el índice de refracción relativo del diamante con respecto a la glicerina.
+		\item 2) Dada la onda, encuentre $v(\text{vel.})$, el valor de la fase y la amplitud, tome en cuenta los resultados para $E(0)$ y cuando $v(0)$. Considere 2 focos que emiten ondas esféricas, encuentre la onda resultante en el punto P y las condiciones para reforzar y cancelar las superposición de las ondas. Considere que son de igual amplitud.
+	\end{itemize}
+	
+	\begin{equation*}
+		E(t) = E_0\cos(\omega t + \varphi)
+	\end{equation*}
+	\begin{minipage}{0.4\textwidth}
+		\textit{[Imagen: dos\_focos\_ondas\_esfericas\_punto\_P.png]}
+	\end{minipage}
+	\begin{minipage}{0.5\textwidth}
+		\begin{align*}
+			E_1 &= E_0 \sin\left[\frac{2\pi}{\lambda}(r_1 - vt)\right] \\
+			E_2 &= E_0 \sin\left[\frac{2\pi}{\lambda}(r_2 - vt)\right]
+		\end{align*}
+	\end{minipage}
+	
+	\subsection{Anotaciones Extra (Diferencia de camino óptico)}
+	... la diferencia de camino óptico (OPD):
+	\begin{align*}
+		\text{fase} &= (2\pi / \lambda) \times \text{OPD} \\
+		&= (z_1 - z_2)n
+	\end{align*}
+	OPD fue una longitud de onda $\lambda$
+	
+	\textcolor{cyan}{
+		\begin{align*}
+			V &= \frac{dE}{dt} = - \omega E_0 \text{ sen}(\omega t + \phi) \\
+			\text{Cuando } E(0) &\rightarrow E(0) = E_0 \cos(\phi) \\
+			\text{Cuando } t=0 &\rightarrow V(0) = - \omega E_0 \text{ sen}(\phi)
+		\end{align*}
+		\begin{align*}
+			E(0) + V(0) &= E_0 \cos\phi - \omega E_0 \text{ sen}\phi \\
+			... &= E_0(\cos\phi - \omega \text{ sen}\phi) \\
+			... \frac{E(0)}{V(0)} &= ...
+		\end{align*}
+		\begin{equation*}
+			\frac{V(0)}{E(0)} = \frac{- \omega E_0 \text{ sen}\phi}{E_0 \cos\phi} = - \omega \tan\phi
+		\end{equation*}
+		\begin{equation*}
+			\phi = \tan^{-1}\left( \frac{V(0)}{-\omega E(0)} \right)
+		\end{equation*}
+		\begin{equation*}
+			E^2(0) + \frac{V^2(0)}{\omega^2} = E_0^2 (\cos^2\phi + \text{sen}^2\phi) = E_0^2
+		\end{equation*}
+	}
+	
+	\underline{\textbf{Diferencia de fase}}
+	La diferencia de fase es relacionada con la diferencia de camino optico (OPD):
+	\begin{align*}
+		\text{Diferencia de fase} &= (2\pi / \lambda) \times \text{OPD} \\
+		&= (2\pi / \lambda) \times (z_1 - z_2)n
+	\end{align*}
+	
+	\textbf{e.g. Si la diferencia de camino optico OPD fue una longitud de onda $\lambda$ entonces:}
+	\begin{align*}
+		\text{Diferencia de fase} &= \mathbf{(2\pi / \lambda) \times \lambda} \\
+		&= \underline{2\pi \text{ radians}}
+	\end{align*}
+	Cuando el OPD es un numero entero de $\lambda$, la diferencia de fase es un multiplo de $2\pi$, i.e. las ondas estan en fase.
+	
+	\section{Visibilidad o Contraste de Franjas ($\gamma$)}
+	Fue propuesto originalmente por Michelson y permitió distinguir los máximos de los mínimos. Mide la calidad de las interferencias si es 1 es porque los mínimos de intensidad tienen intensidad cero (con lo que los máximos resultan en un grado mayor) y si es cero es porque la intensidad máxima y mínima son iguales (por lo que no hay interferencia). La visibilidad de las franjas describe el contraste entre las regiones de interés brillantes y oscuras. La visibilidad es una variable adimensional entre 0 y 1, es un atributo de las franjas de interferencia que describen el contraste entre las regiones de interferencia brillante y oscura
+	
+	\begin{equation*}
+		\gamma = \frac{I_{max} - I_{min}}{I_{max} + I_{min}}
+	\end{equation*}
+	
+	Donde un valor de $I_{max}$ entre dos ondas ocurre
+	\begin{equation*}
+		I_{max} = I_1 + I_2 + 2\sqrt{I_1 I_2} = (\sqrt{I_1} + \sqrt{I_2})^2
+	\end{equation*}
+	\begin{equation*}
+		\text{OPD} = m\lambda \qquad \cos\Delta\varphi = 1 \qquad \Delta\varphi = 2\pi m \qquad (0, \pm2\pi, \pm4\pi)
+	\end{equation*}
+	
+	\colorbox{olive}{\parbox{\textwidth}{\color{white}
+			Si sustituimos en la ecuación de la visibilidad el valor obtenido por la intensidad máxima y mínima tenemos:
+			\begin{equation*}
+				\gamma = \frac{2\sqrt{I_1 I_2}}{I_1 + I_2}
+			\end{equation*}
+			La condición óptima para observar interferencias con buena visibilidad es:  $I_0 = I_1 = I_2$ \\
+			La máxima visibilidad es:  $\gamma = \frac{2\sqrt{I_0^2}}{2I_0} = 1 \qquad \qquad$ o cuando $I_{min} = 0 \quad \gamma = 1$
+			
+			\vspace{0.2cm}
+			\scriptsize{Recordando:} \\
+			\normalsize{$I = I_1 + I_2 + 2\sqrt{I_1 I_2}\cos(\Delta\theta)$}
+			
+			\scriptsize{Esta ecuación se puede escribir en términos de visibilidad:}
+	}}
+	
+	\begin{align*}
+		\mathbf{I = I_T (1 + \gamma(\cos(\Delta\theta)))} \qquad \qquad I_T = I_1 + I_2
+	\end{align*}
+	
+	$\gamma$ es el término de amplitud o término de modulación
+	
+	\section{Coherencia}
+	
+	\subsection{Monocromaticidad}
+	\begin{itemize}
+		\item Una fuente \underline{\textbf{monocromática}} es aquella que emite luz con una única frecuencia
+	\end{itemize}
+	\begin{center}
+		\colorbox{olive}{\parbox{0.3\textwidth}{
+				\begin{align*}
+					\vec{E} &= E_0 \cos(kx - \omega t)\hat{u} \\
+					v &= \frac{c}{\lambda} \qquad k = \frac{2\pi}{\lambda}
+				\end{align*}
+		}}
+	\end{center}
+	
+	\begin{itemize}
+		\item Dos fuentes monocromáticas se dicen coherentes cuando emiten luz con la misma frecuencia y longitud de onda. Deben tener una relación de fase definida y constante.
+	\end{itemize}
+	
+	\textit{[Imagen: comparacion\_luz\_coherente\_y\_no\_coherente.png]}
+	
+	Una onda monocromática con un tiempo de coherencia infinita tiene un solo color que es igual a la luz con una sola longitud de onda.
+	
+	\textit{[Imagen: grafica\_onda\_senoidal\_coherencia\_infinita.png]}
+	
+	Además, la luz monocromática producida por una fuente puntual implica que la amplitud de la vibración ("del campo eléctrico") en un punto de observación arbitrario P es constante y su fase varía linealmente con el tiempo.
+	Ninguna fuente real es puntual o estrictamente monocromática, por lo que el haz de luz no es una onda sinusoidal perfecta que se extienda indefinidamente en el espacio o en el tiempo "longitud infinita". El concepto de monocromático es una idealización matemática.
+	
+	\subsection{El Concepto de Coherencia}
+	\underline{La coherencia} es la correlación y sincronización que existe entre las fases de las ondas que interfieren. Es el grado en que una onda electromagnética mantiene su relación de fase espacial y temporal bastante constante.
+	
+	El concepto de coherencia entre dos fuentes es la capacidad de interferir.
+	
+	\textit{[Imagen: grafica\_tren\_ondas\_coherencia\_finita.png]}
+	
+	La luz es una onda espacial 3D que evoluciona en el tiempo, existen dos coherencias diferentes: a) Coherencia Temporal (CT) b) Coherencia espacial (CS)
+	
+	\begin{itemize}
+		\item \colorbox{yellow}{CT} se refiere al mismo "haz de luz" en el mismo punto espacial, pero para dos diferentes tiempos. Mide la continuidad de una onda a lo largo de su longitud. Define la consistencia de fase entre dos instantes de tiempo, está relacionada con la extensión finita del tren de ondas y el tiempo que tarda en recorrer una distancia determinada.
+	\end{itemize}
+	\textit{[Imagen: graficas\_coherencia\_temporal\_ancho\_de\_linea.png]}
+	
+	\begin{itemize}
+		\item \colorbox{yellow}{CS} se refiere a dos o más puntos diferentes del frente de onda, para el mismo tiempo y mide la separación máxima entre dos puntos en la sección transversal del frente de onda para mantener la correlación entre ellos. Define la correlación de la fase de la onda (haz) para diferentes puntos en el espacio a través del frente de onda.
+	\end{itemize}
+	\textit{[Imagen: esquemas\_coherencia\_espacial.png]}
+	
+	\textit{[Imagen: esquema\_frentes\_de\_onda\_espacial\_temporal.png]}
+	
+	\textbf{Los haces pueden ser coherentes o solo parcialmente coherentes (incluso incoherentes) tanto en el espacio como en el tiempo}
+	
+	\textit{[Imagen: esquemas\_ondas\_incoherentes\_ancho\_banda\_bombilla.png]}
+	
+	\begin{center}
+		\renewcommand{\arraystretch}{1.5}
+		\begin{tabular}{|p{0.45\textwidth}|p{0.45\textwidth}|}
+			\hline
+			\textbf{\textcolor{blue}{COHERENCIA TEMPORAL}} & \textbf{\textcolor{blue}{COHERENCIA ESPACIAL}} \\
+			\hline
+			La coherencia temporal se ocupa de la correlación de fase de la onda en un punto dado del espacio en dos instantes de tiempo diferentes. & La coherencia espacial se ocupa de la correlación de fase de dos puntos diferentes a través de un frente de onda en un instante de tiempo dado \\
+			\hline
+			El tipo de coherencia relacionada con el tiempo. & El tipo de coherencia relacionada con la posición. \\
+			\hline
+			Se conoce como coherencia longitudinal. & Se conoce como coherencia transversal. \\
+			\hline
+			La coherencia temporal de la luz está relacionada con el ancho de banda de frecuencia de la monocromaticidad de la fuente. & La coherencia espacial de la luz está relacionada con el tamaño de la luz. \\
+			\hline
+			La coherencia temporal es medida en un interferómetro como el Interferómetro de Michelson. & La Medida de coherencia espacial en interferómetro como el interferómetro de doble rendija de Young. \\
+			\hline
+		\end{tabular}
+	\end{center}
+	
+	\textit{[Imagen: comparativa\_ondas\_coherentes\_incoherentes\_espacial\_temporal.png]}
+	
+	\subsection{Cuantificación de la Coherencia}
+	\textbf{a) La Coherencia Temporal}
+	
+	\textbf{El tiempo de coherencia temporal ($\tau_c$) es el tiempo en que los frentes de onda permanecen igualmente espaciados. Es decir, el campo permanece sinusoidal con una sola longitud de onda:}
+	
+	\begin{center}
+		\textit{[Imagen: esquema\_tiempo\_de\_coherencia\_temporal.png]}
+	\end{center}
+	
+	$\tau_c$ es el tiempo promedio durante el cual una onda de propagación puede considerarse coherente. En otras palabras, es el intervalo de tiempo dentro del cual su fase es, en promedio, predecible. Para el cual existe una relación de fase definida.
+	
+	\textbf{b) La longitud de coherencia espacial ($L_c$ o L) es la distancia sobre la cual los frentes de onda del haz permanecen planos:}
+	
+	\textit{[Imagen: esquema\_longitud\_de\_coherencia\_espacial.png]}
+	
+	Como hay dos dimensiones transversales, podemos definir un área de coherencia. Coherencia – es muy importante para obtener interferencia.
+	
+	\subsubsection*{Tiempo y Longitud de coherencia}
+	$L$ es el tiempo de coherencia multiplicado por la velocidad de vacío de la luz y,
+	
+	\begin{align*}
+		\text{\fbox{$L = c \tau$}} \qquad \qquad &\text{--------------Eq 1}
+	\end{align*}
+	
+	Longitud de coherencia en términos de la frecuencia.
+	\begin{align*}
+		\text{\fbox{\parbox{2cm}{$L = c \tau$ \\ $\tau = \Delta t = \frac{1}{\Delta \nu}$}}} \qquad \qquad &\text{--------------Eq 2}
+	\end{align*}
+	
+	\begin{align*}
+		\text{\fbox{$\nu = \frac{c}{\lambda}$}} \qquad \qquad &\text{--------------Eq 3}
+	\end{align*}
+	
+	\begin{minipage}{0.5\textwidth}
+		\textit{[Imagen: grafica\_ancho\_de\_banda\_luz.png]}
+	\end{minipage}
+	\hfill
+	\begin{minipage}{0.45\textwidth}
+		Donde $\Delta \nu$ es el ancho de banda de la luz (ancho del espectro).
+	\end{minipage}
+	
+	\vspace{0.5cm}
+	Al derivar la ecuación 3 obtenemos:
+	\begin{align*}
+		\text{\fbox{$\Delta \nu = -\frac{c}{\lambda^2} \Delta \lambda = \left| \frac{c}{\lambda^2} \Delta \lambda \right|$}} \qquad \qquad &\text{--------Eq 4}
+	\end{align*}
+	
+	$\Delta \lambda$ .- ancho de linea (ancho espectral). La disminución del ancho de línea de la radiación aumenta su longitud de coherencia. Esta es la razón por la cual se recomienda el uso de un solo láser longitudinal en interferometría. Q factor
+	
+	\& Spectral Purity Factor is given by:
+	\begin{align*}
+		\text{\fbox{$Q = \frac{\lambda}{\Delta \lambda}$}} \qquad \qquad &\text{--------Eq 5}
+	\end{align*}
+	
+	So
+	\begin{align*}
+		\text{\fbox{$L = c \tau = \frac{c}{\Delta \nu} = \frac{\lambda^2}{\Delta \lambda} = \lambda Q$}} \qquad \qquad &\text{--------Eq 6}
+	\end{align*}
+	\begin{align*}
+		\text{\fbox{$L = \lambda Q$}} \qquad \qquad &\text{--------Eq 7}
+	\end{align*}
+	\begin{align*}
+		4 \text{ \fbox{$\tau = \frac{L}{c} = \frac{\lambda Q}{c}$}} \qquad \qquad &\text{--------Eq 8}
+	\end{align*}
+	
+	\begin{minipage}{0.5\textwidth}
+		\textit{[Imagen: onda\_desfase\_180\_grados.png]}
+		Define una longitude de coherencia $L$ como la distancia de propagación sobre la cual la radiación de ancho espectral $\Delta \lambda$ se desfasa $180 ^\circ$.
+	\end{minipage}
+	\hfill
+	\begin{minipage}{0.45\textwidth}
+		\textit{[Imagen: grafica\_ancho\_espectral\_delta\_lambda.png]}
+	\end{minipage}
+	
+	\subsection{Ejercicios de Coherencia}
+	Ejemplo.- Determine el ancho de banda de la frecuencia de la luz blanca. Calcule la longitud de coherencia L y el tiempo coherente $\tau$
+	
+	A.– El rango de frecuencia para la luz blanca es $\sim$de 384 THz ----- 769 THz
+	
+	El $\Delta \nu = 769 \text{ THz} - 384 \text{ THz} = 385 \times 10^{12} \text{Hz}$
+	
+	$\Delta \tau = 1/\Delta \nu = 1/385 \times 10^{12} \text{s} = 2.597 \times 10^{-15} \text{ s}$
+	
+	$L = c \Delta \tau = 3 \times 10^8 \text{m/s} \times 2.597 \times 10^{-15} \text{ s} = 779 \text{ nm}$
+	
+	\textbf{Para practicar:}
+	\begin{enumerate}
+		\item La luz de $\lambda = 4800 \text{ \AA}$ tiene una longitud de 25 ondas. ¿Cuál es la longitud de coherencia y el tiempo de coherencia?
+		\item Imagine que modulamos un láser continuo (para que tenga una longitud de onda perfectamente monocromática $\lambda = 6500 \text{ \AA}$) en pulsos de 0.5 ns usando una especie de obturador. Calcule $L$, $\Delta \nu$, y $\Delta \lambda$
+	\end{enumerate}
+	
+	\section{Detección y Mediciones por Óptica Coherente y No-Coherente: Técnicas de Imagen}
+	
+	\subsection{Pruebas No-Destructivas (PND)}
+	\colorbox{yellow}{\parbox{\textwidth}{
+			En términos generales, las pruebas no-destructivas tienen como propósito determinar características físicas como la forma, las propiedades mecánicas, los defectos estructurales, etc. de un objeto, sin modificarlo significativamente durante la realización de la prueba.
+			
+			Existen varias técnicas utilizadas en las pruebas no-destructivas como son la evaluación ultrasónica, la irradiación con rayos X, y también los métodos ópticos, como interferometría digital de patrones de moteado e interferometría holográfica digital (DSPI y HDI, por sus siglas en inglés) holografía digital de alta velocidad entre otros en forma de campo completo.
+	}}
+	
+	\begin{itemize}
+		\item El objetivo de una inspección es hallar características físicas significativas para determinar cuáles son normales y distinguirlas de aquellas características anormales.
+	\end{itemize}
+	
+	Que consiste en comprobar el estado de los distintos recursos y materiales.
+	
+	\begin{minipage}{0.4\textwidth}
+		\textit{[Imagen: medicion\_resonancias\_camara\_rapida.png]}
+	\end{minipage}
+	\hfill
+	\begin{minipage}{0.5\textwidth}
+		\LARGE{Medición de resonancias con cámara rápida}
+	\end{minipage}
+	
+	\vspace{0.5cm}
+	\colorbox{yellow}{\parbox{\textwidth}{
+			Por mencionar sólo algunas áreas de aplicación, se utilizan frecuentemente pruebas no-destructivas en:
+			\begin{itemize}
+				\item Detección de discontinuidades (internas y superficiales).
+				\item Determinación de composición química.
+				\item Detección de fugas.
+				\item Medición de espesores y monitoreo de corrosión.
+				\item Adherencia entre materiales.
+				\item Inspección de uniones soldadas.
+				\item Determinación de poros y estructura, etc. sin destruirlo.
+			\end{itemize}
+			
+			Los candidatos típicos para las pruebas no destructivas (PND o NDT, por sus siglas en inglés) incluyen soldadura, fundición, edificios, ferrocarriles, aviones, puentes, tuberías subterráneas de hormigón y varios tipos de equipo de fábrica, y materiales, ya sean éstos metales, plásticos (polímeros), cerámicos o compuestos. \\
+			Se emplean en las industrias por ejemplo la aeronáutica y automotriz entre otras.
+	}}
+	
+	\subsection{Métodos Ópticos}
+	\textbf{CONSIDERACIÓN} \\
+	\underline{\textbf{Métodos coherentes de codificación basados en:}} \\
+	Inteferometría \\
+	Holografía \\
+	\underline{\textbf{Métodos de codificación no coherentes basados en:}} \\
+	Métodos grid/grating \\
+	Métodos de Moiré (Interferencia mecánica) \\
+	Metodos de correlación digital. \\
+	Proyección de franjas.
+	
+	\underline{\textbf{Salida de codificación:}} \\
+	Fringe pattern/interferogram \\
+	Hologram \\
+	Specklegram/correlogram
+	
+	\colorbox{gray!20}{\parbox{\textwidth}{
+			\begin{itemize}
+				\item \underline{Los métodos ópticos coherentes} detectan cambios en la totalidad de la superficie de la muestra, y se basan en el fenómeno de moteado (speckle), presente en un campo óptico generado con la luz esparcida por una superficie rugosa. Al reflejarse en esta superficie, la luz se esparce en mayor o menor grado dependiendo de la rugosidad de la superficie, con una amplitud y una fase que varían aleatoriamente, pero que contienen al mismo tiempo información sobre el objeto bajo prueba.
+			\end{itemize}
+	}}
+	
+	\vspace{0.5cm}
+	\colorbox{olive!40}{\parbox{\textwidth}{
+			\textbf{De la información extraída de una prueba óptica no-destructiva se puede cuantificar:}
+			\begin{itemize}
+				\item[$\square$] Deformación,
+				\item[$\square$] Esfuerzo,
+				\item[$\square$] Detección de defectos internos de un objeto
+				\item[$\square$] Detección de anormalidades.
+				\item[$\square$] Recuperación de la forma
+				\item[$\square$] Vibración, etc.
+			\end{itemize}
+	}}
+	
+	\section{Speckle (Moteado)}
+	\begin{minipage}{0.45\textwidth}
+		\textit{[Imagen: formacion\_speckle\_laser.png]}
+	\end{minipage}
+	\hfill
+	\begin{minipage}{0.45\textwidth}
+		\textit{[Imagen: interferencia\_aleatoria\_superficie\_rugosa.png]}
+	\end{minipage}
+	
+	\vspace{0.5cm}
+	El moteado se deriva de la interferencia de ondas de luz coherente (láser) esparcidas por puntos adyacentes en superficies rugosas, cuya variación de su altura es del orden o mayor que la longitud de onda de la luz que las ilumina. Es la interferencia entre componentes desfasados y produce una fluctuación aleatoria en amplitud.
+	
+	\colorbox{olive!30}{\parbox{\textwidth}{
+			El moteado se produce por variaciones microscópicas de la superficie de un objeto no especular en la escala de una sola longitud de onda óptica que dan como resultado variaciones de fase en la luz
+	}}
+	
+	\vspace{0.3cm}
+	\colorbox{olive!30}{\parbox{\textwidth}{
+			El patrón de moteado es un patrón de intensidad aleatorio, se produce por la interferencia mutua de un conjunto de frentes de onda
+	}}
+	
+	\vspace{0.3cm}
+	\begin{minipage}{0.3\textwidth}
+		\textit{[Imagen: difraccion\_superficie\_iluminada.png]}
+	\end{minipage}
+	\hfill
+	\begin{minipage}{0.65\textwidth}
+		\colorbox{olive!40}{\parbox{\textwidth}{
+				De acuerdo con la teoría de difracción, cada punto sobre una superficie iluminada actúa como una fuente secundaria de ondas esféricas.
+		}}
+	\end{minipage}
+	
+	\subsection{Presencia de Patrones de Moteado}
+	\begin{minipage}{0.45\textwidth}
+		\textit{[Imagen: diagrama\_presencia\_patrones\_moteado.png]} \\
+		\textit{Nota de la imagen: Muestra una 'Fuente coherente' incidiendo en una 'Superficie de dispersión', reflejándose hacia la 'Imagen en el sensor'. Indica A: Ondas fuera de fase, motas oscuras. B: Ondas en fase, motas brillantes.}
+	\end{minipage}
+	\hfill
+	\begin{minipage}{0.5\textwidth}
+		La luz en cualquier punto del campo de luz dispersada está formada por ondas que se han dispersado desde cada punto de la superficie iluminada.
+		
+		El patrón de moteado se produce cuando la superficie es lo suficientemente rugosa como para \textbf{crear diferencias de trayectoria.}
+		
+		Las ondas tienen diferentes fases, que se suman para dar como resultado una onda.
+		
+		\textbf{La amplitud de la onda cambia y por tanto la intensidad, varía aleatoriamente.}
+	\end{minipage}
+	
+	\vspace{0.5cm}
+	Si la diferencia de camino es mayor que $\lambda$, entonces el cambio de fase será mayor que $2\pi$. Así que los cambios de amplitud, a su vez varían la intensidad de la luz resultante al azar. Cuando se combinan ondas en desfase que se originan en diferentes regiones de un objeto en la retina, película fotográfica u otro medio de grabación, se produce una interferencia granular,
+	
+	Por lo tanto la amplitud compleja para un punto en el espacio de un patrón de moteado puede ser:
+	\begin{equation*}
+		E_k = \frac{1}{\sqrt{N}} \sum_{k=1}^N E_{0k} e^{i\phi_k}
+	\end{equation*}
+	
+	Donde $E_{0k}$ y $\phi_k$ son la amplitud y fase de la k-enésima onda de dispersión \\
+	$\frac{1}{\sqrt{N}}$ es porque se usa el valor eficaz o rms (root mean square) N: numero total de las contribuciones
+	
+	La amplitud total tiene un valor que varía entre 0 y un valor máximo determinado por la magnitud y fase de las amplitudes individuales.
+	
+	\begin{minipage}{0.45\textwidth}
+		Asumiendo que:
+		\begin{enumerate}
+			\item La amplitud y fase de cada componente son estadísticamente independientes de los otros componentes.
+			\item Las fases $\phi_k$ son uniformemente distribuidas para valores entre $-\pi$ y $+\pi$
+			\item La intensidad del patrón será $I = |E_k|^2$
+		\end{enumerate}
+		La $I$ en un patrón de moteado obedece a una exponencial negativa, el valor mas probable de la $I$ de Moteado es cero esto es más speckles son negros.
+		\begin{equation*}
+			P(I) = \frac{1}{\langle I \rangle} e^{\left(-I / \langle I \rangle\right)}
+		\end{equation*}
+	\end{minipage}
+	\hfill
+	\begin{minipage}{0.5\textwidth}
+		\textit{[Imagen: histograma\_pdf\_intensidad\_speckle.png]}
+	\end{minipage}
+	
+	\colorbox{cyan!10}{\parbox{\textwidth}{
+			SE PUEDE DISTINGUIR LA FORMACION DE 2 TIPOS FUNDAMENTALES DE SPECKLE: \\
+			a) OBJETIVO \\
+			b) SUBJETIVO
+	}}
+	
+	\subsection{Speckle Objetivo}
+	\begin{minipage}{0.4\textwidth}
+		\textit{[Imagen: speckle\_objetivo\_fases\_interferencia.png]}
+	\end{minipage}
+	\hfill
+	\begin{minipage}{0.55\textwidth}
+		\textbf{Objective speckle configuration} \\
+		\textit{[Imagen: configuracion\_speckle\_objetivo\_laser.png]}
+	\end{minipage}
+	
+	\vspace{0.3cm}
+	Cuando la luz láser que se ha dispersado desde una superficie rugosa incide sobre otra superficie, forma un "patrón de manchas (speckle) objetivas".
+	
+	Si se coloca una placa fotográfica u otro sensor óptico 2D dentro del campo de luz esparcida sin lente, se obtiene un patrón moteado cuyas características dependen de la geometría del sistema y de la longitud de onda del láser.
+	
+	Cuando el ángulo de dispersión cambia la diferencia de trayectoria relativa entre la luz dispersada desde el centro y del borde del área iluminada se modifica. Si este cambia en $\lambda$, la intensidad deja de estar correlacionada. Esta pérdida de correlación significa que el patrón de interferencia se desplaza y los puntos brillantes y oscuros del patrón de moteado cambian de posición.
+	
+	\colorbox{gray!10}{\parbox{\textwidth}{
+			\textbf{El tamaño del grano (speckle) promedio está determinado:}
+			\begin{itemize}
+				\item[$\circ$] Por la longitud de onda de la luz y el sistema óptico utilizado para verla.
+				\item[$\circ$] El tamaño de la primera superficie que el rayo láser ilumina, y la distancia entre esta superficie del objeto rugoso y la superficie donde se forma el patrón de motas.
+			\end{itemize}
+			
+			El tamaño medio de la mota como:
+			\begin{equation*}
+				\frac{\lambda z}{D}
+			\end{equation*}
+			
+			Donde: \\
+			$D$ es el diámetro/ancho del área iluminada. \\
+			$z$ es la distancia entre el objeto y la superficie donde se forma el patrón de speckle.
+	}}
+	
+	$s$ periodo espacial de las franjas depende del ángulo entre los dos haces ($\alpha$) interferentes y $\lambda$.
+	
+	\begin{minipage}{0.3\textwidth}
+		\begin{equation*}
+			s = \frac{\lambda}{2\sin\frac{\alpha}{2}}
+		\end{equation*}
+	\end{minipage}
+	\hfill
+	\begin{minipage}{0.65\textwidth}
+		\textit{[Imagen: esquema\_tamano\_speckle\_objetivo.png]}
+	\end{minipage}
+	
+	\vspace{0.3cm}
+	Asumimos que la pantalla de observación esta bastante lejos del área iluminada, lo que implica que el ángulo $\alpha$ es bastante pequeño se puede aproximar $\alpha/2 = D/2z$ donde $D$ es el diametro del superficie iluminada, y la distancia de observacion, $z$ es la distancia de la superficie iluminada a la pantalla de observación (detector, pelicula fotografica).
+	
+	Substituyendo el valor de esta ángulo en el periodo espacial obtenemos el tamaño promedio del speckle objetivo:
+	\begin{equation*}
+		s = \frac{\lambda z}{D}
+	\end{equation*}
+	
+	\subsection{Speckle Subjetivo}
+	\begin{minipage}{0.45\textwidth}
+		\textit{[Imagen: esquema\_speckle\_subjetivo\_lente.png]} \\
+		
+		La imagen se forma a partir de una superficie rugosa cuando se ilumina con una luz coherente. \\
+		Los parámetros del sistema de visualización deciden el patrón de moteado (subjetivo). Por ejemplo, si el tamaño de la apertura de la lente cambia, el tamaño de la mota cambia. \\
+		La posición del sistema de imágenes se altera con un cambio gradual en el moteado.
+	\end{minipage}
+	\hfill
+	\begin{minipage}{0.5\textwidth}
+		\textit{[Imagen: configuracion\_laser\_iluminando\_mano.png]} \\
+		
+		Cada punto de la imagen está iluminado por un área finita en el objeto. \\
+		El tamaño de esta área está determinado por la lente que está dada por el disco aireado. \\
+		La resolución de la lente está limitada por la difracción. \\
+		El diámetro del disco de Airy es $2.4 \lambda u / D$ (A Circular) \\
+		$u$ es la distancia entre el objeto y la lente y $D$ es el diámetro de la apertura de la lente.
+	\end{minipage}
+	
+	\section{Interferometría de Speckle (SI)}
+	\colorbox{gray!20}{\parbox{\textwidth}{
+			En metrología óptica, el moteado puede considerarse como un elemento fundamental en el transporte de la información utilizada en una medida concreta. Las técnicas de metrología de speckle tienen su origen en la interferometría holográfica y, por tanto, comparten con ella varias configuraciones ópticas y principios operativos. \\
+			
+			La interferometría de moteado permite medir mapas de desplazamiento estáticos o dinámicos que ocurren en un objeto sometido a carga mecánica. El moteado se consideraba un tipo especial de ruido y era la pesadilla de los hológrafos. Sin embargo, pronto se descubrió su propiedad de transporte de información y el fenómeno se utilizó para aplicaciones metrológicas. La comprensión de que un patrón de moteado transportaba información llevó a una nueva técnica de medición conocida como interferometría de moteado (SI). Aunque el fenómeno del moteado en sí mismo es una consecuencia de la interferencia entre numerosas ondas desfasadas aleatoriamente, se requiere una onda de referencia en SI.
+	}}
+	
+	\colorbox{gray!10}{\parbox{\textwidth}{
+			Inicialmente, la SI se realizó principalmente mediante el uso de emulsiones de plata como medio de grabación. El specklegram de doble exposición se filtró para extraer la información deseada. Dado que SI se puede configurar para que sea sensible al componente de desplazamiento en el plano, el componente de desplazamiento fuera del plano o sus derivadas, los interferogramas correspondientes a estos se extrajeron del specklegram para su posterior análisis. Dado que el tamaño del moteado se puede controlar mediante el número F de la lente de formación de imágenes, pronto se comprendió que la SI podía realizarse con detección electrónica, aumentando así su precisión y velocidad de medición \\
+			\textbf{ADVANTAGES OF SPECKLE INTERFEROMETRY} \\
+			\textbf{Displacement resolution : +/- 0.1 $\mu$ m} \\
+			Modos propios de un objeto vibrante con los factores de amortiguación. \\
+			\textbf{Object size : from several mm\textsuperscript{2} to several m\textsuperscript{2}} \\
+			Medición de la deformación inducida mecánica o térmicamente. Eficiente en todo tipo de materiales \\
+			\textbf{APLICATIONES} \\
+			Actualización de simulación FEM, biospeckle, DIC, \\
+			Análisis de comportamiento mecánico (en un solo objeto o estructura compleja) \\
+			Banco óptico para fines educativos
+	}}
+	
+	\subsection{Configuraciones Ópticas y Operación}
+	\begin{center}
+		CONFIGURACIÓN ÓPTICA PARA INTERFEROMETRÍA DE SPECKLE \\
+		(CONFIGURACIÓN FUERA DEL PLANO)
+	\end{center}
+	\textit{[Imagen: configuracion\_optica\_interferometria\_speckle\_esquema\_basico.png]}
+	
+	\begin{center}
+		CONFIGURACIÓN ÓPTICA PARA INTERFEROMETRÍA \\
+		DE SPECKLE (CONFIGURACIÓN EN EL PLANO)
+	\end{center}
+	\textit{[Imagen: configuracion\_optica\_interferometria\_speckle\_esquema\_en\_plano.png]}
+	
+	En metrología moteada, comparamos dos patrones (doble exposición), cada uno generado por la interferencia coherente de dos frentes de onda. Estos dos patrones se utilizan en el análisis de deformaciones, de manera que uno se refiere al estado no deformado y el otro al estado deformado del objeto con superficie rugosa.
+	
+	\begin{minipage}{0.4\textwidth}
+		Los cambios en el patrón están relacionados cuantitativamente con la traslación de la superficie. La interferometría moteada describe el proceso de dos estados para generar dicho mapa.
+	\end{minipage}
+	\hfill
+	\begin{minipage}{0.55\textwidth}
+		\begin{center}
+			\colorbox{olive!50}{\textcolor{white}{Imagen Inicial del patron de moteado}} \\
+			$\Downarrow$ \\
+			\colorbox{olive!50}{\textcolor{white}{Imagen final del patron de moteado}} \\
+			$\Downarrow$ \\
+			\colorbox{olive!50}{\textcolor{white}{Sustracción digital de las imagenes}}
+		\end{center}
+		
+		Por lo tanto, al comparar el patrón de moteado producido por un objeto en dos estados separados, es posible mapear los cambios en el contorno de la superficie debido a la tensión o el movimiento.
+	\end{minipage}
+	
+	\subsubsection*{Intensidad Resultante y Deformación}
+	Intensidad resultante de la combinacion de un haz de referencia con un haz objeto para un estado no deformado (referencia) en el sensor es:
+	
+	\begin{equation*}
+		I_A(x,y) = |a_R(x,y)\exp(i\varphi_R) + a_o(x,y)\exp(i\varphi_o)|^2
+	\end{equation*}
+	\begin{equation*}
+		= a_R^2 + a_o^2 + 2a_Ra_o \cos(\varphi_o - \varphi_R) = I_R + I_o + 2\sqrt{I_o I_R}\cos(\varphi_o - \varphi_R)
+	\end{equation*}
+	
+	donde $a_o, a_R, \text{y } \varphi_o, \varphi_R$ son, las amplitudes y las fases del haz objeto y del haz de referencia respectivamente.
+	
+	El termino $(\varphi_o - \varphi_R)$ es la diferencia de fase entre el haz de referencia y el haz objeto, el cual varia aleatoreamente debido a la naturaleza del material desde un punto a otro.
+	
+	\textbf{Después de la deformacion un Segundo patron de speckle pattern es registrado:}
+	\begin{equation*}
+		I_B(x,y) = a_R^2 + a_o^2 + 2a_Ra_o \cos(\varphi_o - \varphi_R + \Delta\varphi)
+	\end{equation*}
+	
+	The correlation of these two interference patterns allows the measurement of the out-of-plane displacements. the difference of intensity due to the surface deformation, between an initial undeformed state A and a final deformed state B, is given by
+	
+	\begin{equation*}
+		\Delta I = |I_A - I_B| = |2a_Ra_o (\cos(\varphi_o - \varphi_R) - \cos(\varphi_o - \varphi_R + \Delta\varphi))|
+	\end{equation*}
+	\begin{equation*}
+		= 4a_Ra_o \left|\sin\left(\varphi_o - \varphi_R + \frac{\Delta\varphi}{2}\right) \sin\frac{\Delta\varphi}{2}\right| \qquad \sqrt{I_R I_O} = a_R a_o
+	\end{equation*}
+	
+	La raíz cuadrada describe la iluminación de fondo, el primer factor seno representa la alta frecuencia espacial y el ruido del moteado que varia aleatoriamente de píxel a píxel, el segundo es la modulación de baja frecuencia inducida por el desplazamiento que se conoce como interferencia de moteado representada por las franjas de correlación. Cuando se realiza en tiempo real, la sustracción de las intensidades IA e IB permite visualizar patrones de franjas de tonalidad oscura, que corresponden al desplazamiento del objeto. Sin embargo, en esta fase, este desplazamiento sólo se describe de forma aproximada, ya que no hay información entre las franjas.
+	
+	\textit{[Imagen: franjas\_correlacion\_desplazamiento\_objeto.png]}
+	\textit{[Imagen: proceso\_sustraccion\_patrones\_speckle.png]} \\
+	\textit{[Imagen: interferograma\_franjas\_deformacion.png]} \\
+	\textit{[Imagen: grafica\_3D\_deformacion\_superficie.png]}
+	
+	\section{Interferometría de Medición de Fase (PMI)}
+	\colorbox{cyan!20}{\parbox{\textwidth}{
+			\begin{center}
+				\textbf{TÉCNICAS DE DEMODULACIÓN DE FASE}
+			\end{center}
+	}}
+	
+	\begin{itemize}
+		\item Para recuperar la fase óptica ahora describimos un grupo de métodos llamados \colorbox{yellow}{interferometría de medición de fase (PMI)}. PMI es la técnica más utilizada en la actualidad para medir la fase del frente de onda en interferómetros y también se ha aplicado con éxito en interferometría holográfica y moiré. Las técnicas de PMI se pueden dividir en dos categorías principales:
+	\end{itemize}
+	
+	1.- Los datos utilizados para determinar la fase se obtienen en distintos intervalos de tiempo, i.e. secuencialmente. Estos métodos se conocen como PMI \underline{temporal} o TPM.
+	
+	2.- Las que toman todos los datos para recuperar la fase en forma simultáneamente, se conocen como PMI \underline{espacial} o SPMI. Altera el frente de onda de luz.
+	
+	\colorbox{cyan!20}{\parbox{\textwidth}{
+			LOS TPMI PUEDEN SUBDIVIDIRSE EN DOS TÉCNICAS:
+	}}
+	a) una que integra la intensidad mientras la fase aumenta linealmente, llamada \colorbox{cyan!20}{phase shifting} y \\
+	b) una segunda en la que altera la fase por pasos entre las mediciones de intensidad, llamada \colorbox{cyan!20}{phase stepping}.
+	
+	Tanto phase shifting como phase stepping son técnicas interferométricas para recuperar la fase óptica, pero se diferencian principalmente en cómo se modula y se mide la fase. Phase shifting utiliza cambios continuos y controlados en la fase, mientras que phase stepping se basa en incrementos discretos de fase.
+	
+	\begin{minipage}{0.45\textwidth}
+		\begin{center}
+			\colorbox{blue!20}{\textbf{Phase Shifting}} \\
+			\scriptsize{Continuous Phase Variation}
+		\end{center}
+		\textit{[Imagen: graficas\_phase\_shifting\_continuo.png]} \\
+		Este método requiere una modulación de fase lineal y uniforme en todo el campo de visión durante el tiempo de exposición del detector.
+		\begin{center}
+			\colorbox{blue!80}{\textcolor{white}{Precise Control \quad Fast Measurement \quad High Accuracy}}
+		\end{center}
+	\end{minipage}
+	\hfill
+	\begin{minipage}{0.45\textwidth}
+		\begin{center}
+			\colorbox{orange!50}{\textbf{Phase Stepping}} \\
+			\scriptsize{Discrete Phase Steps}
+		\end{center}
+		\textit{[Imagen: graficas\_phase\_stepping\_discreto.png]} \\
+		\begin{center}
+			\colorbox{orange!80}{\textcolor{white}{Simple Setup \quad Slower Process \quad Robust \& Easy}}
+		\end{center}
+	\end{minipage}
+	
+	Se registra una secuencia de patrones de franjas con un incremento de fase, y la diferencia de fase registrada durante el tiempo de exposición debe ser idéntica de una adquisición a otra.
+	
+	\colorbox{yellow}{Phase shifting} = continuo, preciso, de alta precisión, pero más lento y requiere mucho equipo. \\
+	\colorbox{yellow}{Phase stepping} = discreto, más rápido, más sencillo, pero menos preciso. Se ha convertido en el más popular en los últimos años y a continuación ofrecemos una breve descripción de esta técnica.
+	
+	\subsection{Interferometría por Cambio de Fase (PSI)}
+	\begin{align*}
+		I(x,y) &= I_R + I_o + 2\sqrt{I_R I_o} \cos[\varphi(x,y) + \alpha(t)] \\
+		I(x,y) &= I_{dc} + I_{ac} \cos[\varphi(x,y) + \alpha(t)] \\
+		I(x,y) &= I_T (1 + \gamma \cos[\varphi(x,y) + \alpha(t)])
+	\end{align*}
+	
+	La distribución de fase del frente de onda está codificada en la variación de la intensidad. La diferencia de fase del frente de onda entre los dos haces de interferencia se puede obtener analizando la irradiancia punto por punto de tres o más interferogramas a medida que varía la diferencia de fase.
+	En general no es posible calcular la fase directamente de la $I$, porque no se conocen los parámetros $I_{dc}$ y $I_{ac}$. Además, la función coseno es una función par $\cos 30^\circ = \cos -30^\circ$ y no se determina el signo de la fase. El principio es registrar 3 o más patrones de interferencia con cambios de fase.
+	
+	\textit{[Imagen: phase\_shifting\_interferometry\_a\_b\_c.png]}
+	
+	\colorbox{green!20}{\textbf{Algoritmo de 3 pasos}} \\
+	Este algoritmo demuestra que con 3 pasos discretos la diferencia de fase puede ser obtenida con 3 mediciones. Se registraran las imágenes de intensidad para $\pi/4, 3\pi/4, 5\pi/4$
+	
+	\begin{align*}
+		I_1(x,y) &= I_T\left(1 + \frac{\sqrt{2}}{2}\gamma[\cos(\varphi) - \text{sen}(\varphi)]\right) \\
+		I_2(x,y) &= I_T\left(1 + \frac{\sqrt{2}}{2}\gamma[-\cos(\varphi) - \text{sen}(\varphi)]\right) \\
+		I_3(x,y) &= I_T\left(1 + \frac{\sqrt{2}}{2}\gamma[-\cos(\varphi) + \text{sen}(\varphi)]\right)
+	\end{align*}
+	
+	Calculamos la tangente inversa:
+	\begin{equation*}
+		\varphi = \tan^{-1} \left[ \frac{\sin\varphi}{\cos\varphi} \right] = \tan^{-1} \left[ \frac{I_3 - I_2}{I_1 - I_2} \right] \qquad \gamma = \frac{\sqrt{(I_1 - I_2)^2 + (I_3 - I_2)^2}}{\sqrt{2}I_T}
+	\end{equation*}
+	
+	\colorbox{green!20}{\parbox{\textwidth}{
+			Si se toman cuatro imágenes de datos, a medida que la fase cambia $90^\circ$ entre lecturas, la irradiancia para las cuatro mediciones y la fase medida, $\varphi(x,y)$, vienen dadas por lo siguiente:
+			\begin{align*}
+				I_1(x,y) &= I_{dc} + I_{ac} \cos[\varphi(x,y)] \text{ si } \alpha(t) = 0 \\
+				I_2(x,y) &= I_{dc} - I_{ac} \sin[\varphi(x,y)] \text{ si } \alpha(t) = \frac{\pi}{2} \\
+				I_3(x,y) &= I_{dc} - I_{ac} \cos[\varphi(x,y)] \text{ si } \alpha(t) = \pi \\
+				I_4(x,y) &= I_{dc} + I_{ac} \sin[\varphi(x,y)] \text{ si } \alpha(t) = \frac{3\pi}{2}
+			\end{align*}
+			\begin{equation*}
+				\tan[\varphi(x,y)] = \frac{I_4(x,y) - I_2(x,y)}{I_1(x,y) - I_3(x,y)}
+			\end{equation*}
+	}}
+	
+	\subsubsection*{Medios de Modulación de Fase}
+	Para controlar el valor de alfa $\alpha$ el interferómetro se ajusta ligeramente entre cada medición (ej. usando un transductor piezoeléctrico PZT).
+	\textit{[Imagen: medios\_modulacion\_cambio\_fase\_a\_b\_c\_d.png]} \\
+	a) espejo móvil, b) placa de cristal inclinada c) rejilla de difracción móvil d) placa de onda móvil (giratoria).
+	\textit{[Imagen: esquema\_pzt\_espejo\_desplazamiento\_fase.png]}
+	\textit{[Imagen: esquema\_movimiento\_eje\_y\_rejilla\_difraccion.png]}
+	
+	\textit{[Imagen: esquema\_interferometro\_speckle\_fuera\_plano.png]}
+	\textit{[Imagen: esquema\_transmission\_linear\_gratings\_oscilloscope.png]}
+	
+	\subsection{Otros Algoritmos de Medición de Fase y Errores}
+	\begin{itemize}
+		\item \textbf{Schwider-Hariharan Cinco Medidas} ($-2\alpha, -\alpha, 0, \alpha, 2\alpha$ con paso $\pi/2$)
+		\begin{equation*}
+			\phi = ArcTan \left[ \frac{2(I_4 - I_2)}{I_1 - 2I_3 + I_5} \right] \qquad o \qquad \tan \delta(x, y) = 2 \sin \alpha \frac{(I2 - I4)}{2I3 - (I1 + I5)}
+		\end{equation*}
+		\item \textbf{Carré Ecuación}
+		\begin{equation*}
+			\phi = ArcTan \left[ \frac{\sqrt{[3(I_2 - I_3) - (I_1 - I_4)][(I_2 - I_3) + (I_1 - I_4)]}}{(I_2 + I_3) - (I_1 + I_4)} \right]
+		\end{equation*}
+	\end{itemize}
+	
+	\underline{Las dos fuentes de error más comunes son:} Desplazamiento de fase incorrecto (vibraciones) y reflexiones parásitas. Errores menos comunes incluyen error de cuantificación, no linealidad e inestabilidades.
+	
+	Una vez determinada la fase a través del campo de interferencia, se puede determinar el desplazamiento correspondiente (distribución de altura) $d(x,y)$, en la superficie de prueba, como:
+	\begin{equation*}
+		d(x,y) = \frac{\lambda}{4\pi} \varphi(x,y)
+	\end{equation*}
+	
+	\section{Avisos Académicos y Administrativos (Posgrado)}
+	\colorbox{gray!20}{\parbox{\textwidth}{
+			\textcolor{red}{\textbf{Prioridad de beca}} \\
+			\textbf{Acuerdo 02/26NOV25:} \\
+			Con fundamento en las funciones y facultades del Comité Académico señaladas en el punto X del artículo 2.1.4 del Lineamiento Académico de Posgrados...
+			1. Primeras personas: admitidas de forma directa en 1ra convocatoria, o 2da convocatoria con promedio $\ge$ general.
+			2. Segundas personas: admitidas en 1ra convocatoria condicionadas a propedéuticos.
+			3. Últimas personas: admitidas en 2da convocatoria con promedio inferior al general.
+	}}
+	
+	\begin{minipage}{0.4\textwidth}
+		\textbf{Consideraciones importantes:}
+		\begin{enumerate}
+			\item Ser estudiante regular
+			\item No estar re-cursando
+			\item Promedio $\ge$ 8.0
+			\item Asistencia a seminarios $\ge$ 70\%
+			\item Carta de aceptación
+			\item Actividades durante 2026
+		\end{enumerate}
+	\end{minipage}
+	\hfill
+	\begin{minipage}{0.55\textwidth}
+		\colorbox{green!40}{\textbf{SE DARÁ PREFERENCIA}}: No apoyos previos, asistencia a seminarios, recursos concurrentes del asesor(a).
+	\end{minipage}
+	\textit{[Imagen: grafica\_barras\_becas\_por\_asesor.png]}
+	
+	\section{Modulación Espacial y Transformada de Fourier}
+	\colorbox{gray!10}{\parbox{\textwidth}{
+			\textcolor{blue}{\textbf{Modulación Espacial (Método de Takeda, o interferometría de Fourier) Interferometría fuera de eje (off-axis)}}
+			
+			La interferometría fuera de eje toma ventaja de la modulación espacial de fase introducida mediante el desplazamiento angular de la onda de referencia. Los métodos de medición de la fase de portadora espacial se basan en la idea de superponer una portadora de patrón de franjas sobre las franjas del interferograma o sobre el patrón de speckle.
+	}}
+	\textit{[Imagen: esquema\_modulacion\_espacial\_takeda\_off\_axis.png]}
+	\textit{[Imagen: esquema\_modulacion\_espacial\_efecto\_inclinacion.png]}
+	
+	El patrón de franjas viene dado por:
+	\begin{equation*}
+		I(x,y) = a(x,y) + b(x,y)\cos[\phi(x,y)] = a(x,y) + c(x,y) + c^*(x,y)
+	\end{equation*}
+	Donde $c(x,y) = \frac{1}{2}b(x,y)e^{i\phi(x,y)}$. Al aplicar la Transformada de Fourier:
+	\begin{equation*}
+		I(u,v) = A(u,v) + C(u,v) + C^*(-u,-v)
+	\end{equation*}
+	
+	La fase de interferencia $\phi(x, y)$ se obtiene aislando un pico de la frecuencia, aplicando un filtro paso banda y obteniendo la transformada inversa:
+	\begin{equation*}
+		\phi(x, y) = \arctan \left[ \frac{\text{Imag } c(x,y)}{\text{Real } c(x,y)} \right]
+	\end{equation*}
+	
+	\textit{[Imagen: diagrama\_fase\_interferencia\_fft\_phase\_map.png]}
+	\textit{[Imagen: paneles\_transformada\_fourier\_filtros.png]}
+	
+	\textbf{Método espacial con portadora:}
+	\begin{equation*}
+		I(x,y) = a(x,y) + b(x,y) \cos[\phi(x,y) + 2\pi f_0 x]
+	\end{equation*}
+	\textit{[Imagen: patron\_interferencia\_portadora\_baja\_frec.png]}
+	\textit{[Imagen: patron\_interferencia\_portadora\_alta\_frec.png]}
+	\textit{[Imagen: diagrama\_espectro\_fourier\_separados.png]}
+	
+	\textbf{Ventajas:} Un solo interferograma, procesamiento rápido (FFT). \\
+	\textbf{Desventajas:} Arreglo especial, bordes con mal resultado, difícil estimación en detalles finos.
+	
+	\section{Interferometría Digital de Patrones de Speckle (DSPI / ESPI)}
+	Es una técnica óptica no destructiva, de campo completo de alta precisión, basada en el efecto óptico de interferencia y la difracción para la medición de varios parámetros, físicos estáticos y dinámicos (desplazamientos), la forma, los gradientes de desplazamiento, las vibraciones y el índice de refracción etc.
+	
+	\textit{[Imagen: diagrama\_bloques\_espi.png]}
+	\textit{[Imagen: montaje\_experimental\_espi\_laboratorio.png]}
+	
+	\subsection{Sensibilidad y Configuraciones}
+	\begin{equation*}
+		\Delta\phi = (\vec{K}_i - \vec{K}_o)\cdot\vec{d} = \vec{K}\cdot\vec{d} = \frac{2\pi}{\lambda}(\vec{n}_i - \vec{n}_o)\cdot\vec{d}
+	\end{equation*}
+	\textit{[Imagen: diagrama\_vectores\_sensibilidad\_espi.png]}
+	
+	\textbf{1. SENSIBILIDAD FUERA DEL PLANO}
+	La luz de iluminación es colineal con la de observación ($\alpha=0^\circ$).
+	\begin{equation*}
+		\Delta\phi(x,y) = \frac{4\pi}{\lambda}d_z(x,y)
+	\end{equation*}
+	\textit{[Imagen: diagrama\_sensibilidad\_fuera\_de\_plano.png]}
+	\textit{[Imagen: esquema\_optico\_dspi\_fuera\_plano.png]}
+	\textit{[Imagen: interferogramas\_franjas\_viga\_dspi\_a\_c.png]}
+	\textit{[Imagen: diagrama\_3d\_desplazamiento\_fuera\_plano.png]}
+	
+	\textbf{2. SENSIBILIDAD EN EL PLANO}
+	El objeto se ilumina mediante dos haces con un mismo ángulo $\alpha$, siendo insensible al desplazamiento perpendicular.
+	\begin{equation*}
+		\Delta\phi(x,y) = \frac{4\pi}{\lambda} \sin(\alpha) d_x(x,y)
+	\end{equation*}
+	\textit{[Imagen: diagrama\_sensibilidad\_en\_plano.png]}
+	\textit{[Imagen: esquema\_optico\_dspi\_en\_plano.png]}
+	\textit{[Imagen: interferogramas\_dspi\_en\_plano\_fase\_envuelta.png]}
+	\textit{[Imagen: graficas\_3d\_deformacion\_plano\_xy.png]}
+	
+	\textbf{3. ARREGLO DE CIZALLADURA (SHEAROGRAPHY)}
+	Se utiliza un prisma de cizalla u otros elementos para dividir la imagen, llegando dos rayos de puntos separados ($\Delta x, \Delta y$).
+	\begin{equation*}
+		\Delta\phi \approx \frac{4\pi}{\lambda} \left[ \frac{\partial d_z}{\partial x} \right] \Delta x
+	\end{equation*}
+	\textit{[Imagen: diagrama\_sensibilidad\_cizalladura.png]}
+	\textit{[Imagen: esquema\_optico\_shearography\_prisma.png]}
+	
+\end{document}

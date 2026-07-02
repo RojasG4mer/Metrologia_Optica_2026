@@ -45,4 +45,44 @@
 	
 	El $\alpha(t)$ es agregar un valor a la fase, experimentalmente se pone una placa de media o cuarto de onda en el haz objeto o haz de referencia. Tambien se le puede poner un pizoelectrico que dependiendo de la corriente que se aplique va a cambiar la posición.
 	
+	
+	\section*{Método de 4 pasos}
+	
+	Si lo que medimos es mayor a la longitud de onda, la fase se envuelve. Si mezclamos varias $\lambda$ podemos aumentar la resolución, pero aumenta el ruido.\\
+	
+	Para controlar el valor de $\alpha$ el interferómetro se ajusta ligeramente entre cada medición. Típicamente se utiliza un pizoelectrico (al modular, controlamos el cambio de la frecuencia),como el titanato de circonato de plomo (PZT). El phase stepping y el otro son modulaciones temporales, las de fourier son en la frecuencia.
+	
+	\section*{Algoritmo de Carré}
+	Es ampliamente usado en interferometría óptica porque el paso es arbitrario. No es sensitivo al error de cambio de paso. Este algorimo es un algoritmo de 4 pasos con una cambio de fase desconocido.
+	
+	Las 4 intensidades se pueden escribir como:
+	
+	$$ I_1(x, y) =  $$
+	
+	Así queda como:
+	
+	$$\Delta \phi = \arctan\left(\frac{\sqrt{I_1 + I_2 - I_3 -I_4} \cdot \sqrt{3I_2-3I_3-I_1+I_4}}{I_2+I_3-I_1-I_4}\right)$$
+	
+	\section*{Algoritmo de 5 pasos Schwideer-Hariharan}
+	Este método comprueba que la primer imagen es igual que el quinto, ya que los desplazamientos de fase es de $\pi/2 = 90^{\circ}$.
+	
+	Así haciendo el álgebra llegamos a:
+	
+	
+	\subsection*{Fuentes de error}
+	\begin{itemize}
+		\item Desplazamiento de fase incorrecto entre las imagenes.
+		\item Desfase incorrecto suele deberse a las vibraciones.
+		\item Refrexiones parásitas.
+		\item Error de cuantificación.
+		\item No linealidad del detector.
+		\item Inestabilidad de la fuente. 
+	\end{itemize}
+	
+	
+	Una vez determinada la fase a través del campo de interferencia, se puede determinar el desplazamiento correspondiente (distribución de alturas $d(x, y)$) en la superficie de prueba.
+	$$ d(x, y) = \frac{\lambda}{4\pi}\phi(x, y) $$	
+
+	
+	
 \end{document}
