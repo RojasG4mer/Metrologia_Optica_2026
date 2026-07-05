@@ -1,0 +1,550 @@
+\documentclass[12pt, letterpaper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage[spanish]{babel}
+\usepackage[margin=2cm]{geometry}
+\usepackage{tikz}
+% Se agregó 'babel' a las librerías para evitar conflicto con las flechas (>)
+\usetikzlibrary{optics, positioning, arrows.meta, babel} 
+\usepackage{listings}
+\usepackage{xcolor}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+	backgroundcolor=\color{backcolour},   
+	commentstyle=\color{codegreen},
+	keywordstyle=\color{magenta},
+	numberstyle=\tiny\color{codegray},
+	stringstyle=\color{codepurple},
+	basicstyle=\ttfamily\footnotesize,
+	breakatwhitespace=false,         
+	breaklines=true,                 
+	captionpos=b,                    
+	keepspaces=true,                 
+	numbers=left,                    
+	numbersep=5pt,                  
+	showspaces=false,                
+	showstringspaces=false,
+	showtabs=false,                  
+	tabsize=4
+}
+\lstset{style=mystyle}
+
+\begin{document}
+	
+	\begin{center}
+		\Large \textbf{METROLOGÍA ÓPTICA} \\
+		\large \textbf{TAREA 2} 
+	\end{center}
+	
+	\vspace{0.5cm}
+	\noindent \textbf{NOMBRE:} ROJAS MARTINEZ JONATHAN FRANCISCO\\
+	\noindent \textbf{FECHA:} 18/JUNIO/2026\\[1em]
+	
+	\noindent \textbf{INSTRUCCIONES.-} Conteste de manera completa las siguientes preguntas.
+	
+	\begin{enumerate}
+		\item Realice los pasos para llegar a la siguiente fórmula $s=\lambda/(2\sin(\varphi/2))$ ''espacio entre franjas adyacentes" para la interferencia de dos ondas planas.
+		
+		\textbf{Solución:}
+		Para obtener la separación entre franjas mediante consideraciones geométricas, analizamos la diferencia de camino óptico ($\Delta r$) entre dos ondas planas que inciden simétricamente sobre el plano de observación (eje $x$) formando un ángulo $\varphi$ entre sí. Esto significa que cada onda incide con un ángulo $\theta = \varphi/2$ respecto a la normal (eje $z$).
+		
+		\begin{center}
+			\begin{tikzpicture}[scale=1.5, font=\small, >=stealth]
+				% Eje de interferencia
+				\draw[thick] (-2.5,0) -- (3.5,0) node[right] {Plano de interferencia ($x$)};
+				\draw[dashed] (0,-0.5) -- (0,2.5) node[above] {Normal ($z$)};
+				
+				% Puntos O y P
+				\fill (0,0) circle (1.5pt) node[below] {$O$};
+				\fill (2,0) circle (1.5pt) node[below] {$P (x=s)$};
+				
+				% --- ONDA 1 (Azul, ángulo theta) ---
+				\draw[blue, thick, ->] (-1.15, 2) -- (0,0) node[pos=0.1, left] {Onda 1};
+				\draw[blue, thick, ->] (0.85, 2) -- (2,0);
+				
+				% Frente de onda y Diferencia de camino
+				\draw[blue, dashed, thick] (0,0) -- (1.5, 0.866) node[midway, above left] {Frente de onda};
+				\draw[blue, ultra thick] (1.5, 0.866) -- (2,0) node[midway, right] {$\Delta r_1$};
+				
+				% Ángulo recto
+				\draw[blue, thin] (1.4, 0.8) -- (1.46, 0.7) -- (1.56, 0.76);
+				
+				% --- ONDA 2 (Rojo, ángulo -theta) ---
+				\draw[red, thick, ->] (1.15, 2) -- (0,0) node[pos=0.1, right] {Onda 2};
+				\draw[red, thick, ->] (3.15, 2) -- (2,0);
+				
+				% Frente de onda y Diferencia de camino
+				\draw[red, dashed, thick] (2,0) -- (0.5, 0.866);
+				\draw[red, ultra thick] (0.5, 0.866) -- (0,0) node[midway, left] {$\Delta r_2$};
+				
+				% Ángulo recto
+				\draw[red, thin] (0.6, 0.8) -- (0.54, 0.7) -- (0.44, 0.76);
+				
+				% Ángulos en el origen
+				\draw (0,1) arc (90:120:1) node[midway, above] {$\theta$};
+				\draw (0,1) arc (90:60:1) node[midway, above] {$\theta$};
+				
+				% Distancia s
+				\draw[<->] (0,-0.5) -- (2,-0.5) node[midway, below] {Espacio entre franjas adyacentes ($s$)};
+			\end{tikzpicture}
+		\end{center}
+		
+		Analizando la geometría del esquema:
+		\begin{enumerate}
+			\item Consideremos dos puntos en el plano de observación: el origen $O$ y un punto $P$ separado por una distancia $x=s$, donde $s$ es la distancia entre dos franjas brillantes consecutivas.
+			\item La \textbf{Onda 1} (incidiendo con ángulo $\theta$) debe recorrer una distancia extra para llegar a $P$ en comparación a $O$. Trazando el frente de onda (línea punteada perpendicular a los rayos), se forma un triángulo rectángulo. Por trigonometría, esta diferencia de camino es $\Delta r_1 = s \sin(\theta)$.
+			\item La \textbf{Onda 2} (incidiendo con ángulo $-\theta$) alcanza $P$ antes que $O$. Su diferencia de camino respecto a $O$ es $\Delta r_2 = -s \sin(\theta)$.
+			\item La diferencia de camino óptico total en el punto $P$ originada por ambas ondas es:
+			$$ \Delta r = \Delta r_1 - \Delta r_2 = s \sin(\theta) - (-s \sin(\theta)) = 2s \sin(\theta) $$
+			\item Para que exista una franja brillante (interferencia constructiva) tanto en $O$ como en $P$, la diferencia de camino total debe ser igual a una longitud de onda ($\Delta r = \lambda$).
+			\item Sustituyendo e igualando a $\lambda$:
+			$$ 2s \sin(\theta) = \lambda $$
+			\item Dado que el ángulo total entre las ondas es $\varphi = 2\theta$, sustituimos $\theta = \varphi/2$:
+			$$ 2s \sin(\varphi/2) = \lambda $$
+			\item Despejando $s$, llegamos a la fórmula final:
+			$$ s = \frac{\lambda}{2\sin(\varphi/2)} $$
+		\end{enumerate}
+		
+		\item La visibilidad de las franjas en un patrón de interferencia se definió como $\gamma=(I_{max}-I_{min})/(I_{max}+I_{min})$. 
+		\begin{itemize}
+			\item Obtenga una expresión para la visibilidad si sustituye las expresiones para $I_{max}$ e $I_{min}$.
+			\item ¿Cuál es la visibilidad cuando las intensidades son iguales?
+			\item ¿Qué es visibilidad de las franjas y cuál es su utilidad?  
+		\end{itemize}
+		
+		\textbf{Solución:}
+		\begin{itemize}
+			\item Sabiendo que la ecuación de interferencia es $I = I_1 + I_2 + 2\sqrt{I_1 I_2}\cos(\Delta\phi)$, los valores máximos y mínimos ocurren cuando el coseno es $1$ y $-1$, respectivamente:
+			$$ I_{max} = I_1 + I_2 + 2\sqrt{I_1 I_2} $$
+			$$ I_{min} = I_1 + I_2 - 2\sqrt{I_1 I_2} $$
+			Sustituyendo en $\gamma$:
+			$$ \gamma = \frac{(I_1 + I_2 + 2\sqrt{I_1 I_2}) - (I_1 + I_2 - 2\sqrt{I_1 I_2})}{(I_1 + I_2 + 2\sqrt{I_1 I_2}) + (I_1 + I_2 - 2\sqrt{I_1 I_2})} $$
+			$$ \gamma = \frac{4\sqrt{I_1 I_2}}{2(I_1 + I_2)} = \frac{2\sqrt{I_1 I_2}}{I_1 + I_2} $$
+			
+			\item Cuando las intensidades son iguales ($I_1 = I_2 = I_0$):
+			$$ \gamma = \frac{2\sqrt{I_0 I_0}}{I_0 + I_0} = \frac{2I_0}{2I_0} = 1 $$
+			
+			\item La visibilidad (o contraste) es una medida cuantitativa de la claridad de las franjas de interferencia. Su utilidad radica en que permite evaluar el grado de coherencia de la fuente de luz, el balance de intensidades en los brazos del interferómetro y la influencia de vibraciones o ruido en el sistema óptico.
+		\end{itemize}
+		
+		\item Explique: a) "Muestreo Espacial con arreglos CCD", b) "Resolución espacial", c) Teorema de muestreo (Nyquist) y d) aliasing. 
+		
+		\textbf{Solución:}
+		\begin{itemize}
+			\item \textbf{a) Muestreo Espacial con arreglos CCD:} Es el proceso de convertir una distribución de intensidad óptica continua en una matriz de valores discretos utilizando una cuadrícula bidimensional de fotorreceptores (píxeles). Cada píxel integra la luz que incide sobre su área durante un tiempo determinado.
+			\item \textbf{b) Resolución espacial:} Es la capacidad del sistema para distinguir detalles pequeños y cercanos en el patrón óptico. En un CCD, está limitada por el tamaño (pitch) de los píxeles; píxeles más pequeños permiten detectar franjas más finas.
+			\item \textbf{c) Teorema de muestreo (Nyquist):} Establece que para reconstruir fielmente una señal espacial (como un patrón de franjas) sin pérdida de información, la frecuencia de muestreo espacial ($f_s$) debe ser al menos el doble de la frecuencia espacial máxima presente en la señal ($f_{max}$). Es decir, se requieren al menos dos píxeles por cada periodo de franja.
+			\item \textbf{d) Aliasing:} Es el efecto que ocurre cuando se viola el teorema de Nyquist (frecuencias espaciales altas se muestrean con muy pocos píxeles). Se manifiesta como la aparición de falsas franjas de baja frecuencia (patrones de Moiré) que no existen en la señal óptica original.
+		\end{itemize}
+		
+		\item La formación de las franjas de correlación mediante la observación del cambio de intensidad se describe por medio de la correlación por substracción y por suma, realice el formalismo para encontrar la Intensidad resultante para ambas.
+		
+		\textbf{Solución:}
+		Sea $I_1$ la intensidad inicial y $I_2$ la intensidad tras una deformación que introduce un cambio de fase $\Delta\phi$.
+		$$ I_1 = I_0 + I_r + 2\sqrt{I_0 I_r}\cos(\phi) $$
+		$$ I_2 = I_0 + I_r + 2\sqrt{I_0 I_r}\cos(\phi + \Delta\phi) $$
+		
+		\textbf{Correlación por Substracción:}
+		$$ \Delta I = I_2 - I_1 = 2\sqrt{I_0 I_r} [ \cos(\phi + \Delta\phi) - \cos(\phi) ] $$
+		Usando la identidad trigonométrica para la resta de cosenos:
+		$$ \Delta I = -4\sqrt{I_0 I_r} \sin\left(\phi + \frac{\Delta\phi}{2}\right) \sin\left(\frac{\Delta\phi}{2}\right) $$
+		La intensidad observada suele ser el cuadrado o el valor absoluto (tras rectificación). El término $\sin(\Delta\phi/2)$ modula la envolvente de macro-contraste (las franjas que representan el desplazamiento).
+		
+		\textbf{Correlación por Suma:}
+		$$ I_{\Sigma} = I_1 + I_2 = 2(I_0 + I_r) + 2\sqrt{I_0 I_r} [ \cos(\phi) + \cos(\phi + \Delta\phi) ] $$
+		Usando la identidad para la suma de cosenos:
+		$$ I_{\Sigma} = 2(I_0 + I_r) + 4\sqrt{I_0 I_r} \cos\left(\phi + \frac{\Delta\phi}{2}\right) \cos\left(\frac{\Delta\phi}{2}\right) $$
+		Aquí, el contraste está modulado por el término $\cos(\Delta\phi/2)$. Generalmente, la substracción ofrece mejor visibilidad porque elimina el término de fondo de DC ($I_0 + I_r$).
+		
+		\item Realice el programa para encontrar la correlación de los patrones de intensidad de la pregunta anterior.
+		
+		\textbf{Solución:}
+		El siguiente código de Python utiliza la librería OpenCV y NumPy para leer dos interferogramas (estados antes y después de la deformación) y realizar la correlación óptica tanto por substracción como por suma, normalizando el resultado para su correcta visualización y procesamiento.
+		
+		\begin{lstlisting}[language=Python]
+			import cv2
+			import numpy as np
+			import matplotlib.pyplot as plt
+			
+			def correlation_fringes(path_img1, path_img2):
+			# Cargar los patrones de intensidad en escala de grises
+			# y convertirlos a flotantes para evitar el desbordamiento
+			I1 = cv2.imread(path_img1, cv2.IMREAD_GRAYSCALE).astype(np.float32)
+			I2 = cv2.imread(path_img2, cv2.IMREAD_GRAYSCALE).astype(np.float32)
+			
+			if I1 is None or I2 is None:
+			raise ValueError("Error al cargar las imagenes.")
+			
+			# Correlacion por substraccion (rectificada)
+			I_resta = np.abs(I2 - I1)
+			
+			# Correlacion por suma
+			I_suma = I1 + I2
+			
+			# Normalizacion 0-255 en uint8 para visualizacion del contraste
+			I_resta_norm = cv2.normalize(I_resta, None, 0, 255, cv2.NORM_MINMAX).astype(np.uint8)
+			I_suma_norm = cv2.normalize(I_suma, None, 0, 255, cv2.NORM_MINMAX).astype(np.uint8)
+			
+			# Visualizacion usando Matplotlib
+			fig, axes = plt.subplots(1, 2, figsize=(10, 5))
+			axes[0].imshow(I_resta_norm, cmap='gray')
+			axes[0].set_title('Franjas por Substraccion')
+			axes[0].axis('off')
+			
+			axes[1].imshow(I_suma_norm, cmap='gray')
+			axes[1].set_title('Franjas por Suma')
+			axes[1].axis('off')
+			
+			plt.show()
+			
+			return I_resta_norm, I_suma_norm
+			
+			# Uso: correlation_fringes('estado_base.png', 'estado_deformado.png')
+		\end{lstlisting}
+		
+		\item Defina Coherencia temporal y espacial. ¿Calcule la longitud de coherencia y el tiempo de coherencia para la luz azul, verde y roja?
+		
+		\textbf{Solución:}
+		\begin{itemize}
+			\item \textbf{Coherencia Temporal:} Es la medida de la correlación de fase de una onda de luz con ella misma en diferentes instantes de tiempo en un punto fijo del espacio. Está directamente relacionada con el ancho de banda espectral de la fuente.
+			\item \textbf{Coherencia Espacial:} Es la medida de la correlación de fase entre las ondas de luz en dos puntos diferentes del espacio en el mismo instante de tiempo. Se relaciona fuertemente con el tamaño físico de la fuente (una fuente puntual tiene alta coherencia espacial).
+		\end{itemize}
+		
+		Para calcular el tiempo ($t_c$) y la longitud de coherencia ($L_c$), asumiremos fuentes LED típicas con un ancho espectral aproximado de $\Delta\lambda \approx 20\text{ nm}$. Utilizamos las fórmulas:
+		$L_c = \frac{\lambda^2}{\Delta\lambda}$ y $t_c = \frac{L_c}{c}$. Consideramos la velocidad de la luz $c = 3 \times 10^8\text{ m/s}$.
+		
+		\begin{itemize}
+			\item \textbf{Luz Azul} ($\lambda = 450\text{ nm}$):\\
+			$L_c = \frac{(450 \times 10^{-9}\text{ m})^2}{20 \times 10^{-9}\text{ m}} = 10.125 \, \mu\text{m}$ \\
+			$t_c = \frac{10.125 \times 10^{-6}\text{ m}}{3 \times 10^8\text{ m/s}} \approx 33.75\text{ fs}$
+			
+			\item \textbf{Luz Verde} ($\lambda = 532\text{ nm}$):\\
+			$L_c = \frac{(532 \times 10^{-9}\text{ m})^2}{20 \times 10^{-9}\text{ m}} \approx 14.15 \, \mu\text{m}$ \\
+			$t_c = \frac{14.15 \times 10^{-6}\text{ m}}{3 \times 10^8\text{ m/s}} \approx 47.1\text{ fs}$
+			
+			\item \textbf{Luz Roja} ($\lambda = 650\text{ nm}$):\\
+			$L_c = \frac{(650 \times 10^{-9}\text{ m})^2}{20 \times 10^{-9}\text{ m}} = 21.125 \, \mu\text{m}$ \\
+			$t_c = \frac{21.125 \times 10^{-6}\text{ m}}{3 \times 10^8\text{ m/s}} \approx 70.4\text{ fs}$
+		\end{itemize}
+		
+		\item Obtenga una expresión para la longitud de coherencia $L_c$ de una onda en términos del ancho de línea correspondiente (desviación de la lambda $\Delta\lambda$) para el ancho de banda de frecuencia $\Delta\nu$.
+		
+		\textbf{Solución:}
+		Partimos de la relación entre longitud de coherencia y tiempo de coherencia:
+		$$ L_c = c \cdot t_c $$
+		Donde $t_c \approx \frac{1}{\Delta\nu}$, por lo tanto:
+		$$ L_c \approx \frac{c}{\Delta\nu} $$
+		Sabemos que la frecuencia y la longitud de onda se relacionan por $\nu = \frac{c}{\lambda}$. Diferenciando esta expresión, obtenemos:
+		$$ d\nu = -\frac{c}{\lambda^2} d\lambda $$
+		Tomando los valores absolutos para los anchos de banda espectrales:
+		$$ \Delta\nu = \frac{c}{\lambda^2} \Delta\lambda $$
+		Sustituyendo $\Delta\nu$ en la expresión de $L_c$:
+		$$ L_c = \frac{c}{\frac{c}{\lambda^2} \Delta\lambda} = \frac{\lambda^2}{\Delta\lambda} $$
+		
+		\item ¿Cómo es la orientación del patrón de difracción relacionado con la orientación de una rejilla de difracción? ¿Qué sugiere esto sobre la naturaleza de la luz? 
+		
+		\textbf{Solución:}
+		El patrón de difracción se extiende siempre perpendicularmente a las líneas (ranuras) de la rejilla de difracción. Si las ranuras son verticales, los puntos o franjas de difracción se dispersarán horizontalmente.
+		
+		Esto sugiere y corrobora la naturaleza ondulatoria de la luz. Según el principio de Huygens-Fresnel, cada punto de una ranura actúa como una fuente secundaria de ondas esféricas; la superposición constructiva y destructiva de estas ondas a lo largo del eje perpendicular al confinamiento de la rejilla genera el patrón difractivo.
+		
+		\item Una luz blanca ilumina una rendija de ancho $a$. ¿Con qué valor de $a$ el primer mínimo de la luz roja ($\lambda=650\text{ nm}$) incide en $\theta=15^{\circ}$? 
+		
+		\textbf{Solución:}
+		La condición para los mínimos de difracción de una sola rendija está dada por la ecuación:
+		$$ a \sin\theta = m\lambda $$
+		Para el primer mínimo, $m = 1$. Despejando el ancho de la rendija $a$:
+		$$ a = \frac{1 \cdot \lambda}{\sin\theta} $$
+		Sustituyendo $\lambda = 650 \times 10^{-9}\text{ m}$ y $\theta = 15^{\circ}$:
+		$$ a = \frac{650 \times 10^{-9}\text{ m}}{\sin(15^{\circ})} = \frac{650 \times 10^{-9}\text{ m}}{0.258819} \approx 2.51 \times 10^{-6}\text{ m} $$
+		El ancho de la rendija es $a \approx 2.51 \, \mu\text{m}$.
+		
+		\item Defina Criterio de Rayleigh.
+		
+		\textbf{Solución:}
+		El Criterio de Rayleigh es el umbral de resolución óptica para sistemas formadores de imagen. Establece que dos fuentes puntuales adyacentes se consideran "apenas resueltas" cuando el centro del máximo principal de difracción (el centro del disco de Airy) de una imagen coincide exactamente con el primer mínimo del patrón de difracción de la segunda imagen. 
+		Para una abertura circular de diámetro $D$, la separación angular mínima $\Delta\theta$ es:
+		$$ \Delta\theta = 1.22 \frac{\lambda}{D} $$
+		
+		\item Deduzca $s$, $\Delta\varphi$, e $I$ para el interferómetro por división del frente de onda "experimento de Young". 
+		
+		\textbf{Solución:}
+		Sea $d$ la distancia entre las dos rendijas y $L$ la distancia desde las rendijas hasta la pantalla. Considere un punto $P$ en la pantalla a una altura $y$ del centro.
+		
+		1. \textbf{Diferencia de trayectoria ($\Delta r$):} Si $L \gg d$, los rayos paralelos forman un ángulo $\theta$ donde $\sin\theta \approx \tan\theta = \frac{y}{L}$.
+		$$ \Delta r = d \sin\theta \approx d \frac{y}{L} $$
+		
+		2. \textbf{Diferencia de fase ($\Delta\varphi$):} Utilizando el número de onda $k = \frac{2\pi}{\lambda}$:
+		$$ \Delta\varphi = k\Delta r = \frac{2\pi}{\lambda} \left( \frac{dy}{L} \right) $$
+		
+		3. \textbf{Intensidad ($I$):} Asumiendo fuentes iguales $I_1 = I_2 = I_0$:
+		$$ I = 2I_0 [1 + \cos(\Delta\varphi)] = 4I_0 \cos^2\left(\frac{\Delta\varphi}{2}\right) $$
+		$$ I = 4I_0 \cos^2\left( \frac{\pi d y}{\lambda L} \right) $$
+		
+		4. \textbf{Separación de franjas ($s$):} Los máximos ocurren cuando $\Delta\varphi = 2\pi m$.
+		$$ \frac{2\pi d y_m}{\lambda L} = 2\pi m \implies y_m = \frac{m\lambda L}{d} $$
+		La separación entre dos máximos adyacentes $s = y_{m+1} - y_m$ es:
+		$$ s = \frac{\lambda L}{d} $$
+		
+		\item Una pantalla de visualización está separada de una fuente de doble abertura por $1.2\text{ m}$. La distancia entre las 2 ranuras es de $0.030\text{ mm}$. La franja brillante de segundo orden ($m=2$) está a $4.5\text{ cm}$ de la franja central.
+		\begin{enumerate}
+			\item Determine la $\lambda$ de la luz. 
+			\item Calcule la distancia entre franjas brillantes adyacentes.
+		\end{enumerate}
+		
+		\textbf{Solución:}
+		Datos: $L = 1.2\text{ m}$, $d = 0.030 \times 10^{-3}\text{ m} = 3 \times 10^{-5}\text{ m}$, $y = 0.045\text{ m}$, $m = 2$.
+		
+		\begin{enumerate}
+			\item Partimos de la condición para máximos en Young: $y = \frac{m\lambda L}{d}$.
+			Despejando $\lambda$:
+			$$ \lambda = \frac{y d}{m L} = \frac{0.045 \times (3 \times 10^{-5})}{2 \times 1.2} = \frac{1.35 \times 10^{-6}}{2.4} = 5.625 \times 10^{-7}\text{ m} $$
+			$\lambda = 562.5\text{ nm}$.
+			
+			\item La distancia entre franjas adyacentes ($s$) es independiente de $m$:
+			$$ s = \frac{\lambda L}{d} = \frac{5.625 \times 10^{-7} \times 1.2}{3 \times 10^{-5}} = 0.0225\text{ m} = 2.25\text{ cm} $$
+		\end{enumerate}
+		
+		\item Defina patrón de speckle ¿Cómo se calcula el tamaño de este patrón cuando se tiene una abertura rectangular y circular? 
+		
+		\textbf{Solución:}
+		El patrón de speckle es una distribución granular aleatoria de la intensidad que se forma cuando una onda altamente coherente (como un láser) se dispersa al incidir sobre una superficie rugosa (rugosidad mayor a la longitud de onda). Es producto de la interferencia constructiva y destructiva de multitud de ondas secundarias desfasadas.
+		
+		El tamaño promedio del "grano" de speckle depende de la geometría de la abertura (lente o área iluminada) observada desde la distancia de medición $z$:
+		\begin{itemize}
+			\item \textbf{Abertura Rectangular} ($L_x \times L_y$):
+			Tamaño promedio en $x$: $\delta x \approx \frac{\lambda z}{L_x}$, y en $y$: $\delta y \approx \frac{\lambda z}{L_y}$.
+			\item \textbf{Abertura Circular} (Diámetro $D$):
+			Tamaño promedio transversal: $\delta \approx 1.22 \frac{\lambda z}{D}$.
+		\end{itemize}
+		
+		\item Explique claramente speckle objetivo, subjetivo y biospeckle y agregue los esquemas correspondientes.
+		
+		\textbf{Solución:}
+		\begin{itemize}
+			\item \textbf{Speckle Objetivo:} Es el patrón que se forma en el espacio libre. Se recoge directamente en una pantalla sin necesidad de utilizar lentes. Su tamaño depende de la distancia de propagación y del tamaño de la mancha láser sobre la superficie iluminada.
+			\item \textbf{Speckle Subjetivo:} Es el patrón que se forma en el plano de la imagen cuando se utiliza una lente para proyectar la superficie dispersora sobre un sensor o la retina ocular. El tamaño de este grano de speckle ya no depende de la mancha láser, sino de la apertura numérica de la lente que forma la imagen.
+			\item \textbf{Biospeckle:} Es un patrón de speckle dinámico generado cuando el láser ilumina muestras biológicas vivas (tejidos, hojas, frutas). Debido a la actividad fisiológica celular e intracelular (flujo sanguíneo, movimiento citoplasmático), el patrón de speckle cambia constantemente a lo largo del tiempo.
+		\end{itemize}
+		
+		\vspace{0.5cm}
+		\begin{center}
+			\begin{tikzpicture}[font=\small, >=stealth]
+				% -- Objetivo --
+				\node[align=center] at (1.5, 3.5) {\textbf{Speckle Objetivo}};
+				\draw[fill=gray!40] (0,0) rectangle (0.5,3);
+				\node[rotate=90] at (0.25, 1.5) {Superficie Rugosa};
+				\draw[thick, red, ->] (-2, 1.5) -- (0, 1.5) node[midway, above] {Láser};
+				\foreach \a in {-35,-15,0,15,35}
+				\draw[red, ->, opacity=0.4] (0.5, 1.5) -- +( \a:2.5 );
+				\draw[ultra thick, black] (3, 0) -- (3, 3) node[above] {Pantalla};
+				
+				% -- Subjetivo --
+				\begin{scope}[xshift=6cm]
+					\node[align=center] at (2.5, 3.5) {\textbf{Speckle Subjetivo}};
+					\draw[fill=gray!40] (0,0) rectangle (0.5,3);
+					\draw[thick, red, ->] (-2, 1.5) -- (0, 1.5);
+					% Lente
+					\draw[thick, blue, fill=blue!10] (2.5, 1.5) ellipse (0.2 and 1) node[above=25pt, black] {Lente};
+					\draw[ultra thick, black] (5, 0) -- (5, 3) node[above] {Sensor};
+					% Rayos
+					\draw[red, opacity=0.4] (0.5, 1.5) -- (2.5, 2.2) -- (5, 1.5);
+					\draw[red, opacity=0.4] (0.5, 1.5) -- (2.5, 0.8) -- (5, 1.5);
+					\draw[red, opacity=0.4, dashed] (0.5, 2.5) -- (2.5, 1.5) -- (5, 0.5);
+				\end{scope}
+				
+				% -- Biospeckle --
+				\begin{scope}[yshift=-5cm, xshift=3cm]
+					\node[align=center] at (2, 3) {\textbf{Biospeckle (Dinámico)}};
+					% Hoja simulada
+					\draw[fill=green!40, thick] (0, 1.5) ellipse (0.5 and 1.5) node[black, rotate=90, align=center] {\scriptsize Tejido\\[-1mm]\scriptsize Vivo};
+					\draw[thick, red, ->] (-2, 1.5) -- (-0.5, 1.5) node[midway, above] {Láser};
+					% Ondas cambiantes
+					\draw[red, thick, ->] (0.5, 1.5) .. controls (1.5, 2.5) and (2.5, 0.5) .. (3.5, 1.5) node[right, black] {Fluctuaciones temporales};
+					\draw[red, thick, dashed, ->] (0.5, 1.5) .. controls (1.5, 0.5) and (2.5, 2.5) .. (3.5, 1.5);
+				\end{scope}
+			\end{tikzpicture}
+		\end{center}
+		\vspace{0.5cm}
+		
+		\item Dibuje un interferómetro fuera del plano y en el plano. ¿Cuál es la diferencia entre ellos?
+		
+		\textbf{Solución:}
+		\textbf{Diferencia Fundamental:} Un interferómetro \textbf{fuera del plano (Out-of-plane)} está diseñado con los vectores de iluminación y observación dispuestos de tal forma que su máxima sensibilidad se encuentra en los desplazamientos normales o perpendiculares a la superficie de prueba (en el eje $z$). En cambio, un interferómetro \textbf{en el plano (In-plane)} utiliza dos haces simétricos de iluminación para que el vector de sensibilidad sea paralelo a la superficie, volviéndolo sensible únicamente a desplazamientos laterales (ejes $x$ o $y$).
+		
+		\begin{center}
+			\textbf{CONFIGURACIÓN ÓPTICA PARA INTERFEROMETRÍA DE SPECKLE\\(CONFIGURACIÓN FUERA DEL PLANO)}
+			\vspace{0.3cm}
+			
+			\begin{tikzpicture}[x=1.2cm, y=1.2cm, font=\sffamily\small, >=stealth]
+				% Colores basados en la diapositiva de clase
+				\colorlet{blockblue}{cyan!20}
+				\colorlet{borderblue}{cyan!60!black}
+				
+				% 1. Objeto
+				\fill[blockblue] (7, -1) rectangle (7.4, 5);
+				\draw[thick, borderblue] (7, -1) rectangle (7.4, 5);
+				\node[right, text=black] at (7.4, 2) {Objeto};
+				
+				% 2. Láser
+				\fill[blockblue] (-0.3, -2) rectangle (0.3, -0.5);
+				\draw[thick, borderblue] (-0.3, -2) rectangle (0.3, -0.5);
+				\node[right, text=black] at (0.3, -1.25) {Láser};
+				
+				% 3. DH (Divisor de Haz)
+				\fill[blockblue] (-0.3, 2) rectangle (0.3, 2.6);
+				\draw[thick, borderblue] (-0.3, 2) rectangle (0.3, 2.6);
+				\draw[borderblue] (-0.3, 2) -- (0.3, 2.6);
+				\node[left] at (-0.3, 2.3) {DH};
+				
+				% 4. CCD
+				\fill[blockblue] (0.5, 0.2) rectangle (1.1, 1.2);
+				\draw[thick, borderblue] (0.5, 0.2) rectangle (1.1, 1.2);
+				\node[below] at (0.8, 0.2) {CCD};
+				
+				% 5. M1 (Espejo 1)
+				\draw[ultra thick, borderblue, rotate around={-30:(0, 4)}] (-0.4, 4) -- (0.4, 4);
+				\node[right] at (0.4, 4) {M1};
+				
+				% 6. L2 (Lente divergente)
+				\draw[thick, borderblue, fill=blockblue] (1.3, 2) .. controls (1.5, 2.1) and (1.5, 2.5) .. (1.3, 2.6) -- (1.7, 2.6) .. controls (1.5, 2.5) and (1.5, 2.1) .. (1.7, 2) -- cycle;
+				\node[above] at (1.5, 2.7) {L2};
+				
+				% 7. M2 (Espejo 2)
+				\draw[ultra thick, borderblue, rotate around={45:(2.8, 2.3)}] (2.4, 2.3) -- (3.2, 2.3);
+				\node[above right] at (2.9, 2.3) {M2};
+				
+				% 8. RH (Recombinador de Haz)
+				\fill[blockblue] (2.2, 0.2) rectangle (3.0, 1.2);
+				\draw[thick, borderblue] (2.2, 0.2) rectangle (3.0, 1.2);
+				\draw[borderblue] (2.2, 0.2) -- (3.0, 1.2);
+				\node[below] at (2.6, 0.2) {RH};
+				
+				% 9. Lente (Convergente)
+				\draw[thick, borderblue, fill=blockblue] (3.7, 0.7) ellipse (0.15 and 0.8);
+				\node[above] at (3.7, 1.6) {Lente};
+				
+				% 10. Cajas inferiores
+				\draw[thick, borderblue] (2.2, -1.5) rectangle (4.5, -0.8) node[midway, text=black] {procesamiento};
+				\draw[thick, borderblue] (2.2, -3) rectangle (4.5, -2.3) node[midway, text=black] {monitor};
+				\draw[->, thick, green!60!black] (0.8, 0.2) |- (2.2, -1.15);
+				\draw[->, thick, green!60!black] (3.35, -1.5) -- (3.35, -2.3);
+				
+				% Trazado de rayos
+				\begin{scope}[thin, black!70]
+					% Laser a DH
+					\draw (0, -0.5) -- (0, 2);
+					% DH a M1
+					\draw (0, 2.6) -- (0, 4);
+					% M1 a Objeto
+					\draw (0, 4) -- (7, 4.5);
+					\draw (0, 4) -- (7, 2) node[midway, above left, text=black] {L1};
+					\draw (0, 4) -- (7, -0.5);
+					
+					% DH a L2
+					\draw (0.3, 2.3) -- (1.3, 2.3);
+					% L2 a M2
+					\draw (1.7, 2.3) -- (2.7, 2.6);
+					\draw (1.7, 2.3) -- (2.8, 2.1);
+					
+					% M2 a RH
+					\draw (2.7, 2.6) -- (2.7, 1.2);
+					\draw (2.8, 2.1) -- (2.8, 1.2);
+					\draw (2.6, 2.3) -- (2.6, 1.2); % Rayo central aproximado
+					
+					% RH a CCD (reflexión del haz de referencia)
+					\draw (2.7, 0.9) -- (1.1, 0.9);
+					\draw (2.8, 0.7) -- (1.1, 0.7);
+					\draw (2.6, 0.5) -- (1.1, 0.5);
+					
+					% Objeto a Lente (Dispersión)
+					\draw (7, 4.5) -- (3.85, 0.9);
+					\draw (7, 2) -- (3.85, 0.7);
+					\draw (7, -0.5) -- (3.85, 0.5);
+					
+					% Lente a CCD (a través de RH)
+					\draw (3.55, 0.9) -- (1.1, 0.9);
+					\draw (3.55, 0.7) -- (1.1, 0.7);
+					\draw (3.55, 0.5) -- (1.1, 0.5);
+				\end{scope}
+			\end{tikzpicture}
+		\end{center}
+		
+		\vspace{0.5cm}
+		
+		\begin{center}
+			\textbf{CONFIGURACIÓN IN-PLANE}
+			\vspace{0.3cm}
+			
+			\begin{tikzpicture}[font=\small, scale=0.85, >=stealth]
+				% IN PLANE
+				% Laser
+				\draw[thick, fill=red!20] (-1.5, 5.5) rectangle (0.5, 4.5) node[midway] {Láser};
+				\draw[thick, red, ->] (0.5, 5) -- (2.8, 5);
+				% Beam splitter
+				\draw[thick, blue, rotate around={-45:(3,5)}] (2.5, 5) rectangle (3.5, 5.1);
+				% Espejos
+				\draw[ultra thick, black, rotate around={45:(3,2)}] (2.5, 2) -- (3.5, 2);
+				\draw[ultra thick, black, rotate around={-45:(6,5)}] (5.5, 5) -- (6.5, 5);
+				% Objeto plano
+				\draw[thick, fill=gray!30] (4, 0) rectangle (5, 0.5) node[below=5pt] {Objeto ($x,y$)};
+				% Trayectorias
+				\draw[thick, red, ->] (3, 5) -- (3, 2.1);
+				\draw[thick, red, ->] (3, 5) -- (5.9, 5);
+				\draw[thick, red, ->] (3, 2) -- (4.4, 0.5) node[midway, left] {$+\theta$};
+				\draw[thick, red, ->] (6, 5) -- (4.6, 0.5) node[midway, right] {$-\theta$};
+				% Observacion
+				\draw[thick, black] (4, 3.5) rectangle (5, 4) node[above] {CCD normal};
+				\draw[thick, red, dashed, ->] (4.5, 0.5) -- (4.5, 3.5);
+			\end{tikzpicture}
+		\end{center}
+		
+		\item Explique las siguientes técnicas: doble exposición, Time averaged holographic interferometry, ESPI, DSPI, stroboscopic holographic interferometry, holografía digital. 
+		
+		\textbf{Solución:}
+		\begin{itemize}
+			\item \textbf{Doble exposición:} Técnica interferométrica donde se graba un holograma de un objeto en su estado original y, en la misma placa/sensor, un segundo holograma del objeto tras someterlo a deformación. Al reconstruirlo, ambos frentes de onda interfieren mostrando las franjas de desplazamiento.
+			\item \textbf{Time averaged holographic interferometry (Promediada en el tiempo):} Consiste en mantener abierto el obturador durante un periodo prolongado mientras el objeto vibra continuamente. El holograma promediará las posiciones extremas, permitiendo ver los nodos de vibración estáticos (franja brillante) y los vientres (franjas con función de Bessel).
+			\item \textbf{ESPI (Electronic Speckle Pattern Interferometry):} Variante que elimina el revelado fotográfico utilizando una cámara de video (CCD/CMOS) para grabar electrónicamente los patrones de speckle. Restando los estados mediante procesamiento digital se obtienen las franjas de correlación en tiempo real.
+			\item \textbf{DSPI (Digital Speckle Pattern Interferometry):} Esencialmente el mismo principio que ESPI, pero el término hace énfasis en la robusta manipulación digital y el procesamiento algorítmico posterior de la fase óptica, incluyendo algoritmos de phase-unwrapping computacionales.
+			\item \textbf{Stroboscopic holographic interferometry:} Se sincroniza la iluminación láser en ráfagas muy cortas (estroboscópicas) con la frecuencia de vibración del objeto. Permite "congelar" virtualmente el movimiento en cualquier fase del ciclo vibratorio para un análisis dinámico detallado.
+			\item \textbf{Holografía digital:} Técnica en la que el patrón de interferencia holográfica (micro-franjas) se graba directamente en un sensor digital (sin lentes) y el frente de onda de la imagen 3D se reconstruye y propaga numéricamente en una computadora resolviendo la integral de difracción de Fresnel-Kirchhoff.
+		\end{itemize}
+		
+		\item Describa la teoría básica del método de phase stepping para obtener la fase óptica. 
+		
+		\textbf{Solución:}
+		El método de desplazamiento de fase (Phase Stepping) busca cuantificar el ángulo de fase $\phi(x,y)$ mediante la adquisición de múltiples interferogramas secuenciales, en los que se introduce deliberadamente un cambio de fase conocido $\alpha_i$ en el brazo de referencia del interferómetro (por ejemplo, moviendo un espejo con un piezoeléctrico).
+		
+		La ecuación de intensidad para el $i$-ésimo paso es:
+		$$ I_i(x,y) = I_0(x,y) + I_M(x,y) \cos[\phi(x,y) + \alpha_i] $$
+		Al tener 3 incógnitas fundamentales ($I_0$ luz de fondo, $I_M$ modulación de amplitud y $\phi$ la fase), se necesitan al menos 3 pasos. Si, por ejemplo, utilizamos un algoritmo de 4 pasos con incrementos $\alpha = 0, \pi/2, \pi, 3\pi/2$, obtenemos 4 ecuaciones de intensidad $I_1, I_2, I_3, I_4$.
+		
+		Combinándolas matemáticamente para aislar $\phi(x,y)$, llegamos a la función arcotangente:
+		$$ \phi(x,y) = \arctan\left( \frac{I_4 - I_2}{I_1 - I_3} \right) $$
+		Esta ecuación nos proporciona la fase "envuelta" (wrapped) en el dominio $[-\pi, \pi]$, requiriendo posteriormente algoritmos de desenvolvimiento (unwrapping) para obtener la fase física continua.
+		
+		\item Realice la superposición y encuentre $I$ de dos ondas de diferente frecuencia. $U_{1}=A_{1}e^{i(2\pi f_{1}t)}$, $U_{2}=A_{2}e^{i(2\pi f_{2}t)}$. 
+		
+		\textbf{Solución:}
+		La onda resultante es la superposición de $U_1$ y $U_2$:
+		$$ U = U_1 + U_2 = A_1 e^{i 2\pi f_1 t} + A_2 e^{i 2\pi f_2 t} $$
+		La intensidad física medible se define como el cuadrado del módulo del campo complejo ($I = |U|^2 = U \cdot U^*$):
+		$$ I = (A_1 e^{i 2\pi f_1 t} + A_2 e^{i 2\pi f_2 t}) (A_1 e^{-i 2\pi f_1 t} + A_2 e^{-i 2\pi f_2 t}) $$
+		Expandiendo los términos:
+		$$ I = A_1^2 + A_1 A_2 e^{i 2\pi (f_1 - f_2) t} + A_2 A_1 e^{-i 2\pi (f_1 - f_2) t} + A_2^2 $$
+		Sabiendo que las intensidades individuales son $I_1 = A_1^2$ e $I_2 = A_2^2$, y usando la fórmula de Euler $\cos(\theta) = \frac{e^{i\theta} + e^{-i\theta}}{2}$:
+		$$ I = I_1 + I_2 + 2 A_1 A_2 \cos(2\pi (f_1 - f_2) t) $$
+		Dado que $A_1 A_2 = \sqrt{I_1 I_2}$, la expresión final es:
+		$$ I = I_1 + I_2 + 2\sqrt{I_1 I_2} \cos(2\pi \Delta f t) $$
+		Donde $\Delta f = |f_1 - f_2|$ es la frecuencia de pulsación (batimiento). La intensidad varía sinusoidalmente en el tiempo.
+		
+	\end{enumerate}
+	
+\end{document}

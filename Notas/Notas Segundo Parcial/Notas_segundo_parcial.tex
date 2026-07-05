@@ -1,0 +1,508 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\geometry{a4paper, margin=1in}
+
+\title{\textbf{Notas de Clase: Ondas Electromagnéticas y Óptica Coherente}}
+\author{}
+\date{}
+
+\begin{document}
+	
+	\maketitle
+	
+	\section{Características de las Ondas Electromagnéticas (EM)}
+	\begin{enumerate}
+		\item Cuando una carga eléctrica vibra, el campo eléctrico a su alrededor cambia, creando a su vez un campo magnético cambiante.
+		\item Los campos magnético y eléctrico se inducen mutuamente de forma continua.
+		\item Una onda EM viaja en todas direcciones en el espacio, es decir, son tridimensionales.
+		\item Los campos eléctricos y magnéticos vibran en ángulo recto (perpendicularmente) con respecto a la dirección en la que viaja la onda, por lo que se define como una onda transversal.
+		\item Toda la materia contiene partículas cargadas en constante movimiento; por lo tanto, todos los objetos emiten ondas EM.
+		\item Las longitudes de onda emitidas se acortan a medida que aumenta la temperatura del material emisor.
+		\item Las ondas EM transportan energía radiante a través del espacio.
+		\item La luz no se produce como una onda continua ininterrumpida, sino que está formada por cuantos de energía llamados fotones, que se emiten continuamente en forma de haces.
+	\end{enumerate}
+	
+	\subsection{Representación en Notación Compleja}
+	\textit{Las ondas electromagnéticas son ondas transversales compuestas por campos eléctricos y magnéticos entrelazados que oscilan, cuyas fases se miden en unidades angulares (radianes o grados).}
+	
+	\vspace{0.5cm}
+	\begin{minipage}{0.45\textwidth}
+		\begin{align*}
+			E &= E_0 e^{i[\varphi(z) \pm (\omega t)]} \\
+			E_0 &= \sqrt{\frac{2P_0}{\varepsilon c A}} \\
+			\varphi(z) &= \frac{2\pi z n}{\lambda} + \theta_0 = \kappa z n + \theta_0 \\
+			\omega &= 2\pi f \\
+			\lambda &= \frac{c}{f} = c T \\
+			\kappa &= \frac{2\pi}{\lambda}
+		\end{align*}
+	\end{minipage}
+	\hfill
+	\begin{minipage}{0.5\textwidth}
+		\textbf{Definición de variables:}
+		\begin{itemize}
+			\item $E_0$: Amplitud de la onda.
+			\item $P_0$: Potencia óptica del haz.
+			\item $\varepsilon$: Permitividad del medio.
+			\item $A$: Área transversal del haz.
+			\item $c$: Velocidad de la luz en el vacío ($3\times10^8$ m/s).
+			\item $\omega$: Frecuencia angular (rad/s).
+			\item $\lambda$: Longitud de onda (distancia entre crestas consecutivas).
+			\item $f$: Frecuencia (ciclos por segundo o Hz). Si $f$ incrementa, $\lambda$ disminuye.
+			\item $\varphi(z)$: Fase instantánea espacial.
+			\item $z$: Longitud del camino físico recorrido.
+			\item $\theta_0$: Fase inicial constante de la onda.
+			\item $n$: Índice de refracción del medio.
+			\item $\kappa$: Número de onda (rad/m).
+		\end{itemize}
+	\end{minipage}
+	
+	\subsection{Fase Instantánea y Amplitud}
+	\textbf{La fase instantánea espacial, $\varphi(z)$, es proporcional a la distancia recorrida a lo largo del camino óptico.} El camino óptico es la trayectoria que sigue la luz entre dos puntos, definido como el producto de la distancia geométrica real ($z$) y el índice de refracción del medio ($n$).
+	
+	Partiendo de la fórmula de Euler, la ecuación de onda se expande como:
+	\begin{equation*}
+		E = E_0 e^{i[\varphi(z) \pm \omega t]} = E_0 e^{i\theta} = E_0 (\cos\theta + i\sin\theta)
+	\end{equation*}
+	
+	Donde definimos la fase total $\theta$:
+	\begin{align*}
+		\theta &= \varphi(z) \pm \omega t = \kappa z n + \theta_0 \pm \omega t
+	\end{align*}
+	Aquí, $\omega t$ es la \textbf{dependencia temporal} y $\varphi(z) = \kappa z n + \theta_0$ es la \textbf{dependencia espacial}.
+	
+	Si expresamos el campo en sus componentes real e imaginaria ($E = x + iy$):
+	\begin{align*}
+		x &= E_0 \cos\theta \\
+		y &= E_0 \sin\theta
+	\end{align*}
+	
+	\textbf{Recuperación de la fase:}
+	La información de la fase se recupera relacionando las componentes:
+	\begin{equation*}
+		\tan\theta = \frac{y}{x} = \frac{\text{Parte Imaginaria}}{\text{Parte Real}} = \frac{\sin\theta}{\cos\theta} \implies \theta = \arctan\left(\frac{y}{x}\right)
+	\end{equation*}
+	
+	\textbf{Recuperación de la amplitud:}
+	La amplitud física al cuadrado se obtiene multiplicando el campo por su complejo conjugado ($E^*$):
+	\begin{equation*}
+		E_0^2 = E E^* = (x+iy)(x-iy) = x^2 + y^2 \implies E_0 = \sqrt{x^2 + y^2}
+	\end{equation*}
+	
+	Físicamente, los campos son reales. Si tomamos la parte real de la ecuación de onda:
+	\begin{equation*}
+		E = Re(E_0 e^{i\theta}) = E_0 \cos(\varphi(z) \pm \omega t)
+	\end{equation*}
+	\textit{Nota:} También es válido representarlo con la función seno, dado que un desfase de $\pi/2$ las hace equivalentes: $E = E_0 \sin(\theta + \pi/2) = E_0 \cos(\theta)$.
+	
+	\subsection{Representación Gráfica}
+	Fijando el tiempo ($t=0$), observamos la onda en el espacio:
+	\begin{equation*}
+		E(x,0) = E_0 \sin\left(\frac{2\pi x}{\lambda}\right)
+	\end{equation*}
+	\textit{[Imagen: diagrama\_onda\_senoidal\_espacio.png]}
+	
+	Fijando la posición ($x=0$), observamos la oscilación en el tiempo:
+	\begin{equation*}
+		E(0,t) = E_0 \sin(\omega t)
+	\end{equation*}
+	\textit{[Imagen: diagrama\_oscilacion\_tiempo.png]}
+	
+	\section{Naturaleza de la Luz y Propagación}
+	
+	\subsection{Dualidad Onda-Partícula}
+	Desde la perspectiva de la física moderna, la luz presenta un comportamiento dual:
+	\begin{itemize}
+		\item \textbf{Naturaleza ondulatoria:} La luz consiste en oscilaciones de campos eléctricos y magnéticos perpendiculares entre sí, capaces de propagarse en el vacío. Se manifiesta en fenómenos como interferencia y difracción.
+		\item \textbf{Naturaleza corpuscular:} Se comporta como un flujo de partículas discretas o "cuantos" de energía llamados fotones.
+		\item \textbf{Visión heurística:} Cuando el campo electromagnético es de muy baja densidad, dominan las interacciones individuales (fotón-átomo), requiriendo un análisis discreto/cuántico. En campos de alta densidad, con un número enorme de fotones, el fenómeno promedia sus efectos manifestándose como un continuo, permitiendo un análisis ondulatorio clásico. (Similar al agua: moléculas discretas a nivel microscópico, fluido continuo a nivel macroscópico).
+	\end{itemize}
+	
+	\subsection{Ecuación de Onda 3D y Ondas Planas}
+	Para una onda que se propaga en cualquier dirección del espacio tridimensional:
+	\begin{equation*}
+		E(x,y,z,t) = E_0 e^{i[\vec{k}\cdot\vec{r} \pm \omega t + \theta_0]}
+	\end{equation*}
+	
+	\begin{center}
+		\fbox{
+			\begin{minipage}{0.85\textwidth}
+				\textbf{Parámetros Vectoriales:}
+				\begin{align*}
+					\vec{k} &= (k_x, k_y, k_z) \quad \text{(Vector de onda, indica dirección de propagación)} \\
+					\vec{r} &= (x, y, z) \quad \text{(Vector de posición en el espacio)}
+				\end{align*}
+				\begin{equation*}
+					|\vec{k}| = \sqrt{k_x^2 + k_y^2 + k_z^2} = \frac{2\pi}{\lambda}
+				\end{equation*}
+				\begin{equation*}
+					\vec{k}\cdot\vec{r} = k_x x + k_y y + k_z z
+				\end{equation*}
+			\end{minipage}
+		}
+	\end{center}
+	
+	\vspace{0.5cm}
+	\textbf{El concepto de "Onda Plana"}\\
+	Una onda plana es un modelo idealizado donde la magnitud física (como la fase) es constante sobre cualquier plano perpendicular a la dirección de propagación. La condición geométrica para estos planos es:
+	\begin{equation*}
+		\vec{k}\cdot\vec{r} = \text{constante}
+	\end{equation*}
+	A estos contornos de fase constante se les llama \textbf{frentes de onda}.
+	
+	\begin{itemize}
+		\item Se desplazan a la velocidad de la luz en la dirección del vector $\vec{k}$.
+		\item Están separados uniformemente por una distancia igual a una longitud de onda ($\lambda$).
+		\item El vector campo eléctrico $\vec{E}_0$, el campo magnético $\vec{H}_0$, y el vector $\vec{k}$ son mutuamente perpendiculares.
+	\end{itemize}
+	
+	\textit{[Imagen: diagramas\_frentes\_de\_onda.png]}
+	
+	\subsubsection*{Rayos láser vs. Ondas planas ideales}
+	Una onda plana perfecta posee frentes de onda infinitos y, por ende, energía infinita; no existe en la realidad física.
+	
+	\textit{[Imagen: frentes\_onda\_planos\_espacio.png]}
+	
+	En contraste, un rayo láser está espacialmente confinado. Matemáticamente, se aproxima multiplicando la propagación de una onda plana en la dirección $z$ por una distribución gaussiana de intensidad en el plano transversal ($x,y$):
+	\begin{equation*}
+		E(x,y,z,t) = E_0 \exp\left[-\frac{x^2+y^2}{w^2}\right] \exp[i(kz - \omega t)]
+	\end{equation*}
+	Donde $w$ es el radio del haz (waist).
+	
+	\textit{[Imagen: frentes\_onda\_localizadas\_haz\_laser.png]}
+	
+	\section{Superposición e Interferencia de Ondas}
+	
+	\subsection{Principio de Superposición}
+	Si varias ondas viajan simultáneamente a través de un medio, la perturbación resultante en cualquier punto es la suma vectorial (algebraica) de las perturbaciones individuales de cada onda en ese instante.
+	
+	\textbf{Relación de Fase:}
+	El resultado no solo depende de las amplitudes, sino del desfase relativo:
+	\begin{itemize}
+		\item \textbf{En fase:} Las crestas coinciden, reforzando la amplitud (suma).
+		\item \textbf{Desfasadas ($180^\circ$ o $\pi$ rad):} La cresta de una coincide con el valle de la otra, resultando en atenuación o cancelación (resta).
+	\end{itemize}
+	\textit{[Imagen: sumas\_y\_cancelacion\_amplitudes.png]}
+	
+	\subsubsection*{Superposición de Dos Ondas Armónicas (Ondas Estacionarias)}
+	Si superponemos dos ondas de igual amplitud y frecuencia que viajan en direcciones opuestas:
+	\begin{align*}
+		E_1 &= E\sin(kx - \omega t) \quad \text{(Viaja a la derecha)} \\
+		E_2 &= E\sin(kx + \omega t) \quad \text{(Viaja a la izquierda)}
+	\end{align*}
+	El campo resultante es $E_R = E_1 + E_2$. Utilizando la identidad trigonométrica $\sin(A\pm B) = \sin A \cos B \pm \cos A \sin B$:
+	\begin{equation*}
+		E_R = 2E\sin(kx)\cos(\omega t)
+	\end{equation*}
+	Esto describe una onda estacionaria, donde la amplitud espacial máxima es $2E$ en los puntos donde $\sin(kx) = 1$ (vientres).
+	
+	\subsubsection*{Superposición con Diferente Amplitud y Desfase General}
+	Dadas dos ondas de misma frecuencia propagándose hacia el mismo punto:
+	\begin{align*}
+		\vec{E}_1 &= E_{01}\cos(\omega t + kr_1)\hat{r} \\
+		\vec{E}_2 &= E_{02}\cos(\omega t + kr_2)\hat{r}
+	\end{align*}
+	
+	El \textbf{desfase inicial} entre ambas debido a la diferencia de recorrido es:
+	\begin{equation*}
+		\Delta\theta = k(r_1 - r_2) = \frac{2\pi}{\lambda}(r_1 - r_2)
+	\end{equation*}
+	
+	\begin{itemize}
+		\item \textbf{En fase:} $\Delta\theta = 2m\pi$ (donde $m$ es entero).
+		\item \textbf{Desfasadas (Antifase):} $\Delta\theta = (2m+1)\pi$. \textit{(Nota de corrección respecto a tus notas originales donde decía $\pi/2$; el desfase destructivo total ocurre a múltiplos impares de $\pi$).}
+	\end{itemize}
+	\textit{[Imagen: representacion\_in\_phase\_out\_of\_phase.png]}
+	
+	La amplitud resultante $E_0$ se obtiene de la suma vectorial (o empleando notación compleja $E_0^2 = E_T E_T^*$):
+	\begin{align*}
+		E_0^2 &= E_{01}^2 + E_{02}^2 + 2E_{01}E_{02}\cos(\Delta\theta) \\
+		E_0 &= \sqrt{E_{01}^2 + E_{02}^2 + 2E_{01}E_{02}\cos(\Delta\theta)}
+	\end{align*}
+	De modo que la onda final se puede escribir como $\vec{E} = E_0 \cos(\omega t - \theta)\hat{r}$.
+	
+	\subsection{Interferencia}
+	Se denomina interferencia a la superposición coherente (espacial y temporal) de dos o más frentes de onda en un punto, generando un \textbf{patrón de franjas de intensidad} (máximos y mínimos). 
+	
+	Existen dos métodos principales para producir luz capaz de interferir a partir de una fuente única:
+	\begin{enumerate}
+		\item \textbf{División de amplitud:} Un divisor de haz (espejo semitransparente) refleja parte de la luz y transmite el resto (ej. Interferómetro de Michelson).
+		\item \textbf{División de frente de onda:} Un solo frente pasa a través de aperturas separadas espacialmente creando frentes secundarios (ej. Experimento de la doble rendija de Young).
+	\end{enumerate}
+	
+	\textit{[Imagen: patron\_interferencia\_dos\_fuentes.png]}
+	\textit{[Imagen: graficas\_interferencia\_constructiva\_destructiva\_normal.png]}
+	
+	\subsubsection*{Condiciones de Interferencia}
+	\begin{center}
+		\begin{tabular}{|p{0.45\textwidth}|p{0.45\textwidth}|}
+			\hline
+			\textbf{Interferencia Constructiva} & \textbf{Interferencia Destructiva} \\
+			\hline
+			Se refuerza el movimiento ondulatorio. Ocurre cuando $\cos(\Delta\theta) = 1$. & Se atenúa o cancela la onda. Ocurre cuando $\cos(\Delta\theta) = -1$. \\
+			Diferencia de fase: $\Delta\theta = 2\pi m$ & Diferencia de fase: $\Delta\theta = (2m+1)\pi$ \\
+			Diferencia de camino óptico: $\text{OPD} = m\lambda$ & Diferencia de camino óptico: $\text{OPD} = (m + 0.5)\lambda$ \\
+			\hline
+		\end{tabular}
+	\end{center}
+	\textit{[Imagen: diagramas\_interferencia\_dos\_fuentes\_constructiva\_destructiva.png]}
+	
+	\textbf{Propiedad General:} Para generar un patrón de interferencia estable, las fuentes deben ser \textbf{coherentes}; es decir, deben mantener una diferencia de fase constante en el tiempo (y poseer la misma frecuencia).
+	
+	\section{Intensidad (I) de la Radiación Electromagnética}
+	El campo eléctrico de la luz oscila a frecuencias altísimas ($\sim 10^{14}$ Hz). Ningún sensor físico (ojo, película, fotodiodos) responde lo suficientemente rápido para medir la amplitud instantánea. Lo que se registra es la **Irradiancia** (flujo de energía temporal promedio por unidad de área), la cual es proporcional al cuadrado de la amplitud.
+	
+	\begin{equation*}
+		I \propto \langle |E_T|^2 \rangle \implies I = E_T E_T^*
+	\end{equation*}
+	
+	Dimensiones de Intensidad ($W/m^2$):
+	\begin{equation*}
+		I = \frac{\text{Potencia}}{\text{Área}} = \left(\frac{\text{Energía}}{\text{Volumen}}\right) \times (\text{Velocidad de la onda})
+	\end{equation*}
+	
+	Integrando la energía cinética máxima de los osciladores armónicos en el medio electromagnético:
+	\begin{equation*}
+		I = \frac{1}{2} \rho c (E_0 \omega)^2
+	\end{equation*}
+	\textit{[Imagen: grafica\_dos\_ondas\_amplitudes\_diferentes.png]}
+	
+	\subsection{Interferencia e Intensidad (Ecuación Fundamental)}
+	Cuando dos ondas complejas $E_1 = E_{01}e^{i\varphi_1}$ y $E_2 = E_{02}e^{i\varphi_2}$ se superponen, la intensidad observada no es simplemente la suma de las intensidades, debido al término cruzado de interferencia.
+	
+	\begin{align*}
+		I &= (E_1 + E_2)(E_1^* + E_2^*) \\
+		&= E_1E_1^* + E_2E_2^* + E_1E_2^* + E_2E_1^* \\
+		&= I_1 + I_2 + E_{01}E_{02}e^{i(\varphi_1 - \varphi_2)} + E_{01}E_{02}e^{-i(\varphi_1 - \varphi_2)}
+	\end{align*}
+	
+	Utilizando la identidad de Euler $e^{ix} + e^{-ix} = 2\cos(x)$, llegamos a la Ley de Interferencia:
+	\begin{center}
+		\fbox{\Large $\mathbf{I = I_1 + I_2 + 2\sqrt{I_1 I_2} \cos(\Delta\theta)}$}
+	\end{center}
+	Donde $\Delta\theta = \varphi_1 - \varphi_2$.
+	
+	El término $2\sqrt{I_1 I_2}\cos(\Delta\theta)$ modula la intensidad generando el patrón de franjas, fluctuando entre:
+	\begin{itemize}
+		\item $I_{max} = I_1 + I_2 + 2\sqrt{I_1 I_2} = (\sqrt{I_1} + \sqrt{I_2})^2$
+		\item $I_{min} = I_1 + I_2 - 2\sqrt{I_1 I_2} = (\sqrt{I_1} - \sqrt{I_2})^2$
+	\end{itemize}
+	\textit{[Imagen: grafica\_intensidad\_patron\_franjas.png]}
+	
+	Si $I_1 = I_2 = I_0$, la modulación es del 100\%:
+	\begin{equation*}
+		I = 2I_0 [1 + \cos(\Delta\theta)] = 4I_0 \cos^2\left(\frac{\Delta\theta}{2}\right)
+	\end{equation*}
+	
+	\section{Camino Geométrico y Camino Óptico}
+	
+	\begin{itemize}
+		\item \textbf{Camino Geométrico ($z$):} Distancia física real que recorre la luz medida en metros.
+		\item \textbf{Camino Óptico ($L$):} Distancia equivalente que recorrería la luz en el vacío durante el mismo intervalo de tiempo. Se calcula como: $L = n \times z$.
+		\item \textbf{Diferencia de Camino Óptico (OPD):} Es la resta entre los caminos ópticos de dos haces interferentes: $\text{OPD} = L_2 - L_1 = n_2z_2 - n_1z_1$.
+	\end{itemize}
+	
+	La diferencia de fase se relaciona directamente con el OPD:
+	\begin{equation*}
+		\Delta\theta = \frac{2\pi}{\lambda_0} \times \text{OPD} = k \times \text{OPD}
+	\end{equation*}
+	\textit{[Imagen: esquema\_caminos\_optico\_y\_geometrico\_punto\_Q.png]}
+	
+	\subsection{Ejemplo de Medios con Diferente Índice de Refracción}
+	Dos haces coherentes viajan una misma distancia geométrica $z$. El haz 1 viaja por aire ($n_1 \approx 1$) y el haz 2 por acrílico ($n_2 = 1.5$).
+	\textit{[Imagen: esquema\_dos\_haces\_aire\_acrilico\_punto\_Q.png]}
+	
+	Aunque la diferencia de camino geométrico es $z - z = 0$, la velocidad disminuye dentro del acrílico, acortando su longitud de onda efectiva ($\lambda_{ac} = \lambda_{air}/1.5$).
+	\textit{[Imagen: esquema\_ondas\_acrilico\_reduccion\_velocidad.png]}
+	
+	La diferencia de camino óptico que genera el desfase es:
+	\begin{equation*}
+		\text{OPD} = n_2 z - n_1 z = z(1.5 - 1) = 0.5z
+	\end{equation*}
+	
+	\subsection{Visibilidad o Contraste de Franjas ($\gamma$)}
+	Propuesta por Michelson, cuantifica la calidad y nitidez del patrón de interferencia. Es una variable adimensional entre 0 y 1.
+	
+	\begin{equation*}
+		\gamma = \frac{I_{max} - I_{min}}{I_{max} + I_{min}}
+	\end{equation*}
+	
+	Sustituyendo las intensidades óptimas, la visibilidad se puede expresar como:
+	\begin{equation*}
+		\gamma = \frac{2\sqrt{I_1 I_2}}{I_1 + I_2}
+	\end{equation*}
+	
+	Condición ideal: Si $I_1 = I_2$, entonces $I_{min}=0$ y $\gamma = 1$ (contraste perfecto).
+	La ecuación de interferencia puede reescribirse usando la visibilidad y la intensidad media local $I_T = I_1+I_2$:
+	\begin{equation*}
+		I = I_T [1 + \gamma \cos(\Delta\theta)]
+	\end{equation*}
+	
+	\section{Coherencia}
+	La coherencia mide la correlación y sincronización de las fases entre ondas. Para que dos ondas formen franjas estables, deben ser coherentes (relación de fase constante).
+	\textit{[Imagen: comparacion\_luz\_coherente\_y\_no\_coherente.png]}
+	
+	Una onda perfectamente monocromática (una sola frecuencia) tendría una onda senoidal infinita, lo cual es una idealización matemática. En la realidad, las ondas se emiten en "trenes de onda" finitos.
+	\textit{[Imagen: grafica\_tren\_ondas\_coherencia\_finita.png]}
+	
+	\subsection{Coherencia Temporal y Espacial}
+	Existen dos dominios de la coherencia:
+	
+	\begin{center}
+		\renewcommand{\arraystretch}{1.5}
+		\begin{tabular}{|p{0.45\textwidth}|p{0.45\textwidth}|}
+			\hline
+			\textbf{\textcolor{blue}{COHERENCIA TEMPORAL (Longitudinal)}} & \textbf{\textcolor{blue}{COHERENCIA ESPACIAL (Transversal)}} \\
+			\hline
+			Correlación de fase del \textbf{mismo haz} en el \textbf{mismo punto} espacial, medido en dos \textbf{tiempos diferentes}. & Correlación de fase entre \textbf{dos puntos diferentes} del frente de onda, medido en el \textbf{mismo instante}. \\
+			Relacionada con el ancho de banda del espectro de emisión (qué tan monocromática es la luz). & Relacionada con el tamaño físico de la fuente de luz. \\
+			Se evalúa con un Interferómetro de Michelson. & Se evalúa con el experimento de doble rendija de Young. \\
+			\hline
+		\end{tabular}
+	\end{center}
+	\textit{[Imagen: comparativa\_ondas\_coherentes\_incoherentes\_espacial\_temporal.png]}
+	
+	\subsection{Cuantificación de la Coherencia Temporal}
+	\begin{itemize}
+		\item \textbf{Tiempo de coherencia ($\tau_c$):} Intervalo promedio en el cual la fase de la onda es predecible y mantiene su forma senoidal.
+		\item \textbf{Longitud de coherencia ($L_c$):} Distancia física que recorre la luz durante su tiempo de coherencia. $L_c = c \tau_c$.
+	\end{itemize}
+	\textit{[Imagen: esquema\_tiempo\_de\_coherencia\_temporal.png]}
+	
+	Si un láser tiene un ancho de banda de frecuencias $\Delta \nu$, el tiempo de coherencia es $\tau_c = \frac{1}{\Delta \nu}$.
+	Derivando de $\nu = c/\lambda$, sabemos que el ancho espectral en longitud de onda es $|\Delta \nu| = \frac{c}{\lambda^2} \Delta \lambda$.
+	
+	Sustituyendo esto, la longitud de coherencia queda relacionada con el ancho espectral ($\Delta \lambda$) y la pureza espectral ($Q = \lambda / \Delta \lambda$):
+	\begin{equation*}
+		L_c = \frac{c}{\Delta \nu} = \frac{\lambda^2}{\Delta \lambda} = \lambda Q
+	\end{equation*}
+	\textit{[Imagen: grafica\_ancho\_espectral\_delta\_lambda.png]}
+	
+	\section{Speckle (Moteado)}
+	El "speckle" es un patrón de intensidad granular y aleatorio que aparece cuando luz coherente (láser) ilumina una superficie rugosa, cuyas variaciones de altura son del orden de la longitud de onda. 
+	
+	Cada punto de la superficie rugosa difracta la luz actuando como un emisor secundario. Al llegar al detector u ojo, todos estos haces secundarios con fases aleatorias interfieren.
+	\textit{[Imagen: formacion\_speckle\_laser.png]}
+	
+	Estadísticamente, la probabilidad de encontrar una intensidad $I$ obedece a una distribución exponencial negativa:
+	\begin{equation*}
+		P(I) = \frac{1}{\langle I \rangle} e^{-I / \langle I \rangle}
+	\end{equation*}
+	Esto indica que el valor más probable de intensidad es cero (hay más motas oscuras que brillantes).
+	\textit{[Imagen: histograma\_pdf\_intensidad\_speckle.png]}
+	
+	\subsection{Tipos de Speckle}
+	\begin{itemize}
+		\item \textbf{Speckle Objetivo:} Se forma directamente en el espacio libre de dispersión, al colocar un sensor sin lentes de por medio. El tamaño promedio del grano depende de la geometría óptica: $s = \frac{\lambda z}{D}$ (donde $D$ es el diámetro iluminado y $z$ la distancia a la pantalla).
+		\item \textbf{Speckle Subjetivo:} Se forma al utilizar un sistema formador de imágenes (lentes u ojo). El tamaño del speckle está regido por el límite de difracción (disco de Airy) de la apertura de la lente: $\approx 2.4 \lambda u / D_{lente}$.
+	\end{itemize}
+	
+	\section{Técnicas de Metrología y Pruebas No Destructivas (PND)}
+	Las pruebas ópticas no destructivas permiten inspeccionar deformaciones, vibraciones, esfuerzos y defectos estructurales sin contacto físico y sin dañar la pieza. Se dividen en métodos coherentes (Interferometría, Holografía, Speckle) e incoherentes (Moiré, Proyección de franjas, Correlación digital DIC).
+	
+	\subsection{Interferometría de Speckle (SI) / ESPI}
+	Originalmente visto como ruido, el speckle se aprovechó como portador de información. La interferometría de speckle compara la fase de un patrón de speckle \textbf{antes y después} de una deformación.
+	\textit{[Imagen: diagrama\_bloques\_espi.png]}
+	
+	El patrón inicial tiene intensidad $I_A$ y el patrón tras aplicar carga mecánica es $I_B$:
+	\begin{equation*}
+		\Delta I = |I_A - I_B| = 4 a_R a_o \left| \sin\left(\varphi_o - \varphi_R + \frac{\Delta\varphi}{2}\right) \sin\left(\frac{\Delta\varphi}{2}\right) \right|
+	\end{equation*}
+	
+	La sustracción digital de estas imágenes revela franjas de correlación de baja frecuencia asociadas estrictamente al desplazamiento del material $\Delta\varphi$.
+	
+	\subsubsection*{Vectores de Sensibilidad en ESPI}
+	El cambio de fase $\Delta\phi$ detectado depende de la dirección de iluminación ($\vec{n}_i$) y observación ($\vec{n}_o$) respecto al vector de desplazamiento real del objeto ($\vec{d}$):
+	\begin{equation*}
+		\Delta\phi = (\vec{K}_i - \vec{K}_o)\cdot\vec{d} = \frac{2\pi}{\lambda}(\vec{n}_i - \vec{n}_o)\cdot\vec{d}
+	\end{equation*}
+	
+	\textbf{1. Configuración Fuera del Plano (Out-of-plane):} Luz colineal con la observación. Sensible al desplazamiento $z$.
+	$\Delta\phi = \frac{4\pi}{\lambda}d_z$
+	\textit{[Imagen: esquema\_optico\_dspi\_fuera\_plano.png]}
+	
+	\textbf{2. Configuración En el Plano (In-plane):} Dos haces simétricos iluminan con ángulo $\alpha$.
+	$\Delta\phi = \frac{4\pi}{\lambda} \sin(\alpha) d_x$
+	\textit{[Imagen: esquema\_optico\_dspi\_en\_plano.png]}
+	
+	\textbf{3. Cizalladura (Shearography):} Se usa un prisma divisor; interfieren dos puntos contiguos de la misma superficie ($\Delta x, \Delta y$). Mide directamente el gradiente de deformación, ideal para encontrar defectos internos.
+	$\Delta\phi \approx \frac{4\pi}{\lambda} \left[ \frac{\partial d_z}{\partial x} \right] \Delta x$
+	\textit{[Imagen: esquema\_optico\_shearography\_prisma.png]}
+	
+	\section{Interferometría de Medición de Fase (PMI y PSI)}
+	La simple observación de franjas de interferencia presenta ambigüedad de fase (no se distingue si el orden de franja sube o baja ya que $\cos(\phi) = \cos(-\phi)$). Las técnicas de demodulación resuelven esto.
+	
+	\subsection{Métodos Temporales (Phase Shifting / Phase Stepping)}
+	Se toman secuencialmente múltiples interferogramas, introduciendo un retraso de fase calibrado y controlado (ej. usando un espejo en un actuador piezoeléctrico - PZT).
+	\begin{equation*}
+		I_n(x,y) = I_{dc} + I_{ac} \cos[\varphi(x,y) + \alpha_n]
+	\end{equation*}
+	
+	\textbf{Algoritmo de 4 pasos} ($\alpha_n = 0, \pi/2, \pi, 3\pi/2$):
+	Resolviendo el sistema de ecuaciones para las cuatro intensidades $I_1, I_2, I_3, I_4$:
+	\begin{equation*}
+		\varphi(x,y) = \arctan \left[ \frac{I_4(x,y) - I_2(x,y)}{I_1(x,y) - I_3(x,y)} \right]
+	\end{equation*}
+	El cálculo proporciona el mapa de fase módulo $2\pi$ (fase envuelta). A partir de ahí, la deformación real $d(x,y)$ se calcula como: $d(x,y) = \frac{\lambda}{4\pi} \varphi(x,y)$.
+	
+	\subsection{Métodos Espaciales (Transformada de Fourier / Takeda)}
+	En lugar de tomar múltiples imágenes, se capta un único interferograma utilizando una configuración "fuera de eje" (off-axis) que inyecta una alta frecuencia portadora de franjas muy finas.
+	\begin{equation*}
+		I(x,y) = a(x,y) + b(x,y) \cos[\phi(x,y) + 2\pi f_0 x]
+	\end{equation*}
+	
+	Al aplicar la Transformada Rápida de Fourier (FFT), el espectro de frecuencias muestra un lóbulo central (fondo) y dos lóbulos laterales (fase modulada).
+	\begin{equation*}
+		I(u,v) = A(u,v) + C(u,v) + C^*(-u,-v)
+	\end{equation*}
+	Se filtra espacialmente (aislando el lóbulo $C(u,v)$), se centra y se aplica la Transformada Inversa para calcular directamente el mapa de fase:
+	\begin{equation*}
+		\phi(x, y) = \arctan \left[ \frac{\text{Im}(c(x,y))}{\text{Re}(c(x,y))} \right]
+	\end{equation*}
+	
+	\section{Ejercicios Propuestos y Anotaciones Adicionales}
+	
+	\subsection{Ejercicios de Índices de Refracción}
+	El índice de refracción de la glicerina y el diamante con respecto al aire son 1.46 y 2.42 respectivamente. Calcula la velocidad y la longitud de onda de la luz en la glicerina y en el diamante para luz que viaja a través del aire con $\lambda = 5400 \text{ \AA}$. Posteriormente, calcular el índice de refracción relativo del diamante con respecto a la glicerina.
+	
+	\subsection{Ejercicios de Superposición y Fase}
+	Dada la onda $E(t) = E_0\cos(\omega t + \phi)$, encuentre la velocidad de oscilación $V$, el valor de fase y la amplitud inicial, evaluando $E(0)$ y $V(0)$. 
+	
+	\textit{Resolución propuesta de las notas:}
+	\begin{align*}
+		V(t) &= \frac{dE}{dt} = - \omega E_0 \sin(\omega t + \phi) \\
+		\text{Evaluando en } t=0: \quad E(0) &= E_0 \cos(\phi) \quad \text{y} \quad V(0) = - \omega E_0 \sin(\phi) \\
+		\frac{V(0)}{E(0)} &= \frac{- \omega E_0 \sin(\phi)}{E_0 \cos(\phi)} = - \omega \tan(\phi) \implies \phi = \arctan\left( \frac{V(0)}{-\omega E(0)} \right)
+	\end{align*}
+	Para recuperar la amplitud $E_0$:
+	\begin{equation*}
+		E^2(0) + \frac{V^2(0)}{\omega^2} = E_0^2 (\cos^2\phi + \sin^2\phi) = E_0^2
+	\end{equation*}
+	
+	\subsection{Ejercicios de Interferencia y Caminos Ópticos}
+	Dos haces de microondas de longitud de onda $6.00 \times 10^{-3}$ m recorren 5 cm hasta un detector. Uno pasa por aire y el otro por cuarzo ($n = 1.54$). ¿Provocan interferencia constructiva o destructiva?
+	
+	\textit{Resolución:}
+	\begin{align*}
+		\text{OPD} &= (n_{\text{cuarzo}} - n_{\text{aire}}) \times z \\
+		&= (1.54 - 1.00) \times 0.05 \text{ m} = 0.027 \text{ m}
+	\end{align*}
+	Dividiendo el OPD entre la longitud de onda:
+	\begin{equation*}
+		\text{Órdenes de interferencia} = \frac{0.027}{6.00 \times 10^{-3}} = 4.5
+	\end{equation*}
+	Como resulta en un número entero más medio ciclo ($4 + 0.5$), las ondas llegarán en contrafase, causando interferencia \textbf{destructiva}.
+	
+	\subsection{Ejercicios de Coherencia}
+	\begin{enumerate}
+		\item Determine el ancho de banda ($\Delta \nu$), longitud de coherencia ($L_c$) y tiempo de coherencia ($\tau_c$) de la luz blanca asumiendo su espectro entre 384 THz y 769 THz. \textit{(Desarrollado en las notas previas: $L_c \approx 779$ nm).}
+		\item La luz de $\lambda = 4800 \text{ \AA}$ tiene una longitud de coherencia equivalente a 25 ondas. ¿Cuál es la longitud de coherencia absoluta y el tiempo de coherencia?
+		\item Se modula un láser continuo ($\lambda = 6500 \text{ \AA}$) en pulsos de 0.5 ns usando un obturador. Calcule $L_c$, $\Delta \nu$, y $\Delta \lambda$.
+	\end{enumerate}
+	
+\end{document}
