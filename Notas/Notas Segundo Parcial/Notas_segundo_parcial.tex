@@ -120,7 +120,7 @@
 	\begin{itemize}
 		\item \textbf{Naturaleza ondulatoria:} La luz consiste en oscilaciones de campos eléctricos y magnéticos perpendiculares entre sí, capaces de propagarse en el vacío. Se manifiesta en fenómenos como interferencia y difracción.
 		\item \textbf{Naturaleza corpuscular:} Se comporta como un flujo de partículas discretas o "cuantos" de energía llamados fotones.
-		\item \textbf{Visión heurística:} Cuando el campo electromagnético es de muy baja densidad, dominan las interacciones individuales (fotón-átomo), requiriendo un análisis discreto/cuántico. En campos de alta densidad, con un número enorme de fotones, el fenómeno promedia sus efectos manifestándose como un continuo, permitiendo un análisis ondulatorio clásico. (Similar al agua: moléculas discretas a nivel microscópico, fluido continuo a nivel macroscópico).
+		\item \textbf{Visión heurística:} Cuando el campo electromagnético es de muy baja densidad, dominan las interacciones individuales (fotón-átomo), requiriendo un análisis discreto/cuántico. En campos de alta densidad, con un número enorme de fotones, el fenómeno promedia sus efectos manifestándose como un continuo, permitiendo un análisis ondulatorio clásico.
 	\end{itemize}
 	
 	\subsection{Ecuación de Onda 3D y Ondas Planas}
@@ -172,7 +172,6 @@
 	\begin{equation*}
 		E(x,y,z,t) = E_0 \exp\left[-\frac{x^2+y^2}{w^2}\right] \exp[i(kz - \omega t)]
 	\end{equation*}
-	Donde $w$ es el radio del haz (waist).
 	
 	\textit{[Imagen: frentes\_onda\_localizadas\_haz\_laser.png]}
 	
@@ -199,7 +198,6 @@
 	\begin{equation*}
 		E_R = 2E\sin(kx)\cos(\omega t)
 	\end{equation*}
-	Esto describe una onda estacionaria, donde la amplitud espacial máxima es $2E$ en los puntos donde $\sin(kx) = 1$ (vientres).
 	
 	\subsubsection*{Superposición con Diferente Amplitud y Desfase General}
 	Dadas dos ondas de misma frecuencia propagándose hacia el mismo punto:
@@ -215,11 +213,11 @@
 	
 	\begin{itemize}
 		\item \textbf{En fase:} $\Delta\theta = 2m\pi$ (donde $m$ es entero).
-		\item \textbf{Desfasadas (Antifase):} $\Delta\theta = (2m+1)\pi$. \textit{(Nota de corrección respecto a tus notas originales donde decía $\pi/2$; el desfase destructivo total ocurre a múltiplos impares de $\pi$).}
+		\item \textbf{Desfasadas (Antifase):} $\Delta\theta = (2m+1)\pi$.
 	\end{itemize}
 	\textit{[Imagen: representacion\_in\_phase\_out\_of\_phase.png]}
 	
-	La amplitud resultante $E_0$ se obtiene de la suma vectorial (o empleando notación compleja $E_0^2 = E_T E_T^*$):
+	La amplitud resultante $E_0$ se obtiene de:
 	\begin{align*}
 		E_0^2 &= E_{01}^2 + E_{02}^2 + 2E_{01}E_{02}\cos(\Delta\theta) \\
 		E_0 &= \sqrt{E_{01}^2 + E_{02}^2 + 2E_{01}E_{02}\cos(\Delta\theta)}
@@ -252,10 +250,8 @@
 	\end{center}
 	\textit{[Imagen: diagramas\_interferencia\_dos\_fuentes\_constructiva\_destructiva.png]}
 	
-	\textbf{Propiedad General:} Para generar un patrón de interferencia estable, las fuentes deben ser \textbf{coherentes}; es decir, deben mantener una diferencia de fase constante en el tiempo (y poseer la misma frecuencia).
-	
 	\section{Intensidad (I) de la Radiación Electromagnética}
-	El campo eléctrico de la luz oscila a frecuencias altísimas ($\sim 10^{14}$ Hz). Ningún sensor físico (ojo, película, fotodiodos) responde lo suficientemente rápido para medir la amplitud instantánea. Lo que se registra es la **Irradiancia** (flujo de energía temporal promedio por unidad de área), la cual es proporcional al cuadrado de la amplitud.
+	El campo eléctrico de la luz oscila a frecuencias altísimas ($\sim 10^{14}$ Hz). Ningún sensor físico responde lo suficientemente rápido para medir la amplitud instantánea. Lo que se registra es la **Irradiancia**, la cual es proporcional al cuadrado de la amplitud.
 	
 	\begin{equation*}
 		I \propto \langle |E_T|^2 \rangle \implies I = E_T E_T^*
@@ -277,7 +273,6 @@
 	
 	\begin{align*}
 		I &= (E_1 + E_2)(E_1^* + E_2^*) \\
-		&= E_1E_1^* + E_2E_2^* + E_1E_2^* + E_2E_1^* \\
 		&= I_1 + I_2 + E_{01}E_{02}e^{i(\varphi_1 - \varphi_2)} + E_{01}E_{02}e^{-i(\varphi_1 - \varphi_2)}
 	\end{align*}
 	
@@ -287,17 +282,8 @@
 	\end{center}
 	Donde $\Delta\theta = \varphi_1 - \varphi_2$.
 	
-	El término $2\sqrt{I_1 I_2}\cos(\Delta\theta)$ modula la intensidad generando el patrón de franjas, fluctuando entre:
-	\begin{itemize}
-		\item $I_{max} = I_1 + I_2 + 2\sqrt{I_1 I_2} = (\sqrt{I_1} + \sqrt{I_2})^2$
-		\item $I_{min} = I_1 + I_2 - 2\sqrt{I_1 I_2} = (\sqrt{I_1} - \sqrt{I_2})^2$
-	\end{itemize}
+	El término $2\sqrt{I_1 I_2}\cos(\Delta\theta)$ modula la intensidad generando el patrón de franjas.
 	\textit{[Imagen: grafica\_intensidad\_patron\_franjas.png]}
-	
-	Si $I_1 = I_2 = I_0$, la modulación es del 100\%:
-	\begin{equation*}
-		I = 2I_0 [1 + \cos(\Delta\theta)] = 4I_0 \cos^2\left(\frac{\Delta\theta}{2}\right)
-	\end{equation*}
 	
 	\section{Camino Geométrico y Camino Óptico}
 	
@@ -337,7 +323,6 @@
 		\gamma = \frac{2\sqrt{I_1 I_2}}{I_1 + I_2}
 	\end{equation*}
 	
-	Condición ideal: Si $I_1 = I_2$, entonces $I_{min}=0$ y $\gamma = 1$ (contraste perfecto).
 	La ecuación de interferencia puede reescribirse usando la visibilidad y la intensidad media local $I_T = I_1+I_2$:
 	\begin{equation*}
 		I = I_T [1 + \gamma \cos(\Delta\theta)]
@@ -347,12 +332,7 @@
 	La coherencia mide la correlación y sincronización de las fases entre ondas. Para que dos ondas formen franjas estables, deben ser coherentes (relación de fase constante).
 	\textit{[Imagen: comparacion\_luz\_coherente\_y\_no\_coherente.png]}
 	
-	Una onda perfectamente monocromática (una sola frecuencia) tendría una onda senoidal infinita, lo cual es una idealización matemática. En la realidad, las ondas se emiten en "trenes de onda" finitos.
-	\textit{[Imagen: grafica\_tren\_ondas\_coherencia\_finita.png]}
-	
 	\subsection{Coherencia Temporal y Espacial}
-	Existen dos dominios de la coherencia:
-	
 	\begin{center}
 		\renewcommand{\arraystretch}{1.5}
 		\begin{tabular}{|p{0.45\textwidth}|p{0.45\textwidth}|}
@@ -360,8 +340,7 @@
 			\textbf{\textcolor{blue}{COHERENCIA TEMPORAL (Longitudinal)}} & \textbf{\textcolor{blue}{COHERENCIA ESPACIAL (Transversal)}} \\
 			\hline
 			Correlación de fase del \textbf{mismo haz} en el \textbf{mismo punto} espacial, medido en dos \textbf{tiempos diferentes}. & Correlación de fase entre \textbf{dos puntos diferentes} del frente de onda, medido en el \textbf{mismo instante}. \\
-			Relacionada con el ancho de banda del espectro de emisión (qué tan monocromática es la luz). & Relacionada con el tamaño físico de la fuente de luz. \\
-			Se evalúa con un Interferómetro de Michelson. & Se evalúa con el experimento de doble rendija de Young. \\
+			Relacionada con el ancho de banda del espectro de emisión. & Relacionada con el tamaño físico de la fuente de luz. \\
 			\hline
 		\end{tabular}
 	\end{center}
@@ -369,15 +348,13 @@
 	
 	\subsection{Cuantificación de la Coherencia Temporal}
 	\begin{itemize}
-		\item \textbf{Tiempo de coherencia ($\tau_c$):} Intervalo promedio en el cual la fase de la onda es predecible y mantiene su forma senoidal.
+		\item \textbf{Tiempo de coherencia ($\tau_c$):} Intervalo promedio en el cual la fase de la onda es predecible.
 		\item \textbf{Longitud de coherencia ($L_c$):} Distancia física que recorre la luz durante su tiempo de coherencia. $L_c = c \tau_c$.
 	\end{itemize}
 	\textit{[Imagen: esquema\_tiempo\_de\_coherencia\_temporal.png]}
 	
 	Si un láser tiene un ancho de banda de frecuencias $\Delta \nu$, el tiempo de coherencia es $\tau_c = \frac{1}{\Delta \nu}$.
-	Derivando de $\nu = c/\lambda$, sabemos que el ancho espectral en longitud de onda es $|\Delta \nu| = \frac{c}{\lambda^2} \Delta \lambda$.
-	
-	Sustituyendo esto, la longitud de coherencia queda relacionada con el ancho espectral ($\Delta \lambda$) y la pureza espectral ($Q = \lambda / \Delta \lambda$):
+	La longitud de coherencia queda relacionada con el ancho espectral ($\Delta \lambda$) y la pureza espectral ($Q = \lambda / \Delta \lambda$):
 	\begin{equation*}
 		L_c = \frac{c}{\Delta \nu} = \frac{\lambda^2}{\Delta \lambda} = \lambda Q
 	\end{equation*}
@@ -386,24 +363,23 @@
 	\section{Speckle (Moteado)}
 	El "speckle" es un patrón de intensidad granular y aleatorio que aparece cuando luz coherente (láser) ilumina una superficie rugosa, cuyas variaciones de altura son del orden de la longitud de onda. 
 	
-	Cada punto de la superficie rugosa difracta la luz actuando como un emisor secundario. Al llegar al detector u ojo, todos estos haces secundarios con fases aleatorias interfieren.
+	Cada punto de la superficie rugosa difracta la luz actuando como un emisor secundario. Al llegar al detector, todos estos haces secundarios interfieren con fases aleatorias.
 	\textit{[Imagen: formacion\_speckle\_laser.png]}
 	
 	Estadísticamente, la probabilidad de encontrar una intensidad $I$ obedece a una distribución exponencial negativa:
 	\begin{equation*}
 		P(I) = \frac{1}{\langle I \rangle} e^{-I / \langle I \rangle}
 	\end{equation*}
-	Esto indica que el valor más probable de intensidad es cero (hay más motas oscuras que brillantes).
 	\textit{[Imagen: histograma\_pdf\_intensidad\_speckle.png]}
 	
 	\subsection{Tipos de Speckle}
 	\begin{itemize}
-		\item \textbf{Speckle Objetivo:} Se forma directamente en el espacio libre de dispersión, al colocar un sensor sin lentes de por medio. El tamaño promedio del grano depende de la geometría óptica: $s = \frac{\lambda z}{D}$ (donde $D$ es el diámetro iluminado y $z$ la distancia a la pantalla).
-		\item \textbf{Speckle Subjetivo:} Se forma al utilizar un sistema formador de imágenes (lentes u ojo). El tamaño del speckle está regido por el límite de difracción (disco de Airy) de la apertura de la lente: $\approx 2.4 \lambda u / D_{lente}$.
+		\item \textbf{Speckle Objetivo:} Se forma directamente en el espacio libre de dispersión, al colocar un sensor sin lentes de por medio.
+		\item \textbf{Speckle Subjetivo:} Se forma al utilizar un sistema formador de imágenes (lentes u ojo). El tamaño del speckle está regido por el límite de difracción de la apertura de la lente.
 	\end{itemize}
 	
 	\section{Técnicas de Metrología y Pruebas No Destructivas (PND)}
-	Las pruebas ópticas no destructivas permiten inspeccionar deformaciones, vibraciones, esfuerzos y defectos estructurales sin contacto físico y sin dañar la pieza. Se dividen en métodos coherentes (Interferometría, Holografía, Speckle) e incoherentes (Moiré, Proyección de franjas, Correlación digital DIC).
+	Las pruebas ópticas no destructivas permiten inspeccionar deformaciones, vibraciones, esfuerzos y defectos estructurales sin contacto físico.
 	
 	\subsection{Interferometría de Speckle (SI) / ESPI}
 	Originalmente visto como ruido, el speckle se aprovechó como portador de información. La interferometría de speckle compara la fase de un patrón de speckle \textbf{antes y después} de una deformación.
@@ -435,35 +411,74 @@
 	\textit{[Imagen: esquema\_optico\_shearography\_prisma.png]}
 	
 	\section{Interferometría de Medición de Fase (PMI y PSI)}
-	La simple observación de franjas de interferencia presenta ambigüedad de fase (no se distingue si el orden de franja sube o baja ya que $\cos(\phi) = \cos(-\phi)$). Las técnicas de demodulación resuelven esto.
+	La simple observación de franjas de interferencia presenta ambigüedad de fase. Las técnicas de demodulación resuelven esto evaluando múltiples interferogramas secuenciales (Phase Shifting/Stepping) o introduciendo frecuencias portadoras en una sola imagen (Transformada de Fourier).
 	
-	\subsection{Métodos Temporales (Phase Shifting / Phase Stepping)}
-	Se toman secuencialmente múltiples interferogramas, introduciendo un retraso de fase calibrado y controlado (ej. usando un espejo en un actuador piezoeléctrico - PZT).
-	\begin{equation*}
-		I_n(x,y) = I_{dc} + I_{ac} \cos[\varphi(x,y) + \alpha_n]
-	\end{equation*}
+	\subsection{Algoritmos de Medición de Fase}
+	A continuación se resumen las ecuaciones para los algoritmos más comunes de medición de fase:
 	
-	\textbf{Algoritmo de 4 pasos} ($\alpha_n = 0, \pi/2, \pi, 3\pi/2$):
-	Resolviendo el sistema de ecuaciones para las cuatro intensidades $I_1, I_2, I_3, I_4$:
+	\textbf{Tres Medidas:}
 	\begin{equation*}
-		\varphi(x,y) = \arctan \left[ \frac{I_4(x,y) - I_2(x,y)}{I_1(x,y) - I_3(x,y)} \right]
-	\end{equation*}
-	El cálculo proporciona el mapa de fase módulo $2\pi$ (fase envuelta). A partir de ahí, la deformación real $d(x,y)$ se calcula como: $d(x,y) = \frac{\lambda}{4\pi} \varphi(x,y)$.
-	
-	\subsection{Métodos Espaciales (Transformada de Fourier / Takeda)}
-	En lugar de tomar múltiples imágenes, se capta un único interferograma utilizando una configuración "fuera de eje" (off-axis) que inyecta una alta frecuencia portadora de franjas muy finas.
-	\begin{equation*}
-		I(x,y) = a(x,y) + b(x,y) \cos[\phi(x,y) + 2\pi f_0 x]
+		\phi = \text{ArcTan}\left[\frac{I_3 - I_2}{I_1 - I_2}\right]
 	\end{equation*}
 	
-	Al aplicar la Transformada Rápida de Fourier (FFT), el espectro de frecuencias muestra un lóbulo central (fondo) y dos lóbulos laterales (fase modulada).
+	\textbf{Cuatro Medidas:}
 	\begin{equation*}
-		I(u,v) = A(u,v) + C(u,v) + C^*(-u,-v)
+		\phi = \text{ArcTan}\left[\frac{I_4 - I_2}{I_1 - I_3}\right]
 	\end{equation*}
-	Se filtra espacialmente (aislando el lóbulo $C(u,v)$), se centra y se aplica la Transformada Inversa para calcular directamente el mapa de fase:
+	
+	\textbf{Schwider-Hariharan Cinco Medidas:}
 	\begin{equation*}
-		\phi(x, y) = \arctan \left[ \frac{\text{Im}(c(x,y))}{\text{Re}(c(x,y))} \right]
+		\phi = \text{ArcTan}\left[\frac{2(I_4 - I_2)}{I_1 - 2I_3 + I_5}\right]
 	\end{equation*}
+	
+	\textbf{Carré Ecuación:}
+	\begin{equation*}
+		\phi = \text{ArcTan}\left[\frac{\sqrt{[3(I_2 - I_3) - (I_1 - I_4)][(I_2 - I_3) + (I_1 - I_4)]}}{(I_2 + I_3) - (I_1 + I_4)}\right]
+	\end{equation*}
+	
+	\subsubsection*{Desarrollo mediante Identidades Trigonométricas (Paso $\Phi_R$)}
+	Usando las identidades trigonométricas:
+	\begin{align*}
+		\cos(a-b) &= \cos(a)\cos(b) + \sin(a)\sin(b) \\
+		\cos(a+b) &= \cos(a)\cos(b) - \sin(a)\sin(b)
+	\end{align*}
+	
+	El paso es $\Phi_R$:
+	\begin{equation*}
+		\Delta\varphi = \arctan \frac{\sqrt{I_1 + I_2 - I_3 - I_4} \cdot \sqrt{3I_2 - 3I_3 - I_1 + I_4}}{I_2 + I_3 - I_1 - I_4}
+	\end{equation*}
+	
+	\subsubsection*{Schwideer-Hariharan Algoritmo de 5 pasos $\pi/2$}
+	Pasos de fase: $-2\alpha, -\alpha, 0, \alpha, 2\alpha$
+	
+	Hariharan propuso un algoritmo de 5 pasos en el que la fase de la onda de referencia se toma como $-2\alpha, -\alpha, 0, \alpha, 2\alpha$ y las distribuciones de irradiancia correspondientes se escriben como:
+	\begin{align*}
+		I_1(x, y) &= a(x, y) + b(x, y) \cos[\delta(x,y) - 2\alpha] \\
+		I_2(x, y) &= a(x, y) + b(x, y) \cos[\delta(x,y) - \alpha] \\
+		I_3(x, y) &= a(x, y) + b(x, y) \cos\delta(x,y) \\
+		I_4(x, y) &= a(x, y) + b(x, y) \cos[\delta(x,y) + \alpha] \\
+		I_5(x, y) &= a(x, y) + b(x, y) \cos[\delta(x,y) + 2\alpha]
+	\end{align*}
+	
+	La fase $\delta(x, y)$ es obtenida con:
+	\begin{equation*}
+		\tan \delta(x, y) = 2 \sin \alpha \frac{(I_2 - I_4)}{2I_3 - (I_1 + I_5)}
+	\end{equation*}
+	
+	\subsection{Fuentes de error}
+	\underline{Las dos fuentes de error más comunes son:}
+	\begin{itemize}
+		\item Desplazamiento de fase incorrecto entre imagenes de datos.
+		\item El desfase incorrecto suele deberse a las vibraciones.
+		\item Reflexiones parásitas.
+	\end{itemize}
+	
+	\underline{Errores menos comunes:}
+	\begin{itemize}
+		\item Error de cuantificación
+		\item No linealidad del detector
+		\item Inestabilidades de la fuente.
+	\end{itemize}
 	
 	\section{Ejercicios Propuestos y Anotaciones Adicionales}
 	
@@ -500,7 +515,7 @@
 	
 	\subsection{Ejercicios de Coherencia}
 	\begin{enumerate}
-		\item Determine el ancho de banda ($\Delta \nu$), longitud de coherencia ($L_c$) y tiempo de coherencia ($\tau_c$) de la luz blanca asumiendo su espectro entre 384 THz y 769 THz. \textit{(Desarrollado en las notas previas: $L_c \approx 779$ nm).}
+		\item Determine el ancho de banda ($\Delta \nu$), longitud de coherencia ($L_c$) y tiempo de coherencia ($\tau_c$) de la luz blanca asumiendo su espectro entre 384 THz y 769 THz.
 		\item La luz de $\lambda = 4800 \text{ \AA}$ tiene una longitud de coherencia equivalente a 25 ondas. ¿Cuál es la longitud de coherencia absoluta y el tiempo de coherencia?
 		\item Se modula un láser continuo ($\lambda = 6500 \text{ \AA}$) en pulsos de 0.5 ns usando un obturador. Calcule $L_c$, $\Delta \nu$, y $\Delta \lambda$.
 	\end{enumerate}

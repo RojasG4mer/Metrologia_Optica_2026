@@ -17,7 +17,7 @@ class SimuladorFranjas:
         # Coordenadas polares
         self.R = np.sqrt(self.X**2 + self.Y**2)
         self.Theta = np.arctan2(self.Y, self.X)
-
+        
     def _calcular_salida(self, fase_absoluta, alpha=0.0):
         """
         Calcula el interferograma utilizando el modelo riguroso de dos ondas.
