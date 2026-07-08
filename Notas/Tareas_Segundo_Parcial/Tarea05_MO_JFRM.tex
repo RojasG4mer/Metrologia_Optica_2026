@@ -8,6 +8,10 @@
 \usepackage{amssymb}
 \usepackage{geometry}
 \usepackage{verbatim}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{subcaption} 
+\usepackage{tikz}
 
 % Configuración de los márgenes
 \geometry{left=2.5cm, right=2.5cm, top=2.5cm, bottom=2.5cm}
@@ -17,11 +21,11 @@
 	\begin{center}
 		\Large \textbf{METROLOGÍA ÓPTICA} \\
 		\vspace{0.3cm}
-		\large \textbf{TAREA 3 - SOLUCIONARIO}
+		\large \textbf{TAREA 3}
 	\end{center}
 	
 	\vspace{0.5cm}
-	\noindent \textbf{NOMBRE:} \underline{Jonathan Francisco Rojas Martínez} \hfill \textbf{FECHA:} \underline{6 de julio de 2026}
+	\noindent \textbf{NOMBRE:} \underline{Jonathan Francisco Rojas Martínez} \hfill \textbf{FECHA:} \underline{7 de julio de 2026}
 	
 	\vspace{0.5cm}
 	\noindent \textbf{INSTRUCCIONES.-} Conteste de manera completa las siguientes preguntas.
@@ -82,7 +86,7 @@
 		\[ \Delta\theta = \arctan\left(\frac{I_3 - I_2}{I_1 - I_2}\right) \]
 		\vspace{0.5cm}
 		
-		\item[4.-] Programe las ecuaciones de Intensidad (3) para un algoritmo de 3 pasos (pregunta 7) y encuentre $\Delta\theta$. Envíe el programa y los resultados.
+		\item[4.-] Programe las ecuaciones de Intensidad para un algoritmo de 3 pasos y encuentre $\Delta\theta$. Envíe el programa y los resultados.
 		
 		\vspace{0.3cm}
 		\textbf{Respuesta:} \\
@@ -94,7 +98,8 @@
 			# 1. Definición de parámetros espaciales y fase sintética
 			x = np.linspace(-5, 5, 500)
 			X, Y = np.meshgrid(x, x)
-			fase_original = 2 * np.pi * np.exp(-(X**2 + Y**2)/4) # Fase de prueba (gaussiana)
+			fase_original = 
+			= 2 * np.pi * np.exp(-(X**2 + Y**2)/4) # Fase de prueba (gaussiana)
 			
 			# Parámetros del interferograma
 			I_dc = 1.0  # Intensidad de fondo
@@ -116,33 +121,153 @@
 			# Verificación de resultados numéricos en el centro de la matriz
 			print("Fase original en el centro:", fase_original[250, 250])
 			# El resultado de arctan2 está envuelto en el rango [-pi, pi]
-			fase_original_wrapped = np.arctan2(np.sin(fase_original), np.cos(fase_original))
+			fase_original_wrapped =
+			= np.arctan2(np.sin(fase_original), np.cos(fase_original))
 			print("Fase recuperada envuelta en el centro:", fase_recuperada[250, 250])
-			print("Error absoluto máximo:", np.max(np.abs(fase_original_wrapped - fase_recuperada)))
+			print("Error absoluto máximo:", 
+			np.max(np.abs(fase_original_wrapped - fase_recuperada)))
 		\end{verbatim}
 		
 		\textbf{Resultados de la simulación:} \\
-		Al ejecutar el script, se constata que la fase se recupera de manera idéntica a la fase original dentro del rango normado $[-\pi, \pi]$. El error numérico residual es de orden fraccionario microscópico ($<10^{-15}$), lo que comprueba matemáticamente la validez exacta del algoritmo programado.
-		\vspace{0.5cm}
-		
-		% Sección de ecuaciones de intensidad mostradas en el documento original
-		\begin{align*}
-			I(x,y) &= I_{T1} + \gamma \cos(\phi(x,y) + \alpha(t)) \\
-			I(x,y) &= I_{T1} + \gamma \cos(\phi(x,y) + \alpha(t)) \\
-			I(x,y) &= I_R + I_o + 2 I_R I_o \cos(\phi_o + \phi_R \phi) \\
-			I(x,y) &= I_R + I_o + 2 I_R I_o \cos(\phi_o + \phi_R \phi) \\
-			I(x,y) &= I_{dc} + I_{ac} \cos(\phi(x,y) + \alpha(t)) \\
-			I(x,y) &= I_{dc} + I_{ac} \cos(\phi(x,y) + \alpha(t))
-		\end{align*}
-		\vspace{0.5cm}
+		\begin{figure}
+			\centering
+			\includegraphics[width=1\linewidth]{resultados.png}
+			\caption{Desenvolviendo la fase por el método de 3 pasos.}
+			\label{fig:placeholder}
+		\end{figure}
+			
 		
 		\item[6.-] Explique, deduzca y describa la utilidad de los algoritmos de Carré y Hariharan.
 		
 		\vspace{0.3cm}
 		\textbf{Respuesta:} \\
 		\textbf{Algoritmo de Carré:} \\
-		Es un método de 4 pasos diseñado para situaciones donde el cambio de fase $\alpha$ inducido entre pasos sucesivos es constante pero \textbf{completamente desconocido}. Su modelo asume desfases lineales de la forma: $-3\alpha/2, -\alpha/2, \alpha/2, 3\alpha/2$. \\
-		\textit{Utilidad:} Es sumamente útil cuando el transductor piezoeléctrico (PZT) carece de una calibración precisa o se ve alterado por variaciones térmicas directas, ya que calcula el desfase real a partir de los propios datos de intensidad de las imágenes.
+		
+		Se tienen las siguientes ecuaciones con sus respectivos corrimientos de fase de $2\beta$ entre cada una:
+		
+		\begin{equation}
+			\begin{aligned}
+				I_1 &= I' + I''\cos(\phi - 3\beta), \\
+				I_2 &= I' + I''\cos(\phi - \beta), \\
+				I_3 &= I' + I''\cos(\phi + \beta), \\
+				I_4 &= I' + I''\cos(\phi + 3\beta).
+			\end{aligned}
+		\end{equation}
+		
+		Ahora se utilizan identidades trigonométricas para reescribir las ecuaciones de la siguiente manera:
+		
+		\begin{equation}
+			\begin{aligned}
+				I_1 &= I' + I''(\cos\phi\cos3\beta + \text{sen}\phi\text{sen}3\beta), \\
+				I_2 &= I' + I''(\cos\phi\cos\beta + \text{sen}\phi\text{sen}\beta), \\
+				I_3 &= I' + I''(\cos\phi\cos\beta - \text{sen}\phi\text{sen}\beta), \\
+				I_4 &= I' + I''(\cos\phi\cos3\beta - \text{sen}\phi\text{sen}3\beta).
+			\end{aligned}
+		\end{equation}
+		
+		Se elimina la variable $I'$ al calcular las diferencias entre las ecuaciones pares como se indica a continuación:
+		
+		\begin{equation}
+			\begin{aligned}
+				I_1 - I_4 &= 2I''\text{sen}\phi\text{sen}3\beta, \\
+				I_2 - I_3 &= 2I''\text{sen}\phi\text{sen}\beta.
+			\end{aligned}
+		\end{equation}
+		
+		Sustituyendo estos valores en el segundo miembro de la fórmula 2.22 se sigue que:
+		
+		\begin{equation}
+			\frac{3(I_2 - I_3) - (I_1 - I_4)}{(I_1 - I_4) + (I_2 - I_3)} = \frac{6I''\text{sen}\phi\text{sen}3\beta - 2I''\text{sen}\phi\text{sen}3\beta}{2I''\text{sen}\phi\text{sen}3\beta + 2I''\text{sen}\phi\text{sen}\beta}
+		\end{equation}
+		
+		\begin{equation}
+			\frac{3(I_2 - I_3) - (I_1 - I_4)}{(I_1 - I_4) + (I_2 - I_3)} = \frac{3\text{sen}\beta - \text{sen}3\beta}{\text{sen}3\beta + \text{sen}\beta}
+		\end{equation}
+		
+		Aquí se reescribe la ecuación anterior utilizando la siguiente identidad:
+		
+		\begin{equation}
+			\begin{aligned}
+				\text{sen}3\beta &= \text{sen}(\beta + 2\beta), \\
+				&= \text{sen}\beta\cos2\beta + \cos\beta\text{sen}2\beta, \\
+				&= \text{sen}\beta(\cos^2\beta - \text{sen}^2\beta) + \cos2\beta\text{sen}\beta\cos\beta, \\
+				&= 3\text{sen}\beta\cos^2\beta - \text{sen}^3\beta.
+			\end{aligned}
+		\end{equation}
+		
+		Esta expresión nos lleva a:
+		
+		\begin{equation}
+			\frac{3\text{sen}\beta - \text{sen}3\beta}{\text{sen}3\beta + \text{sen}\beta} = \frac{3\text{sen}\beta - 3\text{sen}\beta\cos^2\beta + \text{sen}^3\beta}{3\text{sen}\beta\cos^2\beta - \text{sen}^3\beta + \text{sen}\beta}
+		\end{equation}
+		
+		\begin{equation}
+			= \frac{3 - 3\cos^2\beta + \text{sen}^2\beta}{3\cos^2\beta - \text{sen}^2\beta + 1}
+		\end{equation}
+		
+		\begin{equation}
+			= \frac{3\text{sen}^2\beta + \text{sen}^2\beta}{3\cos^2\beta + \cos^2\beta}
+		\end{equation}
+		
+		\begin{equation}
+			\frac{3(I_2 - I_3) - (I_1 - I_4)}{(I_1 - I_4) + (I_2 - I_3)} = \tan^2\beta
+		\end{equation}
+		
+		Y vemos que este resultado corresponde a lo esperado utilizando el algoritmo de Carré para calcular el corrimiento de fase $\beta$. Para obtener la fase final, se parte de la ecuación 2.23 y se calculan las sumas y diferencias que se encuentran en el segundo miembro de la expresión:
+		
+		\begin{equation}
+			\begin{aligned}
+				I_1 - I_4 &= 2I''\text{sen}\phi\text{sen}3\beta, \\
+				I_2 - I_3 &= 2I''\text{sen}\phi\text{sen}\beta, \\
+				I_1 + I_4 &= 2I' + 2I''\cos\phi\cos3\beta, \\
+				I_2 + I_3 &= 2I' + 2I''\cos\phi\cos3\beta.
+			\end{aligned}
+		\end{equation}
+		
+		Sustituyendo:
+		
+		\begin{equation}
+			\tan\beta\frac{3(I_1 - I_4) + (I_2 - I_3)}{(I_2 + I_3) - (I_1 + I_4)} = \tan\beta\frac{2I''\text{sen}\phi\text{sen}3\beta + 2I''\text{sen}\phi\text{sen}\beta}{2I' + 2I''\cos\phi\cos\beta - 2I' - 2I''\cos\phi\cos3\beta}
+		\end{equation}
+		
+		\begin{equation}
+			= \tan\beta\frac{\text{sen}\phi\text{sen}3\beta + \text{sen}\phi\text{sen}\beta}{\cos\phi\cos\beta - \cos\phi\cos3\beta}
+		\end{equation}
+		
+		\begin{equation}
+			= \tan\beta\tan\phi\frac{\text{sen}3\beta + \text{sen}\beta}{\cos\beta - \cos3\beta}
+		\end{equation}
+		
+		Ahora se reescribe la expresión anterior usando la identidad que se presenta a continuación:
+		
+		\begin{equation}
+			\begin{aligned}
+				\cos3\beta &= \cos(2\beta + \beta) = \cos2\beta\cos\beta - \text{sen}2\beta\text{sen}\beta, \\
+				&= (\cos^2\beta - \text{sen}^2\beta)\cos\beta - 2\text{sen}^2\beta\cos\beta, \\
+				&= \cos^3\beta - 3\text{sen}^2\beta\cos\beta.
+			\end{aligned}
+		\end{equation}
+		
+		Se obtiene que:	
+		
+		\begin{equation}
+			\tan\beta\tan\phi\frac{\text{sen}3\beta + \text{sen}\beta}{\cos\beta - \cos3\beta} = \tan\phi\tan\beta\frac{3\text{sen}\beta\cos^2\beta - \text{sen}^3\beta + \text{sen}\beta}{\cos\beta - \cos^3\beta + 3\text{sen}^2\beta\cos\beta}
+		\end{equation}
+		
+		\begin{equation}
+			\tan\beta\tan\phi\frac{\text{sen}3\beta + \text{sen}\beta}{\cos\beta - \cos3\beta} = \tan\phi\tan^2\beta\frac{3\cos^2\beta - \text{sen}^2\beta + 1}{1 - \cos^2\beta + 3\text{sen}^2\beta}
+		\end{equation}
+		
+		\begin{equation}
+			= \tan\phi\tan^2\beta\frac{1}{\tan^2\beta}
+		\end{equation}
+		
+		Lo que nos lleva a la expresión esperada para calcular la fase $\phi$ mediante el algoritmo de Carré:
+		
+		\begin{equation}
+			\tan\phi = \frac{3(I_1 - I_4) + (I_2 - I_3)}{(I_2 + I_3) - (I_1 + I_4)}
+		\end{equation}
+		
 		
 		\vspace{0.2cm}
 		\textbf{Algoritmo de Hariharan (5 pasos):} \\
