@@ -1,0 +1,133 @@
+\documentclass[letterpaper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{enumerate}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{amsmath}
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage[spanish,es-nodecimaldot, es-tabla]{babel}
+\usepackage{wrapfig}
+\usepackage[rightcaption]{sidecap}
+\graphicspath{ {./images/} }
+\usepackage{amssymb}
+\usepackage{setspace}
+\usepackage{fancyhdr}
+\usepackage[left=2.5 cm,right=2.5 cm, top=2.5 cm, bottom=2.5 cm]{geometry}
+\usepackage{float}
+\usepackage{afterpage}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta, decorations.pathreplacing}
+
+% Configuración de encabezado y pie de página
+\pagestyle{fancy}
+\fancyhf{} % Limpia encabezado y pie
+\fancyhead[R]{\small Estudiante de posgrado, Centro de Investigaciones en Óptica \\ Metrología Óptica}
+\fancyfoot[C]{\thepage} % Número de página centrado
+\renewcommand{\headrulewidth}{0pt} % Quita la línea bajo el encabezado
+\renewcommand{\footrulewidth}{0pt} % Quita línea sobre pie de página
+
+\begin{document}
+	
+	\begin{center}
+		\Large \textbf{DSPI (DIGITAL SPECKLE PATTERN INTERFEROMETRY)}
+	\end{center}
+	
+	\begin{center}
+		Jonathan Francisco Rojas Martínez\\
+		jonathan.frm@cio.mx\\
+		09/07/2026\\
+		Centro de Investigaciones en Óptica\\
+		Loma del Bosque 115, Lomas del Campestre, León, Gto, C.P. 37150
+	\end{center}
+	
+	\begin{center}
+		{\Large \textbf{Resumen}}
+	\end{center}
+	
+	\noindent
+	Esta práctica explica el concepto de interferencia entre dos hologramas digitales y su potencial para hacer mediciones no invasivas. En particular, se estudia la resonancia de una muestra metálica mediante la implementación de un arreglo interferométrico ESPI (Electrónica Speckle Pattern Interferometry). Se miden distintas audio-frecuencias a las que el metal alcanza su máxima deformación (modos de vibración) empleando una excitación acústica. A través de la correlación de hologramas en tiempo cuasi real, se logran observar los patrones de franjas que caracterizan cualitativa y cuantitativamente estos desplazamientos.
+	
+	\begin{multicols}{2}
+		
+		\section*{Introducción}
+		
+		Las pruebas ópticas no destructivas permiten detectar cambios de diferente índole en toda la superficie de un objeto bajo análisis, esto sin hacer contacto físico alguno que pudiera interferir en su integridad sin afectar el estado de comportamiento que se quiera analizar. Para llevar a cabo dichas pruebas se han desarrollado diferentes metodologías, que aparte de ser no invasivas, son de campo completo capaces de proveer información cualitativa y cuantitativa de la forma y deformación de aquellos objetos sujetos a una variedad de estímulos.
+		
+		En esta práctica se plantea el uso de la técnica de interferometría electrónica de patrones de moteado (ESPI) en tiempo cuasi real para obtener información cualitativa de un objeto que se deforma a partir de sus modos de vibración generados mediante perturbación de ondas acústicas. La implementación práctica de dicha técnica permitirá obtener patrones de franjas tanto en pruebas llevadas a cabo en modo estático como en modo dinámico. 
+		
+		\section*{Objetivos}
+		
+		\begin{itemize}
+			\item Realizar experimentos sencillos que conduzcan a entender aquellos principios básicos de la tecnología de punta referente a pruebas ópticas no destructivas (deformaciones, resonancias), empleando luz Láser.
+		\end{itemize}
+		
+		\section*{Material y equipo}
+		
+		\begin{enumerate}
+			\item Laser verde Nd: YAG
+			\item Cámara CCD
+			\item 2 Cubos divisor de haz
+			\item 2 Fibras ópticas mono-modales
+			\item 2 Lentes
+			\item 2 Objetivos de microscopio con monturas de ajuste XYZ
+			\item Diafragma de iris
+			\item Objeto de prueba
+			\item Monturas mecánicas para las componentes
+			\item Bocina
+			\item Generador de funciones
+			\item Amplificador
+		\end{enumerate}
+		
+		\section*{Procedimiento}
+		
+		\textbf{EXPERIMENTO 1.} Arme el arreglo experimental (interferómetro fuera de plano). Use un programa especial para correlacionar hologramas y asi encontrar los patrones de vibraciones del objeto de prueba.
+		
+		\begin{enumerate}[i)]
+			\item Primeramente, realice el enfoque nítidamente del objeto de prueba con luz blanca.
+			\item Obtenga patrones de franjas para una placa de aluminio sometida primero a una carga estática y luego a una onda senoidal.
+			\item Para el objeto de prueba, realice el barrido de la frecuencia de excitación de 100Hz a 15 kHz aplicando un estímulo acústico (onda senoidal).
+			\item Con ayuda del programa, busque las regiones de alta respuesta (donde resalten los modos de vibración) y encuentre las bandas de frecuencia locales para la máxima densidad de franjas. El programa graba una imagen inicial (holograma) o imagen de referencia de la muestra bajo estudio que es comparada con las imágenes subsecuentes en distintas posiciones. La comparación es usualmente hecha por la substracción de las imágenes subsecuentes con la imagen inicial, tomada como referencia. El resultado, mostrado en el monitor en forma de patrones de interferencia, caracteriza la posición del objeto, i.e., la franjas describen el desplazamiento del objeto.
+			\item Una vez identificadas las regiones de alta respuesta, escoja al menos 3 modos de vibración para la muestra y complete la tabla 1. Los patrones de vibración muestran el comportamiento del objeto en condiciones normales sujeto a un estímulo acústico.
+			\item Grabe una serie de hologramas consecutivos para cada modo de vibración elegido.
+			\item Escriba un programa que lea los hologramas y los compare mediante la substracción de los mismos y presente los patrones de franjas de interferencia resultantes.
+		\end{enumerate}
+		
+		\section*{Resultados y Análisis}
+		
+		\begin{table}[H]
+			\centering
+			\caption{Resultados}
+			\vspace{0.3cm}
+			\resizebox{\columnwidth}{!}{%
+				\begin{tabular}{|c|c|c|c|}
+					\hline
+					\multicolumn{4}{|c|}{\textbf{Patrones de resonancia encontrados (Modos)}} \\
+					\hline
+					\textbf{Modo} & \textbf{Patrón de intensidad} & \textbf{Frecuencia y voltaje} & \textbf{Observaciones} \\
+					\hline
+					& & & \\[1.2cm] \hline
+					& & & \\[1.2cm] \hline
+					& & & \\[1.2cm] \hline
+				\end{tabular}%
+			}
+		\end{table}
+		
+		\section*{Cuestionario}
+		\begin{enumerate}
+			\item A parte de ESPI, mencione y describa brevemente otras técnicas de medición no invasivas.
+			\item ¿A qué se refiere cuando se habla de obtener la fase de un objeto deformado?
+			\item Desarrolle el método que usó para obtener la fase del objeto deformado a partir del patrón de franjas. Mencione métodos alternos.
+			\item ¿Qué consideraciones se deben tener para que exista condición de interferencia entre un holograma del objeto en su posición inicial o en referencia y un holograma del objeto deformado? Suponga que estos hologramas son dos patrones de moteado vistos en práctica.
+		\end{enumerate}
+		
+		\section*{Bibliografía}
+		\begin{enumerate}
+			\item Thomas Kreis, \textit{Handbook of Holographic Interferometry}. Wiley-Vch.
+			\item R. Jones \& C. Wykes, \textit{Holographic and Speckle Interferomety}. Cambridge University Press.
+			\item Fernando Mendoza-Santoyo, et. Al., \textit{Full Field Optical Metrology and Applications}. IOP books.
+		\end{enumerate}
+		
+	\end{multicols}
+\end{document}

@@ -1,0 +1,424 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{xcolor}
+\usepackage[spanish]{babel}
+\usepackage[a4paper, margin=2cm]{geometry}
+\usepackage{tikz}
+\usetikzlibrary{calc, angles, quotes, babel}
+
+\begin{document}
+	
+	\begin{center}
+		\textcolor{red!80!black}{\large METROLOGIA OPTICA}
+	\end{center}
+	
+	\noindent \textcolor{red!80!black}{EXAMEN 2} \\
+	NOMBRE: \underline{Rojas Martinez Jonathan Francisco} \\
+	FECHA: \underline{09/Julio/2026} \\
+	
+	\vspace{0.5cm}
+	\noindent \textbf{INSTRUCCIONES.- Conteste de manera completa las siguientes preguntas.}
+	\vspace{0.3cm}
+	
+	\begin{enumerate}
+		\renewcommand{\labelenumi}{\arabic{enumi}.-}
+		
+		\item La visibilidad de las franjas en un patrón de interferencia se definió como $\gamma=(I_{\max}-I_{\min})/(I_{\max}+I_{\min})$
+		\begin{enumerate}
+			\item[a)] Obtenga una expresión para la visibilidad si sustituye las expresiones para $I_{\max}$ e $I_{\min}$
+		\end{enumerate}
+		
+		\vspace{0.2cm}
+		\textcolor{blue!70!black}{\textbf{Respuesta:}} \\
+		La intensidad de dos haces que interfieren está dada por: $I = I_1 + I_2 + 2\sqrt{I_1 I_2}\cos(\Delta\phi)$. \\
+		La intensidad máxima ocurre cuando $\cos(\Delta\phi) = 1$:
+		\[ I_{\max} = I_1 + I_2 + 2\sqrt{I_1 I_2} \]
+		La intensidad mínima ocurre cuando $\cos(\Delta\phi) = -1$:
+		\[ I_{\min} = I_1 + I_2 - 2\sqrt{I_1 I_2} \]
+		Calculamos las diferencias y sumas necesarias para $\gamma$:
+		\[ I_{\max} - I_{\min} = (I_1 + I_2 + 2\sqrt{I_1 I_2}) - (I_1 + I_2 - 2\sqrt{I_1 I_2}) = 4\sqrt{I_1 I_2} \]
+		\[ I_{\max} + I_{\min} = (I_1 + I_2 + 2\sqrt{I_1 I_2}) + (I_1 + I_2 - 2\sqrt{I_1 I_2}) = 2(I_1 + I_2) \]
+		Sustituyendo en la fórmula de la visibilidad:
+		\[ \gamma = \frac{4\sqrt{I_1 I_2}}{2(I_1 + I_2)} = \frac{2\sqrt{I_1 I_2}}{I_1 + I_2} \]
+		
+		\vspace{0.5cm}
+		\item La formación de las franjas de correlación mediante la observación del cambio de intensidad se describe por medio de la correlación por substracción y por suma, realice el formalismo para encontrar la Intensidad resultantes para ambas.
+		
+		\vspace{0.2cm}
+		\textcolor{blue!70!black}{\textbf{Respuesta:}} \\
+		Sean $I_1$ la intensidad inicial y $I_2$ la intensidad tras una deformación que induce un cambio de fase $\Delta\phi$:
+		\[ I_1 = I_o + I_r + 2\sqrt{I_o I_r}\cos(\phi) \]
+		\[ I_2 = I_o + I_r + 2\sqrt{I_o I_r}\cos(\phi + \Delta\phi) \]
+		
+		\textbf{Correlación por suma:}
+		\[ I_{\text{suma}} = I_1 + I_2 = 2(I_o + I_r) + 2\sqrt{I_o I_r}[\cos(\phi) + \cos(\phi + \Delta\phi)] \]
+		Usando la identidad trigonométrica $\cos A + \cos B = 2\cos\left(\frac{A+B}{2}\right)\cos\left(\frac{A-B}{2}\right)$:
+		\[ I_{\text{suma}} = 2(I_o + I_r) + 4\sqrt{I_o I_r}\cos\left(\phi + \frac{\Delta\phi}{2}\right)\cos\left(\frac{\Delta\phi}{2}\right) \]
+		
+		\textbf{Correlación por substracción:}
+		\[ I_{\text{resta}} = |I_1 - I_2| = |2\sqrt{I_o I_r}[\cos(\phi) - \cos(\phi + \Delta\phi)]| \]
+		Usando la identidad $\cos A - \cos B = -2\sin\left(\frac{A+B}{2}\right)\sin\left(\frac{A-B}{2}\right)$:
+		\[ I_{\text{resta}} = \left| -4\sqrt{I_o I_r}\sin\left(\phi + \frac{\Delta\phi}{2}\right)\sin\left(\frac{\Delta\phi}{2}\right) \right| \]
+		Para ambas, las franjas de correlación de baja frecuencia que observamos vienen dictadas por los términos $\cos(\Delta\phi/2)$ y $\sin(\Delta\phi/2)$ respectivamente.
+		
+		\vspace{0.5cm}
+		\item Define Coherencia temporal y espacial. ¿Calcule la longitud de coherencia y el tiempo de coherencia para la luz roja?
+		
+		\vspace{0.2cm}
+		\textcolor{blue!70!black}{\textbf{Respuesta:}} \\
+		\textbf{Coherencia Temporal:} Está relacionada con la monocromaticidad de la fuente lumínica y la predecibilidad de la fase de la onda en un mismo punto del espacio en diferentes instantes de tiempo. Depende del ancho de banda frecuencial de la fuente.\\
+		\textbf{Coherencia Espacial:} Está relacionada con el tamaño de la fuente luminosa e indica el grado de correlación de fase que hay en un mismo instante de tiempo pero en diferentes puntos espaciales a lo largo de un plano transversal al avance de onda.\\
+		\textbf{Cálculo para luz roja típica (Láser He-Ne, $\lambda \approx 632.8$ nm):} \\
+		Suponiendo un láser He-Ne típico con un ancho de banda de frecuencia $\Delta\nu \approx 1.5$ GHz.
+		\begin{itemize}
+			\item Tiempo de coherencia $\tau_c$: $\tau_c = \frac{1}{\Delta\nu} = \frac{1}{1.5 \times 10^9 \text{ Hz}} \approx 0.66 \text{ ns}$
+			\item Longitud de coherencia $L_c$: $L_c = c \cdot \tau_c = (3 \times 10^8 \text{ m/s}) \cdot (0.66 \times 10^{-9} \text{ s}) \approx 0.2 \text{ m (20 cm)}$
+		\end{itemize}
+		
+		\vspace{0.5cm}
+		\item ¿Defina patrón de speckle?, Como se calcula el tamaño de este patrón cuando se tiene una abertura rectangular?
+		
+		\vspace{0.2cm}
+		\textcolor{blue!70!black}{\textbf{Respuesta:}} \\
+		\textbf{Patrón de speckle:} Es un patrón granulado estocástico (puntos brillantes y oscuros) originado por la interferencia mutua de un conjunto de frentes de onda coherentes pero con fases aleatorias dispersados desde una superficie ópticamente rugosa. \\
+		\textbf{Tamaño del speckle con abertura rectangular:} Si la abertura limitante tiene dimensiones $D_x \times D_y$, y la luz incide a una distancia de observación $z$, las dimensiones promedio del "grano" de speckle $\delta x$ y $\delta y$ se calculan como:
+		\[ \delta x \approx \frac{\lambda z}{D_x} \quad \text{y} \quad \delta y \approx \frac{\lambda z}{D_y} \]
+		
+		\vspace{0.5cm}
+		\item Explique claramente speckle objetivo y subjetivo y dibuje los arreglos ópticos para ambos.
+		
+		\vspace{0.2cm}
+		\textcolor{blue!70!black}{\textbf{Respuesta:}} \\
+		\textbf{Speckle Objetivo:} Se genera por la propagación en el espacio libre de la luz dispersada desde la superficie rugosa hasta una pantalla, sin usar lentes formadoras de imagen. Su tamaño se rige por el área iluminada en la superficie y la distancia a la pantalla.\\
+		\textbf{Speckle Subjetivo:} Se produce en el plano de imagen mediante el uso de un sistema óptico (una lente o el ojo). El tamaño del speckle depende puramente de la apertura de dicho sistema óptico ($F/\#$) y la magnificación $M$, siendo independiente del tamaño original iluminado.
+		
+		\vspace{0.3cm}
+		\begin{center}
+			\begin{tikzpicture}[font=\small, >=stealth]
+				% -- Objetivo --
+				\node[align=center] at (1.5, 3.5) {\textbf{Speckle Objetivo}};
+				\draw[fill=gray!40] (0,0) rectangle (0.5,3);
+				\node[rotate=90] at (0.25, 1.5) {Superficie Rugosa};
+				\draw[thick, red, ->] (-2, 1.5) -- (0, 1.5) node[midway, above] {Láser};
+				\foreach \a in {-35,-15,0,15,35}
+				\draw[red, ->, opacity=0.4] (0.5, 1.5) -- +( \a:2.5 );
+				\draw[ultra thick, black] (3, 0) -- (3, 3) node[above] {Pantalla};
+				
+				% -- Subjetivo --
+				\begin{scope}[xshift=6cm]
+					\node[align=center] at (2.5, 3.5) {\textbf{Speckle Subjetivo}};
+					\draw[fill=gray!40] (0,0) rectangle (0.5,3);
+					\draw[thick, red, ->] (-2, 1.5) -- (0, 1.5);
+					% Lente
+					\draw[thick, blue, fill=blue!10] (2.5, 1.5) ellipse (0.2 and 1) node[above=25pt, black] {Lente};
+					\draw[ultra thick, black] (5, 0) -- (5, 3) node[above] {Sensor};
+					% Rayos
+					\draw[red, opacity=0.4] (0.5, 1.5) -- (2.5, 2.2) -- (5, 1.5);
+					\draw[red, opacity=0.4] (0.5, 1.5) -- (2.5, 0.8) -- (5, 1.5);
+					\draw[red, opacity=0.4, dashed] (0.5, 2.5) -- (2.5, 1.5) -- (5, 0.5);
+				\end{scope}
+			
+			\end{tikzpicture}
+		\end{center}
+		
+		\vspace{0.5cm}
+		\item Dibuje un interferómetro fuera del plano y en el plano cual es la diferencia entre ellos?
+		
+		\vspace{0.2cm}
+		\textcolor{blue!70!black}{\textbf{Respuesta:}} \\
+		\textbf{Diferencia:} Un interferómetro \textbf{fuera de plano} está diseñado para ser sensible primariamente a desplazamientos del objeto paralelos al eje de observación (deformaciones axiales $z$). Utiliza una onda de referencia interna y lisa. Un interferómetro \textbf{en plano} mide desplazamientos transversales a la dirección de observación (deformaciones axiales $x, y$) e ilumina el objeto con dos haces simétricos bajo el mismo ángulo $\theta$.
+		
+		\vspace{0.3cm}
+			\begin{center}
+			\textbf{OUT OF PLANE PARA INTERFEROMETRÍA DE SPECKLE}
+			\vspace{0.3cm}
+			
+			\begin{tikzpicture}[x=1.2cm, y=1.2cm, font=\sffamily\small, >=stealth]
+				% Colores basados en la diapositiva de clase
+				\colorlet{blockblue}{cyan!20}
+				\colorlet{borderblue}{cyan!60!black}
+				
+				% 1. Objeto
+				\fill[blockblue] (7, -1) rectangle (7.4, 5);
+				\draw[thick, borderblue] (7, -1) rectangle (7.4, 5);
+				\node[right, text=black] at (7.4, 2) {Objeto};
+				
+				% 2. Láser
+				\fill[blockblue] (-0.3, -2) rectangle (0.3, -0.5);
+				\draw[thick, borderblue] (-0.3, -2) rectangle (0.3, -0.5);
+				\node[right, text=black] at (0.3, -1.25) {Láser};
+				
+				% 3. DH (Divisor de Haz)
+				\fill[blockblue] (-0.3, 2) rectangle (0.3, 2.6);
+				\draw[thick, borderblue] (-0.3, 2) rectangle (0.3, 2.6);
+				\draw[borderblue] (-0.3, 2) -- (0.3, 2.6);
+				\node[left] at (-0.3, 2.3) {DH};
+				
+				% 4. CCD
+				\fill[blockblue] (0.5, 0.2) rectangle (1.1, 1.2);
+				\draw[thick, borderblue] (0.5, 0.2) rectangle (1.1, 1.2);
+				\node[below] at (0.8, 0.2) {CCD};
+				
+				% 5. M1 (Espejo 1)
+				\draw[ultra thick, borderblue, rotate around={-30:(0, 4)}] (-0.4, 4) -- (0.4, 4);
+				\node[right] at (0.4, 4) {M1};
+				
+				% 6. L2 (Lente divergente)
+				\draw[thick, borderblue, fill=blockblue] (1.3, 2) .. controls (1.5, 2.1) and (1.5, 2.5) .. (1.3, 2.6) -- (1.7, 2.6) .. controls (1.5, 2.5) and (1.5, 2.1) .. (1.7, 2) -- cycle;
+				\node[above] at (1.5, 2.7) {L2};
+				
+				% 7. M2 (Espejo 2)
+				\draw[ultra thick, borderblue, rotate around={45:(2.8, 2.3)}] (2.4, 2.3) -- (3.2, 2.3);
+				\node[above right] at (2.9, 2.3) {M2};
+				
+				% 8. RH (Recombinador de Haz)
+				\fill[blockblue] (2.2, 0.2) rectangle (3.0, 1.2);
+				\draw[thick, borderblue] (2.2, 0.2) rectangle (3.0, 1.2);
+				\draw[borderblue] (2.2, 0.2) -- (3.0, 1.2);
+				\node[below] at (2.6, 0.2) {RH};
+				
+				% 9. Lente (Convergente)
+				\draw[thick, borderblue, fill=blockblue] (3.7, 0.7) ellipse (0.15 and 0.8);
+				\node[above] at (3.7, 1.6) {Lente};
+				
+				% 10. Cajas inferiores
+				\draw[thick, borderblue] (2.2, -1.5) rectangle (4.5, -0.8) node[midway, text=black] {procesamiento};
+				\draw[thick, borderblue] (2.2, -3) rectangle (4.5, -2.3) node[midway, text=black] {monitor};
+				\draw[->, thick, green!60!black] (0.8, 0.2) |- (2.2, -1.15);
+				\draw[->, thick, green!60!black] (3.35, -1.5) -- (3.35, -2.3);
+				
+				% Trazado de rayos
+				\begin{scope}[thin, black!70]
+					% Laser a DH
+					\draw (0, -0.5) -- (0, 2);
+					% DH a M1
+					\draw (0, 2.6) -- (0, 4);
+					% M1 a Objeto
+					\draw (0, 4) -- (7, 4.5);
+					\draw (0, 4) -- (7, 2) node[midway, above left, text=black] {L1};
+					\draw (0, 4) -- (7, -0.5);
+					
+					% DH a L2
+					\draw (0.3, 2.3) -- (1.3, 2.3);
+					% L2 a M2
+					\draw (1.7, 2.3) -- (2.7, 2.6);
+					\draw (1.7, 2.3) -- (2.8, 2.1);
+					
+					% M2 a RH
+					\draw (2.7, 2.6) -- (2.7, 1.2);
+					\draw (2.8, 2.1) -- (2.8, 1.2);
+					\draw (2.6, 2.3) -- (2.6, 1.2); % Rayo central aproximado
+					
+					% RH a CCD (reflexión del haz de referencia)
+					\draw (2.7, 0.9) -- (1.1, 0.9);
+					\draw (2.8, 0.7) -- (1.1, 0.7);
+					\draw (2.6, 0.5) -- (1.1, 0.5);
+					
+					% Objeto a Lente (Dispersión)
+					\draw (7, 4.5) -- (3.85, 0.9);
+					\draw (7, 2) -- (3.85, 0.7);
+					\draw (7, -0.5) -- (3.85, 0.5);
+					
+					% Lente a CCD (a través de RH)
+					\draw (3.55, 0.9) -- (1.1, 0.9);
+					\draw (3.55, 0.7) -- (1.1, 0.7);
+					\draw (3.55, 0.5) -- (1.1, 0.5);
+				\end{scope}
+			\end{tikzpicture}
+		\end{center}
+		
+		\begin{center}
+			\textbf{CONFIGURACIÓN IN-PLANE}
+			\vspace{0.3cm}
+			
+			\begin{tikzpicture}[font=\small, scale=0.85, >=stealth]
+				% IN PLANE
+				% Laser
+				\draw[thick, fill=red!20] (-1.5, 5.5) rectangle (0.5, 4.5) node[midway] {Láser};
+				\draw[thick, red, ->] (0.5, 5) -- (2.8, 5);
+				% Beam splitter
+				\draw[thick, blue, rotate around={-45:(3,5)}] (2.5, 5) rectangle (3.5, 5.1);
+				% Espejos
+				\draw[ultra thick, black, rotate around={45:(3,2)}] (2.5, 2) -- (3.5, 2);
+				\draw[ultra thick, black, rotate around={-45:(6,5)}] (5.5, 5) -- (6.5, 5);
+				% Objeto plano
+				\draw[thick, fill=gray!30] (4, 0) rectangle (5, 0.5) node[below=5pt] {Objeto ($x,y$)};
+				% Trayectorias
+				\draw[thick, red, ->] (3, 5) -- (3, 2.1);
+				\draw[thick, red, ->] (3, 5) -- (5.9, 5);
+				\draw[thick, red, ->] (3, 2) -- (4.4, 0.5) node[midway, left] {$+\theta$};
+				\draw[thick, red, ->] (6, 5) -- (4.6, 0.5) node[midway, right] {$-\theta$};
+				% Observacion
+				\draw[thick, black] (4, 3.5) rectangle (5, 4) node[above] {CCD normal};
+				\draw[thick, red, dashed, ->] (4.5, 0.5) -- (4.5, 3.5);
+			\end{tikzpicture}
+		\end{center}
+		
+		\vspace{0.5cm}
+		\item Defina interferometría de medición de fase y que técnicas/métodos existen?
+		
+		\vspace{0.2cm}
+		\textcolor{blue!70!black}{\textbf{Respuesta:}} \\
+		\textbf{Definición:} La interferometría de medición de fase (Phase Measurement Interferometry - PMI) es un conjunto de técnicas para recuperar cuantitativamente el mapa de fase óptica $\phi(x,y)$ a partir de los patrones de franjas registrados, eliminando la ambigüedad del signo y la influencia de la intensidad de fondo y modulación. \\
+		\textbf{Técnicas/Métodos que existen:}
+		\begin{itemize}
+			\item \textbf{Desplazamiento de Fase Temporal (Phase Shifting):} Se altera la fase de referencia secuencialmente en pasos definidos, tomando imágenes para cada paso. Ejemplos: Algoritmo de 3 pasos, 4 pasos, Carré, Hariharan (5 pasos).
+			\item \textbf{Desplazamiento de Fase Espacial (Spatial Carrier):} Se genera una alta frecuencia espacial (franjas densas) inclinando el frente de onda de referencia y se recupera la fase de una sola imagen.
+			\item \textbf{Método de Transformada de Fourier (FFT):} Separación en el espacio de frecuencias de las componentes moduladas de la intensidad.
+		\end{itemize}
+		
+		\vspace{0.5cm}
+		\item Encuentre $\Delta\theta$ para un algoritmo de 3 pasos, con paso de $\alpha$= ($\pi/4, 3\pi/4$ y $5\pi/4$)
+		
+		\vspace{0.2cm}
+		\textcolor{blue!70!black}{\textbf{Respuesta:}} \\
+		Asumiendo que el mapa de intensidad para cada paso está dado por $I_i = I_0 + I_m \cos(\phi + \alpha_i)$, (nota: la fase $\phi$ es lo que el problema nota como $\Delta\theta$).
+		Evaluamos las 3 ecuaciones con los pasos dados:
+		\[ I_1 = I_0 + I_m \cos(\phi + \pi/4) = I_0 + I_m \left(\cos\phi \cos\frac{\pi}{4} - \sin\phi \sin\frac{\pi}{4}\right) = I_0 + \frac{\sqrt{2}}{2} I_m(\cos\phi - \sin\phi) \]
+		\[ I_2 = I_0 + I_m \cos(\phi + 3\pi/4) = I_0 + I_m \left(\cos\phi \cos\frac{3\pi}{4} - \sin\phi \sin\frac{3\pi}{4}\right) = I_0 + \frac{\sqrt{2}}{2} I_m(-\cos\phi - \sin\phi) \]
+		\[ I_3 = I_0 + I_m \cos(\phi + 5\pi/4) = I_0 + I_m \left(\cos\phi \cos\frac{5\pi}{4} - \sin\phi \sin\frac{5\pi}{4}\right) = I_0 + \frac{\sqrt{2}}{2} I_m(-\cos\phi + \sin\phi) \]
+		
+		Realizamos substracciones entre imágenes para aislar términos:
+		\[ I_1 - I_2 = \frac{\sqrt{2}}{2} I_m [\cos\phi - \sin\phi - (-\cos\phi - \sin\phi)] = \sqrt{2} I_m \cos\phi \]
+		\[ I_3 - I_2 = \frac{\sqrt{2}}{2} I_m [-\cos\phi + \sin\phi - (-\cos\phi - \sin\phi)] = \sqrt{2} I_m \sin\phi \]
+		
+		Dividiendo estas dos diferencias:
+		\[ \frac{I_3 - I_2}{I_1 - I_2} = \frac{\sqrt{2} I_m \sin\phi}{\sqrt{2} I_m \cos\phi} = \tan\phi \]
+		
+		Finalmente, despejando la fase $\phi$ (o $\Delta\theta$):
+		\[ \Delta\theta = \arctan \left( \frac{I_3 - I_2}{I_1 - I_2} \right) \]
+		
+		\vspace{0.5cm}
+		\item Explique y describa la utilidad de los algoritmos de carré y Hariharan.
+		
+		\vspace{0.2cm}
+		\textcolor{blue!70!black}{\textbf{Respuesta:}} \\
+		\textbf{Algoritmo de Carré (4 pasos):} Su mayor utilidad es que funciona aunque no se conozca la magnitud exacta del corrimiento de fase inducido, siempre que el salto de fase $\alpha$ sea constante entre imágenes. Esto lo vuelve inmune a errores de calibración lineales del actuador piezoeléctrico. \\
+		\textbf{Algoritmo de Hariharan (5 pasos):} Este algoritmo emplea corrimientos típicamente de $-\pi, -\pi/2, 0, \pi/2, \pi$. Su gran utilidad radica en su robustez; la fórmula obtenida minimiza dramáticamente el error de "detuning" (desintonización de fase) y lo vuelve insensible tanto a las malas calibraciones de los desplazadores como a ciertos armónicos de no linealidad de los detectores, siendo uno de los métodos estándar de la industria.
+		
+		\vspace{0.5cm}
+		\item Describa claramente los pasos para obtener la \underline{fase envuelta} usando el método de la transformada rápida de Fourier.
+		
+		\vspace{0.2cm}
+		\textcolor{blue!70!black}{\textbf{Respuesta:}} \\
+		Los pasos metodológicos (método de Takeda) son:
+		\begin{enumerate}
+			\item Partir de un interferograma que contenga una frecuencia portadora espacial alta, en forma $I(x,y) = a(x,y) + c(x,y)e^{i2\pi f_0 x} + c^*(x,y)e^{-i2\pi f_0 x}$.
+			\item Calcular la \textbf{Transformada Rápida de Fourier 2D} (FFT2D) de todo el mapa de intensidad, pasando al dominio de las frecuencias.
+			\item \textbf{Filtrar espectralmente:} En el espacio de frecuencias se observará un lóbulo central (fondo DC) y dos lóbulos laterales. Se aplica una ventana o filtro pasa-banda sobre \textit{solo uno} de los lóbulos laterales (por ejemplo $C(f, y)$ aislando $c(x,y)e^{i2\pi f_0 x}$).
+			\item \textbf{Traslación:} Desplazar el lóbulo lateral filtrado de regreso al origen de coordenadas espectrales. Esto elimina matemáticamente la frecuencia espacial portadora ($f_0$).
+			\item Aplicar la \textbf{Transformada Inversa de Fourier 2D} (IFFT2D) sobre este lóbulo desplazado, lo cual produce un arreglo de números complejos en el dominio espacial.
+			\item Calcular la \textbf{fase envuelta} para cada píxel aplicando la función arcotangente del cociente entre la parte imaginaria y la parte real de los números complejos resultantes: $\phi(x,y) = \arctan\left(\frac{\text{Im}}{\text{Re}}\right)$. El resultado estará acotado en el intervalo $[-\pi, \pi]$.
+		\end{enumerate}
+		
+		\vspace{0.5cm}
+		\item Deduzca la expresión para encontrar el desplazamiento $dz = \frac{\lambda \phi}{2\pi (\cos \Omega_1+1)}$
+		
+A partir de la geometría de los vectores de iluminación ($\vec{K}_i$) y observación ($\vec{K}_o$), considerando el desplazamiento $d_z$ entre los estados inicial ($P_1$) y deformado ($P_2$), se construyen los siguientes triángulos para determinar la diferencia de camino óptico (OPD).
+
+\vspace{0.5cm}
+
+\begin{figure}[h!]
+	\centering
+	\begin{minipage}{0.45\textwidth}
+		\centering
+		\textbf{Triángulo de Iluminación} \\
+		\vspace{0.4cm}
+		\begin{tikzpicture}[scale=1.3]
+			\coordinate (P1) at (0,0);
+			\coordinate (P2) at (4,0);
+			\def\angle{55} % Ángulo Omega_1
+			% Proyección ortogonal para formar el triángulo rectángulo
+			\coordinate (I) at (\angle:{4*cos(\angle)}); 
+			
+			% Líneas del triángulo
+			\draw[thick, green!50!black] (P1) -- (P2) node[midway, below, text=black] {$d_z$};
+			\draw[thick, green!50!black, ->] (P1) -- (I) node[midway, above left, text=black] {$\bar{I}$};
+			\draw[thick, green!50!black] (P2) -- (I);
+			
+			% Símbolo de ángulo recto
+			\coordinate (sq1) at ($(I) + (\angle-180:0.2)$);
+			\coordinate (sq2) at ($(sq1) + (\angle-90:0.2)$);
+			\coordinate (sq3) at ($(I) + (\angle-90:0.2)$);
+			\draw (I) -- (sq1) -- (sq2) -- (sq3) -- cycle;
+			
+			% Puntos
+			\fill (P1) circle (1.5pt) node[below left] {$\mathbf{P_1}$};
+			\fill (P2) circle (1.5pt) node[below right] {$\mathbf{P_2}$};
+			
+			% Arco de ángulo Omega_1
+			\draw (0.8,0) arc (0:\angle:0.8);
+			\node at (\angle/2:1.1) {$\Omega_1$};
+		\end{tikzpicture}
+		
+		\vspace{0.5cm}
+		\Large
+		\[ \cos\Omega_1 = \frac{\bar{I}}{d_z} \]
+		\normalsize
+	\end{minipage}
+	\hfill
+	\begin{minipage}{0.45\textwidth}
+		\centering
+		\textbf{Triángulo de Observación} \\
+		\vspace{0.4cm}
+		\begin{tikzpicture}[scale=1.3]
+			\coordinate (P1) at (0,0);
+			\coordinate (P2) at (4,0);
+			\def\angleObs{-30} % Ángulo Omega_2
+			\coordinate (O) at (\angleObs:{4*cos(\angleObs)});
+			
+			% Líneas del triángulo
+			\draw[thick, green!50!black] (P1) -- (P2) node[midway, above, text=black] {$d_z$};
+			\draw[thick, green!50!black, ->] (P1) -- (O) node[midway, below left, text=black] {$\mathbf{O}$};
+			\draw[thick, green!50!black] (P2) -- (O);
+			
+			% Símbolo de ángulo recto
+			\coordinate (sq1) at ($(O) + (\angleObs+180:0.2)$);
+			\coordinate (sq2) at ($(sq1) + (\angleObs+90:0.2)$);
+			\coordinate (sq3) at ($(O) + (\angleObs+90:0.2)$);
+			\draw (O) -- (sq1) -- (sq2) -- (sq3) -- cycle;
+			
+			% Puntos
+			\fill (P1) circle (1.5pt) node[left] {$\mathbf{P_1}$};
+			\fill (P2) circle (1.5pt) node[right] {$\mathbf{P_2}$};
+			
+			% Arco de ángulo Omega_2
+			\draw (1.2,0) arc (0:\angleObs:1.2);
+			\node at (\angleObs/2:1.5) {$\Omega_2$};
+		\end{tikzpicture}
+		
+		\vspace{0.5cm}
+		\Large
+		\[ \cos\Omega_2 = \frac{-\bar{O}}{d_z} \]
+		\normalsize
+	\end{minipage}
+\end{figure}
+
+\vspace{0.3cm}
+\noindent La diferencia de camino óptico ($OPD$) se define geométricamente como la diferencia entre la contribución del vector de iluminación y el de observación:
+\[ OPD = \bar{I} - \bar{O} \]
+
+\noindent Despejando $\bar{I}$ y $\bar{O}$ de las relaciones trigonométricas obtenidas de los triángulos:
+\begin{align*}
+	\bar{I} &= d_z \cos\Omega_1 \\
+	\bar{O} &= -d_z \cos\Omega_2
+\end{align*}
+
+\noindent Sustituyendo estas componentes en la ecuación del OPD:
+\[ OPD = d_z \cos\Omega_1 - (-d_z \cos\Omega_2) \]
+\[ OPD = d_z (\cos\Omega_1 + \cos\Omega_2) \]
+
+\noindent Para un interferómetro fuera del plano estándar, el vector de observación $\vec{K}_o$ es normal a la superficie, lo que implica que $\Omega_2 = 0^\circ$. Dado que $\cos(0) = 1$, la ecuación se reduce a:
+\[ OPD = d_z (\cos\Omega_1 + 1) \]
+
+\noindent La fase óptica $\varphi$ está directamente relacionada con la diferencia de camino óptico mediante el número de onda $k = \frac{2\pi}{\lambda}$:
+\[ \varphi = k \cdot OPD \]
+\[ \varphi = \frac{2\pi}{\lambda} d_z (\cos\Omega_1 + 1) \]
+
+\noindent Finalmente, despejando el desplazamiento $d_z$, llegamos a la expresión principal mostrada en la diapositiva:
+\[ d_z = \frac{\lambda \varphi}{2\pi (\cos\Omega_1 + 1)} \]
+		
+	\end{enumerate}
+	
+\end{document}
