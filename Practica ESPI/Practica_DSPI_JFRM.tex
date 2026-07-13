@@ -47,7 +47,7 @@
 	\end{center}
 	
 	\noindent
-	Esta práctica explica el concepto de interferencia entre dos hologramas digitales y su potencial para hacer mediciones no invasivas. En particular, se estudia la resonancia de una muestra metálica mediante la implementación de un arreglo interferométrico ESPI (Electrónica Speckle Pattern Interferometry). Se miden distintas audio-frecuencias a las que el metal alcanza su máxima deformación (modos de vibración) empleando una excitación acústica. A través de la correlación de hologramas en tiempo cuasi real, se logran observar los patrones de franjas que caracterizan cualitativa y cuantitativamente estos desplazamientos.
+	En este trabajo se aplicó la interferometría electrónica de patrones de moteado (ESPI) para el análisis óptico no destructivo de una placa de aluminio sujeta por todos sus bordes. Mediante una excitación acústica continua (empleando un barrido de 100 Hz a 1200 Hz a 5 V) y el uso de un láser Nd:YAG, se indujeron y registraron los desplazamientos superficiales de la muestra. Las imágenes se procesaron en tiempo cuasi-real utilizando un software propio desarrollado en Python, el cual se basa en la substracción digital de hologramas de referencia estáticos y dinámicos. Se lograron caracterizar exitosamente dos modos de resonancia: uno fundamental a 500 Hz (un lóbulo central) y un segundo modo con una línea nodal a 1100 Hz, demostrando la eficacia y alta sensibilidad de esta técnica de campo completo.
 	
 	\begin{multicols}{2}
 		
@@ -69,9 +69,8 @@
 			\item Laser verde Nd: YAG
 			\item Cámara CCD
 			\item 2 Cubos divisor de haz
-			\item 2 Fibras ópticas mono-modales
+			\item 1 Fibra óptica mono-modales
 			\item 2 Lentes
-			\item 2 Objetivos de microscopio con monturas de ajuste XYZ
 			\item Diafragma de iris
 			\item Objeto de prueba
 			\item Monturas mecánicas para las componentes
@@ -82,16 +81,14 @@
 		
 		\section*{Procedimiento}
 		
-		\textbf{EXPERIMENTO 1.} Arme el arreglo experimental (interferómetro fuera de plano). Use un programa especial para correlacionar hologramas y asi encontrar los patrones de vibraciones del objeto de prueba.
-		
 		\begin{enumerate}[i)]
-			\item Primeramente, realice el enfoque nítidamente del objeto de prueba con luz blanca.
-			\item Obtenga patrones de franjas para una placa de aluminio sometida primero a una carga estática y luego a una onda senoidal.
-			\item Para el objeto de prueba, realice el barrido de la frecuencia de excitación de 100Hz a 15 kHz aplicando un estímulo acústico (onda senoidal).
-			\item Con ayuda del programa, busque las regiones de alta respuesta (donde resalten los modos de vibración) y encuentre las bandas de frecuencia locales para la máxima densidad de franjas. El programa graba una imagen inicial (holograma) o imagen de referencia de la muestra bajo estudio que es comparada con las imágenes subsecuentes en distintas posiciones. La comparación es usualmente hecha por la substracción de las imágenes subsecuentes con la imagen inicial, tomada como referencia. El resultado, mostrado en el monitor en forma de patrones de interferencia, caracteriza la posición del objeto, i.e., la franjas describen el desplazamiento del objeto.
-			\item Una vez identificadas las regiones de alta respuesta, escoja al menos 3 modos de vibración para la muestra y complete la tabla 1. Los patrones de vibración muestran el comportamiento del objeto en condiciones normales sujeto a un estímulo acústico.
-			\item Grabe una serie de hologramas consecutivos para cada modo de vibración elegido.
-			\item Escriba un programa que lea los hologramas y los compare mediante la substracción de los mismos y presente los patrones de franjas de interferencia resultantes.
+			\item Colocamos el objeto de prueba (placa de aluminio) asegurando que quede sujeto mecánicamente de forma completa por todos sus bordes.
+			\item Configure la trayectoria óptica del sistema: utilice espejos planos para direccionar la luz de iluminación hacia la superficie del objeto, y emplee una fibra óptica mono-modal para llevar el haz de referencia directamente hacia el divisor de haz frente a la cámara CCD.
+			\item Realice el enfoque nítidamente del objeto de prueba con luz blanca.
+			\item Con la bocina y el amplificador configurado a $5\text{ V}$, realice un barrido de la frecuencia de excitación acústica (onda senoidal) partiendo desde los $100\text{ Hz}$ hasta las $1200\text{ Hz}$.
+			\item Utilicé un software de desarrollo propio programado en Python para la adquisición de imágenes. El programa graba una imagen inicial (holograma) o imagen de referencia de la muestra estática, la cual es comparada algorítmicamente con las imágenes subsecuentes correspondientes a los distintos niveles de excitación.
+			\item La comparación geométrica es realizada en tiempo cuasi-real mediante la substracción digital de las imágenes subsecuentes con la imagen inicial. El resultado se despliega en el monitor en forma de patrones de interferencia, donde las franjas describen el desplazamiento local del objeto.
+			\item Busque las regiones de alta respuesta y registre al menos 2 modos de vibración identificables completando la tabla correspondiente.
 		\end{enumerate}
 		
 		\section*{Resultados y Análisis}
@@ -101,26 +98,53 @@
 			\caption{Resultados}
 			\vspace{0.3cm}
 			\resizebox{\columnwidth}{!}{%
-				\begin{tabular}{|c|c|c|c|}
+				\begin{tabular}{|m{1.5cm}|m{4.5cm}|m{3cm}|m{4cm}|}
 					\hline
 					\multicolumn{4}{|c|}{\textbf{Patrones de resonancia encontrados (Modos)}} \\
 					\hline
-					\textbf{Modo} & \textbf{Patrón de intensidad} & \textbf{Frecuencia y voltaje} & \textbf{Observaciones} \\
+					\centering \textbf{Modo} & \centering \textbf{Patrón de intensidad} & \centering \textbf{Frecuencia y voltaje} & \centering \textbf{Observaciones} \arraybackslash \\
 					\hline
-					& & & \\[1.2cm] \hline
-					& & & \\[1.2cm] \hline
-					& & & \\[1.2cm] \hline
+					Modo 1 & Un lóbulo central (vientre único de vibración). & 500 Hz, 5 V & Máxima deformación concentrada en el centro de la muestra. \\ \hline
+					Modo 2 & Dos lóbulos distintos separados por una línea nodal. & 1100 Hz, 5 V & Se observa una franja oscura estacionaria donde la placa no presenta desplazamiento. \\ \hline
 				\end{tabular}%
 			}
 		\end{table}
 		
+		\vspace{0.5cm}
+		
+		\begin{figure}[H]
+			\centering
+			\includegraphics[width=\linewidth]{PriHol.png}
+			\caption{Primeros Hologramas. Patrones de franjas resultantes de la diferencia de fase al comparar el estado estático de referencia inicial sin movimiento frente a los estados dinámicos sujetos a estimulación acústica.}
+			\label{fig:primeros_hologramas}
+		\end{figure}
+		
+		\begin{figure}[H]
+			\centering
+			\includegraphics[width=\linewidth]{SegHolo.png}
+			\caption{Segundos Hologramas. Modos de vibración evidenciados mediante el estado diferencial de dos imágenes, contrastando la referencia con la muestra excitada en distintas frecuencias.}
+			\label{fig:segundos_hologramas}
+		\end{figure}
+		
 		\section*{Cuestionario}
 		\begin{enumerate}
-			\item A parte de ESPI, mencione y describa brevemente otras técnicas de medición no invasivas.
-			\item ¿A qué se refiere cuando se habla de obtener la fase de un objeto deformado?
-			\item Desarrolle el método que usó para obtener la fase del objeto deformado a partir del patrón de franjas. Mencione métodos alternos.
-			\item ¿Qué consideraciones se deben tener para que exista condición de interferencia entre un holograma del objeto en su posición inicial o en referencia y un holograma del objeto deformado? Suponga que estos hologramas son dos patrones de moteado vistos en práctica.
+			\item \textbf{A parte de ESPI, mencione y describa brevemente otras técnicas de medición no invasivas.}\\
+			La holografía tradicional utiliza el mismo principio de superposición de ondas para registrar la interferencia en un medio fotosensible. La perfilometría de Moiré proyecta rejillas periódicas sobre un objeto tridimensional para medir contornos a partir de las deformaciones geométricas de las líneas. Otra técnica es la Tomografía de Coherencia Óptica (OCT), la cual emplea interferometría de baja coherencia para obtener secciones transversales tomográficas con resoluciones en la escala micrométrica.
+			
+			\item \textbf{¿A qué se refiere cuando se habla de obtener la fase de un objeto deformado?}\\
+			Se refiere a aislar y cuantificar el término de fase óptica $\phi$ originado en la ecuación de interferencia. Esta fase está matemáticamente vinculada a la diferencia de camino óptico causada por el desplazamiento microscópico de la superficie bajo estrés. Al extraer esta variable, se puede calcular la magnitud exacta del desplazamiento en el orden de sub-micras o micras, posibilitando la reconstrucción topográfica.
+			
+			\item \textbf{Desarrolle el método que usó para obtener la fase del objeto deformado a partir del patrón de franjas. Mencione métodos alternos.}\\
+			El método principal utilizado fue la correlación por substracción digital en tiempo cuasi-real mediante un script de Python. Se requieren de forma estricta dos imágenes para lograr el estado diferencial: una imagen inicial sin movimiento (referencia) y otra imagen con movimiento. Al restar el valor de intensidad píxel a píxel y rectificar el resultado de forma absoluta, se suprime la iluminación de fondo y el ruido, haciendo evidentes las franjas de correlación que codifican la deformación geométrica. Como técnica alterna, se encuentra el método de Transformada de Fourier espacial, para el cual también se necesitan estrictamente dos imágenes, una de inicio sin movimiento y otra con movimiento, aislando las componentes frecuenciales deseadas en el dominio recíproco. Otro método alterno es el \textit{Phase Shifting} o desplazamiento de fase temporal, que introduce variaciones controladas (e.g., desplazamientos piezoeléctricos de $\pi/2$) en el haz de referencia para resolver sistemas de ecuaciones que despejan directamente la fase en cada punto.
+			
+			\item \textbf{¿Qué consideraciones se deben tener para que exista condición de interferencia entre un holograma del objeto en su posición inicial o en referencia y un holograma del objeto deformado? Suponga que estos hologramas son dos patrones de moteado vistos en práctica.}\\
+			En primer lugar, se requiere un aislamiento mecánico superlativo. Si los elementos ópticos (como espejos o acoplamientos de fibra) sufren vibraciones espurias entre la toma de los dos estados, la correlación de fase se destruye. En segundo lugar, el desplazamiento de la placa bajo prueba no puede exceder el tamaño promedio del grano de moteado (\textit{speckle size}); si la superficie se traslada macroscópicamente más allá de esta dimensión a nivel del sensor de la cámara CCD, existirá decorrelación espacial y el patrón de interferencia desaparecerá por completo.
 		\end{enumerate}
+		
+		\section*{Conclusiones}
+		La implementación de la técnica de interferometría electrónica de patrones de moteado (ESPI) permitió caracterizar exitosamente y de forma no invasiva los modos de vibración de una placa de aluminio. Las condiciones de frontera jugaron un papel crucial en los resultados físicos; al sujetar mecánicamente la placa por completo en todos sus bordes, la deformación acústica fue obligada a concentrarse. Esto se verificó empíricamente al observar un único vientre de vibración a los $500\text{ Hz}$ y la conformación de un segundo modo a los $1100\text{ Hz}$, separado por una línea nodal definida donde el desplazamiento de fase fue nulo.
+		
+		Asimismo, el diseño y desarrollo del software en Python demostró ser una herramienta altamente eficiente para el procesamiento interferométrico. La metrología de campo completo moderno depende intrínsecamente tanto del rigor en la alineación instrumental —como el confinamiento de la referencia en fibras mono-modales— como de la capacidad computacional para adquirir y calcular de inmediato el diferencial estático-dinámico de las imágenes, confirmando la sensibilidad extrema del sistema frente a alteraciones del orden de la longitud de onda de iluminación.
 		
 		\section*{Bibliografía}
 		\begin{enumerate}
