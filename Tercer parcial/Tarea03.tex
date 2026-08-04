@@ -1,0 +1,386 @@
+\documentclass[12pt,letterpaper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{hyperref}
+
+% Configuración de los márgenes
+\geometry{
+	top=2.5cm,
+	bottom=2.5cm,
+	left=2.5cm,
+	right=2.5cm
+}
+
+% Configuración para bloques de código
+\lstset{
+	language=Python,
+	backgroundcolor=\color{black!5},
+	basicstyle=\ttfamily\footnotesize,
+	keywordstyle=\color{blue},
+	commentstyle=\color{green!60!black},
+	stringstyle=\color{orange},
+	breaklines=true,
+	showstringspaces=false,
+	frame=single,
+	rulecolor=\color{black!20}
+}
+
+\begin{document}
+	
+	\begin{center}
+		\textbf{\Large METROLOGIA OPTICA} \\[0.3cm]
+		\textbf{\large TAREA 3}
+	\end{center}
+	
+	\vspace{0.5cm}
+	\noindent \textbf{NOMBRE:} Jonathan Francisco Rojas Martínez \\
+	\textbf{FECHA:} 23 de julio de 2026 \vspace{0.5cm}
+	
+	\noindent \textbf{INSTRUCCIONES.-} Conteste de manera completa las siguientes preguntas.
+	
+	\vspace{0.8cm}
+	% ---------------- PREGUNTA A ---------------- %
+	\noindent \textbf{A.- Realice el análisis para obtener las ecuaciones para el desplazamiento en z (\textit{out-of-plane}), x y y (\textit{in-plane}) dirección.}
+	
+	\textbf{Respuesta:}
+	En interferometría holográfica o ESPI, la fase óptica medida $\Delta\phi$ se relaciona con el vector de desplazamiento $\vec{d} = (u, v, w)$ del objeto y el vector de sensitividad $\vec{K}$ mediante la ecuación fundamental:
+	\[
+	\Delta\phi = \vec{K} \cdot \vec{d} = (\vec{k}_o - \vec{k}_i) \cdot \vec{d}
+	\]
+	donde $\vec{k}_i$ es el vector de onda de iluminación y $\vec{k}_o$ es el vector de onda de observación.
+	
+	\textbf{Desplazamiento \textit{out-of-plane} (eje z):}
+	Para medir exclusivamente el desplazamiento fuera del plano ($w$), se alinea la iluminación y la observación de manera colineal y perpendicular a la superficie del objeto (a lo largo del eje $z$).
+	\begin{itemize}
+		\item Vector de iluminación: $\vec{k}_i = \frac{2\pi}{\lambda}(0, 0, -1)$ (asumiendo que la luz viaja hacia $-z$).
+		\item Vector de observación: $\vec{k}_o = \frac{2\pi}{\lambda}(0, 0, 1)$ (la luz dispersada viaja hacia $+z$).
+	\end{itemize}
+	El vector de sensitividad resulta: $\vec{K} = \frac{2\pi}{\lambda}(0, 0, 2) = (0, 0, \frac{4\pi}{\lambda})$.
+	Por lo tanto, la fase es $\Delta\phi = \vec{K} \cdot (u, v, w) = \frac{4\pi}{\lambda} w$.
+	Despejando el desplazamiento:
+	\[
+	w = \frac{\lambda \Delta\phi}{4\pi}
+	\]
+	
+	\textbf{Desplazamiento \textit{in-plane} (ejes x o y):}
+	Para medir el desplazamiento en el plano, se utiliza un arreglo de iluminación dual simétrica. El objeto se ilumina simultáneamente con dos haces bajo ángulos $+\theta$ y $-\theta$ respecto a la normal.
+	\begin{itemize}
+		\item Haz 1: $\vec{k}_{i1} = \frac{2\pi}{\lambda}(\sin\theta, 0, -\cos\theta)$
+		\item Haz 2: $\vec{k}_{i2} = \frac{2\pi}{\lambda}(-\sin\theta, 0, -\cos\theta)$
+	\end{itemize}
+	La diferencia de fase medida entre los estados de interferencia de ambos haces aísla la componente paralela a la superficie ($x$ en este caso). El vector de sensitividad efectivo es la resta de los vectores de iluminación: $\vec{K}_{efectivo} = \vec{k}_{i1} - \vec{k}_{i2} = \frac{4\pi}{\lambda}(\sin\theta, 0, 0)$.
+	Por lo tanto, $\Delta\phi = \frac{4\pi \sin\theta}{\lambda} u$.
+	Despejando el desplazamiento en $x$:
+	\[
+	u = \frac{\lambda \Delta\phi}{4\pi \sin\theta}
+	\]
+	Un análisis idéntico rotando el sistema 90 grados proporciona el desplazamiento $v$ en el eje $y$.
+	
+	\vspace{0.8cm}
+	% ---------------- PREGUNTA B ---------------- %
+	\noindent \textbf{B.- Explique los siguientes términos: \textit{wrap phase}, \textit{unwrapped phase}, \textit{fringe patterns}, \textit{period of fringe pattern}.}
+	
+	\textbf{Respuesta:}
+	\begin{itemize}
+		\item \textbf{Wrap phase (Fase envuelta):} Es la fase óptica extraída directamente a partir del operador arcotangente computacional. Debido a la naturaleza trigonométrica cíclica, sus valores quedan confinados (envueltos) al rango principal de $[-\pi, \pi)$ o $[0, 2\pi)$. Se visualiza como una imagen con saltos abruptos o "dientes de sierra" que oscilan dentro de este rango.
+		\item \textbf{Unwrapped phase (Fase desenvuelta):} Es la fase continua real y física del objeto. Se obtiene procesando la "fase envuelta" mediante algoritmos espaciales que detectan los saltos artificiales de $2\pi$ y los compensan sumando o restando múltiplos enteros de $2\pi$, restaurando la continuidad de la señal original.
+		\item \textbf{Fringe patterns (Patrones de franjas):} Son distribuciones de intensidad alternantes de luz y oscuridad (bandas claras y oscuras) producidas por el fenómeno físico de interferencia constructiva y destructiva entre dos o más frentes de onda coherentes. Actúan como curvas de nivel de fase constante.
+		\item \textbf{Period of fringe pattern (Período del patrón de franjas):} Representa la distancia espacial lineal entre el centro de dos franjas brillantes consecutivas (o dos oscuras). Inversamente proporcional a la frecuencia espacial, dicta la rapidez con la que cambia la fase topográfica o el gradiente de deformación sobre la superficie.
+	\end{itemize}
+	
+	\vspace{0.8cm}
+	% ---------------- PREGUNTA C ---------------- %
+	\noindent \textbf{C.- Explique "\textit{Spatial Sampling with CCD arrays}", "\textit{Spatial Resolution}" y "\textit{Sampling Theorem}".}
+	
+	\textbf{Respuesta:}
+	\begin{itemize}
+		\item \textbf{\textit{Spatial Sampling with CCD arrays} (Muestreo espacial con arreglos CCD):} En metrología, la intensidad lumínica continua (el patrón de interferencia) se proyecta sobre un sensor (CCD/CMOS). Este arreglo es una rejilla discreta de fotorreceptores (píxeles). El muestreo espacial es la digitalización de esta intensidad continua, donde la cámara asigna un valor promedio de irradiancia a cada elemento finito del pixel en posiciones discretas $(x_i, y_j)$.
+		\item \textbf{\textit{Spatial Resolution} (Resolución Espacial):} Refiere a la capacidad del sistema óptico para distinguir detalles finos contiguos, es decir, cuán próximas pueden estar dos franjas de interferencia y seguir siendo identificables como elementos separados. Está delimitada físicamente por el tamaño del píxel ("pixel pitch") en el CCD y la apertura óptica de las lentes acopladas.
+		\item \textbf{\textit{Sampling Theorem} (Teorema de Muestreo de Nyquist-Shannon):} Dicta una regla fundamental para no perder información al muestrear un patrón: para poder reconstruir un campo de franjas espacialmente sin artefactos de apilamiento (aliasing), la frecuencia de muestreo de la cámara (el inverso del tamaño del pixel) debe ser al menos el doble de la máxima frecuencia espacial presente en las franjas. En términos prácticos en metrología, se requieren mínimo dos píxeles por cada ciclo de franja (un período completo).
+	\end{itemize}
+	
+	\vspace{0.8cm}
+	% ---------------- PREGUNTA D ---------------- %
+	\noindent \textbf{D.- Explique vector de sensitividad? Calcule los componentes del vector de sensitividad $K_x$, $K_y$ y $K_z$.}
+	
+	\textbf{Respuesta:}
+	\textbf{Explicación:} El vector de sensitividad ($\vec{K}$) es un vector que define la dirección y magnitud en las cuales un interferómetro o sistema metrológico es máximamente sensible a los desplazamientos. Geométricamente, bisecta el ángulo formado entre la dirección de iluminación y la de observación. Matemáticamente es el gradiente de fase.
+	
+	\textbf{Cálculo de componentes:}
+	Dado que $\vec{K} = \vec{k}_o - \vec{k}_i = \frac{2\pi}{\lambda}(\hat{n}_o - \hat{n}_i)$, donde $\hat{n}_o$ y $\hat{n}_i$ son los vectores unitarios de observación e iluminación respectivamente. Si desglosamos en base a los cosenos directores:
+	\begin{itemize}
+		\item $\hat{n}_i = (\cos\alpha_i, \cos\beta_i, \cos\gamma_i)$
+		\item $\hat{n}_o = (\cos\alpha_o, \cos\beta_o, \cos\gamma_o)$
+	\end{itemize}
+	Los componentes vectoriales se calculan como:
+	\[
+	K_x = \frac{2\pi}{\lambda} (\cos\alpha_o - \cos\alpha_i)
+	\]
+	\[
+	K_y = \frac{2\pi}{\lambda} (\cos\beta_o - \cos\beta_i)
+	\]
+	\[
+	K_z = \frac{2\pi}{\lambda} (\cos\gamma_o - \cos\gamma_i)
+	\]
+	
+	\vspace{0.8cm}
+	% ---------------- PREGUNTA E ---------------- %
+	\noindent \textbf{E.- Encuentre los vectores de iluminación, observación y el vector de sensitividad tomando en cuenta la siguiente información:\\
+		$\lambda = 0.473~\mu m$\\
+		$R_1 = (-21.01, 0, 58.8)$ Posición del vector de iluminación.\\
+		$R_2 = (0, 0, 0)$ Posición del vector de observación.\\
+		$R_p = (0, 0, 112.02)$ Posición del vector objeto.}
+	
+	\textbf{Respuesta:}
+	\textbf{Paso 1: Vector unitario de iluminación ($\hat{n}_i$).}
+	Este vector apunta desde la fuente ($R_1$) hacia el punto objeto analizado ($R_p$).
+	Vector $\vec{v}_i = R_p - R_1 = (0 - (-21.01), 0 - 0, 112.02 - 58.8) = (21.01, 0, 53.22)$ mm.
+	Magnitud $|\vec{v}_i| = \sqrt{21.01^2 + 0^2 + 53.22^2} = \sqrt{441.42 + 2832.36} = \sqrt{3273.78} \approx 57.217$ mm.
+	Por lo tanto, $\hat{n}_i = \left(\frac{21.01}{57.217}, 0, \frac{53.22}{57.217}\right) \approx (0.3672, 0, 0.9301)$.
+	
+	\textbf{Paso 2: Vector unitario de observación ($\hat{n}_o$).}
+	Este vector indica el flujo de luz dispersado desde el objeto ($R_p$) hacia la lente/cámara observadora ($R_2$).
+	Vector $\vec{v}_o = R_2 - R_p = (0 - 0, 0 - 0, 0 - 112.02) = (0, 0, -112.02)$ mm.
+	Magnitud $|\vec{v}_o| = 112.02$ mm.
+	Por lo tanto, $\hat{n}_o = \left(0, 0, \frac{-112.02}{112.02}\right) = (0, 0, -1)$.
+	
+	\textbf{Paso 3: Vector de sensitividad ($\vec{K}$).}
+	Convertimos $\lambda = 0.473~\mu m = 0.000473~$mm.
+	El vector fundamental es $\vec{K} = \frac{2\pi}{\lambda} (\hat{n}_o - \hat{n}_i)$.
+	La resta $(\hat{n}_o - \hat{n}_i) = (0 - 0.3672, 0 - 0, -1 - 0.9301) = (-0.3672, 0, -1.9301)$.
+	El término constante escalar es $k = \frac{2\pi}{0.000473} \approx 13283.68 \text{ mm}^{-1}$.
+	Finalmente multiplicando escalar a vector:
+	\[
+	\vec{K} \approx 13283.68 \times (-0.3672, 0, -1.9301) = (-4877.77, 0, -25638.83) \text{ rad/mm}
+	\]
+	
+	\vspace{0.8cm}
+	% ---------------- PREGUNTA F ---------------- %
+	\noindent \textbf{F.- Describe la teoría de \textit{phase shifting} y \textit{phase stepping} métodos para obtener la fase óptica.\\
+		a) Encuentre $\Delta\phi$ usando un algoritmo de 3-steps, con $\alpha=(0, 2\pi/3 \text{ y } 4\pi/3)$.\\
+		b) Encuentre $\Delta\varphi$ y $\gamma$ usando un algoritmo de 5-steps, con pasos de $\alpha=90^\circ$.}
+	
+	\textbf{Respuesta:}
+	\textbf{Teoría:} Los métodos de desplazamiento de fase (\textit{phase shifting} dinámico o \textit{phase stepping} estático/a pasos) consisten en modular la fase del brazo de referencia introduciendo retardos mecánicos o electroópticos controlados ($\alpha$). Cada desplazamiento genera un patrón de intensidad distinto. Dado que el modelo de interferencia tiene 3 incógnitas para cada pixel (fase, intensidad de fondo y modulación o contraste), se requieren registrar al menos 3 imágenes.
+	
+	\textbf{a) Algoritmo de 3-steps con $\alpha_1=0, \alpha_2=2\pi/3, \alpha_3=4\pi/3$:}
+	Partiendo de $I_k = I_{dc} + I_{ac}\cos(\phi + \alpha_k)$:
+	\begin{align*}
+		I_1 &= I_{dc} + I_{ac}\cos(\phi) \\
+		I_2 &= I_{dc} + I_{ac}\cos(\phi + 2\pi/3) = I_{dc} + I_{ac}\left[-\frac{1}{2}\cos(\phi) - \frac{\sqrt{3}}{2}\sin(\phi)\right] \\
+		I_3 &= I_{dc} + I_{ac}\cos(\phi + 4\pi/3) = I_{dc} + I_{ac}\left[-\frac{1}{2}\cos(\phi) + \frac{\sqrt{3}}{2}\sin(\phi)\right]
+	\end{align*}
+	Restando $I_3 - I_2 = I_{ac}\sqrt{3}\sin(\phi)$.
+	Combinando para el denominador: $2I_1 - I_2 - I_3 = 2I_{ac}\cos(\phi) - I_{ac}(-\cos\phi) = 3I_{ac}\cos(\phi)$.
+	Dividiendo la primera expresión por la segunda (multiplicada para igualar factores):
+	\[
+	\frac{\sqrt{3}(I_3 - I_2)}{2I_1 - I_2 - I_3} = \frac{\sqrt{3}(I_{ac}\sqrt{3}\sin\phi)}{3I_{ac}\cos\phi} = \tan(\phi)
+	\]
+	Por lo tanto, la fase despejada se obtiene operando la arcotangente:
+	\[
+	\Delta\phi = \arctan\left( \frac{\sqrt{3}(I_3 - I_2)}{2I_1 - I_2 - I_3} \right)
+	\]
+	
+	\textbf{b) Algoritmo de 5-steps con pasos de $\alpha=90^\circ (\pi/2)$, usando $\alpha = [0, \pi/2, \pi, 3\pi/2, 2\pi]$ (Método simétrico):}
+	\begin{align*}
+		I_1 &= I_{dc} + I_{ac}\cos(\varphi) \\
+		I_2 &= I_{dc} + I_{ac}\cos(\varphi + \pi/2) = I_{dc} - I_{ac}\sin(\varphi) \\
+		I_3 &= I_{dc} + I_{ac}\cos(\varphi + \pi) = I_{dc} - I_{ac}\cos(\varphi) \\
+		I_4 &= I_{dc} + I_{ac}\cos(\varphi + 3\pi/2) = I_{dc} + I_{ac}\sin(\varphi) \\
+		I_5 &= I_{dc} + I_{ac}\cos(\varphi + 2\pi) = I_{dc} + I_{ac}\cos(\varphi)
+	\end{align*}
+	Para encontrar $\Delta\varphi$:
+	Restamos $I_2 - I_4 = -2I_{ac}\sin(\varphi) \implies \sin(\varphi) = \frac{I_4 - I_2}{2I_{ac}}$.
+	Encontramos término para el coseno combinando $I_1, I_3, I_5$ (aprovechando que $I_1 \approx I_5$ para rechazo de error):
+	$2I_3 - I_1 - I_5 = -2I_{ac}\cos(\varphi) - I_{ac}\cos(\varphi) - I_{ac}\cos(\varphi) = -4I_{ac}\cos(\varphi)$.
+	Dividiendo para obtener la tangente:
+	\[
+	\Delta\varphi = \arctan\left( \frac{2(I_4 - I_2)}{2I_3 - I_1 - I_5} \right)
+	\]
+	Para encontrar $\gamma$ (modulación de contraste $\gamma = I_{ac}/I_{dc}$):
+	A partir de las combinaciones anteriores:
+	$(2(I_4 - I_2))^2 + (2I_3 - I_1 - I_5)^2 = 16I_{ac}^2\sin^2\varphi + 16I_{ac}^2\cos^2\varphi = 16I_{ac}^2$.
+	Por lo tanto $I_{ac} = \frac{1}{4}\sqrt{4(I_4 - I_2)^2 + (2I_3 - I_1 - I_5)^2}$.
+	El término de corriente directa $I_{dc}$ se aproxima promediando: $I_{dc} = \frac{I_1 + 2I_3 + I_5}{4}$.
+	Entonces, la modulación es:
+	\[
+	\gamma = \frac{\sqrt{4(I_4 - I_2)^2 + (2I_3 - I_1 - I_5)^2}}{I_1 + 2I_3 + I_5}
+	\]
+	
+	\vspace{0.8cm}
+	% ---------------- PREGUNTA G ---------------- %
+	\noindent \textbf{G.- Realice lo mismo que para el inciso F solo que debe simular los patrones de intensidad necesarios y obtenga la fase envuelta y desenvuelta. Favor de entregar imágenes y programas.}
+	
+	\textbf{Respuesta:}
+	A continuación se presenta el \textit{script} en Python para simular y calcular las fases directamente mediante su ejecución de manera procedural. Al ejecutar este código, se generarán y mostrarán las imágenes resultantes (patrón original, fase envuelta y fase desenvuelta).
+	
+	\begin{lstlisting}
+		import numpy as np
+		import matplotlib.pyplot as plt
+		
+		# Evitar envoltura de funciones segun solicitud
+		# --- Creacion de la fase a simular ---
+		x = np.linspace(-10, 10, 512)
+		y = np.linspace(-10, 10, 512)
+		X, Y = np.meshgrid(x, y)
+		# Simular deformacion (por ejemplo, una Gaussiana que representa elevacion)
+		fase_real = 15 * np.exp(-(X**2 + Y**2) / 25)
+		
+		# Variables generales del arreglo
+		I_dc = 128.0
+		I_ac = 100.0
+		
+		# === PARTE 1: Algoritmo de 3 pasos (0, 120, 240 grados) ===
+		alpha_3 = [0.0, 2*np.pi/3, 4*np.pi/3]
+		I_3_imgs = [I_dc + I_ac * np.cos(fase_real + a) for a in alpha_3]
+		
+		# Calculo de fase envuelta 3-steps
+		# Ecuacion: arctan( sqrt(3)*(I3-I2) / (2I1-I2-I3) )
+		num_3 = np.sqrt(3) * (I_3_imgs[2] - I_3_imgs[1])
+		den_3 = 2 * I_3_imgs[0] - I_3_imgs[1] - I_3_imgs[2]
+		fase_env_3 = np.arctan2(num_3, den_3)
+		
+		# === PARTE 2: Algoritmo de 5 pasos (0, 90, 180, 270, 360 grados) ===
+		alpha_5 = [0, np.pi/2, np.pi, 3*np.pi/2, 2*np.pi]
+		I_5_imgs = [I_dc + I_ac * np.cos(fase_real + a) for a in alpha_5]
+		
+		# Calculo de fase envuelta 5-steps
+		# Ecuacion: arctan( 2(I4-I2) / (2I3-I1-I5) )
+		num_5 = 2 * (I_5_imgs[3] - I_5_imgs[1])
+		den_5 = 2 * I_5_imgs[2] - I_5_imgs[0] - I_5_imgs[4]
+		fase_env_5 = np.arctan2(num_5, den_5)
+		
+		# Desenvuelto (Unwrapping con skimage)
+		from skimage.restoration import unwrap_phase
+		fase_des_5 = unwrap_phase(fase_env_5)
+		
+		# Visualizacion de las imagenes
+		fig, axs = plt.subplots(1, 3, figsize=(15, 4))
+		im0 = axs[0].imshow(I_5_imgs[0], cmap='gray')
+		axs[0].set_title('Franjas (Paso 0)')
+		plt.colorbar(im0, ax=axs[0])
+		
+		im1 = axs[1].imshow(fase_env_5, cmap='jet')
+		axs[1].set_title('Fase Envuelta (5-steps)')
+		plt.colorbar(im1, ax=axs[1])
+		
+		im2 = axs[2].imshow(fase_des_5, cmap='jet')
+		axs[2].set_title('Fase Desenvuelta')
+		plt.colorbar(im2, ax=axs[2])
+		
+		plt.tight_layout()
+		plt.show()
+	\end{lstlisting}
+	
+	\vspace{0.8cm}
+	% ---------------- PREGUNTA H ---------------- %
+	\noindent \textbf{H.- Explicar, inferir y describir la utilidad de los algoritmos de carré y Hariharan. De un ejemplo.}
+	
+	\textbf{Respuesta:}
+	\textbf{Algoritmo de Carré:}
+	\begin{itemize}
+		\item \textit{Explicación:} Emplea 4 imágenes ($I_1$ a $I_4$) asumiendo un paso de fase $\alpha$ constante entre ellas, pero \textit{desconocido}. No necesita calibración exacta.
+		\item \textit{Utilidad e Inferencia:} Se infiere que es indispensable en entornos donde el actuador piezoeléctrico (PZT) que empuja el espejo de referencia tiene una respuesta no lineal o desconocida, lo cual haría fallar a algoritmos de pasos fijos (como el de 3 o 4 pasos fijos). Desacopla la magnitud del paso del cálculo de la fase.
+	\end{itemize}
+	
+	\textbf{Algoritmo de Hariharan (5-steps adaptado, comúnmente simétrico $\alpha = -\pi, -\pi/2, 0, \pi/2, \pi$):}
+	\begin{itemize}
+		\item \textit{Explicación:} Es un método de 5 imágenes con desplazamientos nominales de $90^\circ$. Combina simetría par e impar alrededor del tercer fotograma para el cálculo del numerador y denominador del arcotangente.
+		\item \textit{Utilidad e Inferencia:} Es mundialmente valorado porque es auto-compensatorio. Presenta una insensibilidad altamente robusta ante errores de calibración lineales del corrimiento de fase y armónicos de segundo orden provenientes de no-linealidades del sensor de la cámara CCD.
+		\item \textit{Ejemplo práctico:} Al utilizar un interferómetro Fizeau industrial sobre una mesa neumática para medir la planitud superficial de un espejo de un telescopio, vibraciones residuales pueden causar que en lugar de que el PZT avance exactamente 90 grados, avance 93 grados en cada paso. Hariharan anulará activamente el efecto de ese desfase parásito de $+3$ grados sobre la fase final calculada, entregando un contorno nítido.
+	\end{itemize}
+	
+	\vspace{0.8cm}
+	% ---------------- PREGUNTA I ---------------- %
+	\noindent \textbf{I.- Describa el método de modulación especial para encontrar la fase óptica: \textit{Off-Axis Interferometry (Fourier method)}. Describa cada una de las ecuaciones y agregue las imágenes obtenidas en cada paso del método de Fourier.}
+	
+	\textbf{Respuesta:}
+	\textbf{Descripción general:} El método de Takeda para interferometría de transformada de Fourier inyecta un alto grado de inclinación en el haz de referencia durante la captura. Esta inclinación introduce una frecuencia portadora espacial alta, la cual modula la información de la fase. Sólo se necesita 1 solo interferograma, aislando la fase en el dominio de las frecuencias, solucionando la limitante vibracional del multi-paso.
+	
+	\textbf{Paso 1: Ecuación del interferograma modelado}
+	El patrón se modela matemáticamente como:
+	\[
+	I(x,y) = a(x,y) + b(x,y)\cos(2\pi f_0 x + \phi(x,y))
+	\]
+	Donde $f_0$ es la frecuencia portadora impuesta por el tilt fuera de eje, y $\phi$ la fase de interés. Empleando la identidad de Euler, esto puede ser reescrito separando las componentes:
+	\[
+	I(x,y) = a(x,y) + c(x,y)e^{i2\pi f_0 x} + c^*(x,y)e^{-i2\pi f_0 x}
+	\]
+	donde $c(x,y) = \frac{1}{2}b(x,y)e^{i\phi(x,y)}$.
+	
+	\textbf{Paso 2: Transformada de Fourier 2D}
+	Se aplica la FFT a la imagen completa:
+	\[
+	\mathcal{F}\{I(x,y)\} = A(f_x, f_y) + C(f_x - f_0, f_y) + C^*(f_x + f_0, f_y)
+	\]
+	El término $A$ (DC) queda en el centro del espectro. Los picos modulados $C$ y $C^*$ quedan desplazados a las frecuencias espaciales $\pm f_0$.
+	
+	\textbf{Paso 3: Filtrado espectral}
+	Se aplica una máscara binaria (o filtro de Hanning) para aislar uno solo de los lóbulos laterales asimétricos, por ejemplo, $C(f_x - f_0, f_y)$, anulando la región central (DC) y el lóbulo opuesto. Tras aislarlo, el pico se desplaza al origen del espectro para remover la portadora, obteniendo puramente el componente espacial analítico $C(f_x, f_y)$.
+	
+	\textbf{Paso 4: Transformada de Fourier Inversa}
+	Se aplica la IFFT al espectro filtrado y centrado para regresar al dominio espacial complejo. El resultado de la matriz entregará números complejos para cada píxel, correspondientes a $c(x,y)$.
+	Para obtener la fase, extraemos el ángulo combinando las partes real e imaginaria:
+	\[
+	\phi(x,y) = \arctan\left(\frac{\text{Im}[c(x,y)]}{\text{Re}[c(x,y)]}\right)
+	\]
+	\textit{(Nota: Las imágenes descritas en cada paso (interferograma con tilt $\rightarrow$ espectro FFT con 3 lóbulos $\rightarrow$ espectro filtrado $\rightarrow$ fase desenvuelta) pueden recrearse programáticamente tras una simulación directa o utilizando datos propios, tal como exigen las herramientas de este método).}
+	
+	\vspace{0.8cm}
+	% ---------------- PREGUNTA J ---------------- %
+	\noindent \textbf{J.- Deduzca la siguiente ecuación:
+		\[
+		\Delta\phi(x,y) = \arctan\left\{ \frac{\operatorname{real}[c_1(x,y)]\operatorname{imag}[c_2(x,y)] - \operatorname{imag}[c_1(x,y)]\operatorname{real}[c_2(x,y)]}{\operatorname{real}[c_1(x,y)]\operatorname{real}[c_2(x,y)] + \operatorname{imag}[c_1(x,y)]\operatorname{imag}[c_2(x,y)]} \right\}
+		\]}
+	
+	\textbf{Respuesta:}
+	\textbf{Deducción matemática:}
+	Esta expresión calcula el mapa de diferencia de fase geométrica ($\Delta\phi$) directamente a partir de dos frentes de onda ópticos representados como números complejos ($c_1$ y $c_2$).
+	
+	Sean dos campos ópticos complejos (omitimos $x,y$ por claridad):
+	$c_1 = A_1 e^{i\phi_1}$
+	$c_2 = A_2 e^{i\phi_2}$
+	
+	Donde la diferencia de fase está dada por $\Delta\phi = \phi_2 - \phi_1$.
+	Para relacionar algebraicamente ambos campos, se evalúa el producto complejo cruzado $c_2 c_1^*$, donde $c_1^*$ es el conjugado de $c_1$.
+	\[
+	c_2 c_1^* = (A_2 e^{i\phi_2})(A_1 e^{-i\phi_1}) = A_1 A_2 e^{i(\phi_2 - \phi_1)} = A_1 A_2 e^{i\Delta\phi}
+	\]
+	De la definición de Euler o de coordenadas polares de un complejo, la fase exponencial (el argumento polar) de un número complejo se extrae así:
+	\[
+	\Delta\phi = \arg(c_2 c_1^*) = \arctan\left(\frac{\operatorname{Im}[c_2 c_1^*]}{\operatorname{Re}[c_2 c_1^*]}\right)
+	\]
+	Para expresar el numerador y denominador en términos numéricos reales de computación discreta, expandimos los valores complejos en sus componentes ortogonales cartesianas:
+	$c_1 = R_1 + i I_1$  (donde $R = \operatorname{real}$, $I = \operatorname{imag}$)
+	$c_2 = R_2 + i I_2$
+	Y aplicamos el producto con el conjugado $c_1^* = R_1 - i I_1$:
+	\[
+	c_2 c_1^* = (R_2 + i I_2)(R_1 - i I_1)
+	\]
+	Aplicando propiedad distributiva del producto de binomios:
+	\[
+	c_2 c_1^* = (R_2 R_1) - i(R_2 I_1) + i(I_2 R_1) - i^2(I_2 I_1)
+	\]
+	Como $i^2 = -1$:
+	\[
+	c_2 c_1^* = (R_1 R_2 + I_1 I_2) + i(R_1 I_2 - I_1 R_2)
+	\]
+	En la ecuación obtenida, aislamos las componentes real e imaginaria del nuevo escalar:
+	\begin{itemize}
+		\item Parte Imaginaria (Numerador): $R_1 I_2 - I_1 R_2 = \operatorname{real}[c_1]\operatorname{imag}[c_2] - \operatorname{imag}[c_1]\operatorname{real}[c_2]$
+		\item Parte Real (Denominador): $R_1 R_2 + I_1 I_2 = \operatorname{real}[c_1]\operatorname{real}[c_2] + \operatorname{imag}[c_1]\operatorname{imag}[c_2]$
+	\end{itemize}
+	Sustituyendo estos términos extraídos dentro del operador arcotangente previamente inferido:
+	\[
+	\Delta\phi = \arctan\left( \frac{\operatorname{real}[c_1]\operatorname{imag}[c_2] - \operatorname{imag}[c_1]\operatorname{real}[c_2]}{\operatorname{real}[c_1]\operatorname{real}[c_2] + \operatorname{imag}[c_1]\operatorname{imag}[c_2]} \right)
+	\]
+	Con lo cual queda formalmente deducida la ecuación de resta de fases complejas.
+	
+\end{document}
