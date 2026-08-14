@@ -1,0 +1,222 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,es-nodecimaldot]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{geometry}
+\usepackage{tikz}
+\usepackage{enumitem}
+\usetikzlibrary{shapes.geometric, arrows.meta, decorations.pathmorphing, positioning}
+\geometry{left=2.5cm, right=2.5cm, top=2.5cm, bottom=2.5cm}
+
+% Shorthand off for tikz to avoid babel conflict with > and < characters
+\usetikzlibrary{babel}
+
+\begin{document}
+	
+	\begin{center}
+		\textbf{METROLOGIA OPTICA} \\
+		\textbf{TAREA 5 y examen final.}
+	\end{center}
+	
+	\vspace{0.5cm}
+	\noindent
+	\textbf{NOMBRE: Jonathan Francisco Rojas Martínez}\\
+	\textbf{FECHA: \today}	
+	
+	\vspace{0.8cm}
+	
+	\noindent \textbf{INSTRUCCIONES.- Conteste de manera completa las siguientes preguntas.}
+	
+	\section{Explique los siguientes conceptos}
+	\begin{enumerate}[label=\alph*)]
+		\item \textbf{Holografía:} Es una técnica óptica de registro y reconstrucción de ondas tridimensionales. A diferencia de la fotografía convencional que solo captura la intensidad de la luz (amplitud), la holografía registra tanto la amplitud como la fase de la onda luminosa que proviene de un objeto, permitiendo reconstruir una imagen 3D exacta.
+		\item \textbf{Holograma:} Es el medio físico o digital (el patrón de interferencia) donde se almacena la información de la onda del objeto. Se forma por la interferencia de dos haces de luz coherente: un haz de referencia y un haz que se refleja o atraviesa el objeto.
+		\item \textbf{Holografía analógica y digital:} 
+		\begin{itemize}
+			\item \textit{Analógica:} Utiliza placas fotográficas de alta resolución o materiales fotosensibles para registrar el patrón de interferencia. Su reconstrucción se realiza iluminando físicamente la placa revelada con el haz de referencia original.
+			\item \textit{Digital:} El patrón de interferencia se captura utilizando un sensor optoelectrónico (CCD o CMOS). La reconstrucción se realiza numéricamente en una computadora simulando la propagación de la luz mediante algoritmos.
+		\end{itemize}
+		\item \textbf{Grabación y reconstrucción de un holograma:}
+		\begin{itemize}
+			\item \textit{Grabación:} Consiste en superponer una onda de referencia $R$ y una onda de objeto $O$ sobre un sensor. La intensidad es $I = |O + R|^2 = |O|^2 + |R|^2 + OR^* + O^*R$.
+			\item \textit{Reconstrucción:} Consiste en iluminar el holograma con una onda de lectura (usualmente $R$). El término $R(OR^*)$ difracta la luz reconstruyendo el frente de onda original (imagen virtual).
+		\end{itemize}
+	\end{enumerate}
+	
+	\section{Existen métodos numéricos para reconstruir un holograma, investigue cuales son y el principio de funcionamiento de ellos.}
+	\begin{itemize}
+		\item \textbf{Aproximación de Fresnel (Transformada Simple de Fourier):} Utiliza una única FFT. Asume la aproximación paraxial. El tamaño del píxel reconstruido depende de la distancia de propagación $z$.
+		\item \textbf{Método de Convolución (Espectro Angular):} No utiliza aproximación paraxial, exacto para distancias cortas. Aplica el teorema de convolución mediante dos FFT. El tamaño del píxel se mantiene constante en la reconstrucción.
+		\item \textbf{Desplazamiento de Fase (Phase-Shifting):} Permite aislar numéricamente el término de interferencia cruzada. Requiere grabar múltiples hologramas cambiando la fase del haz de referencia para eliminar el orden cero y la imagen gemela antes de propagar.
+	\end{itemize}
+	
+	\section{Deduzca la ecuación para la transformada discreta de Fresnel.}
+	Partimos de la integral de difracción de Fresnel:
+	\[ U(x,y) = \frac{e^{ikz}}{i\lambda z} \iint U_0(\xi, \eta) e^{i\frac{k}{2z} [(x-\xi)^2 + (y-\eta)^2]} d\xi d\eta \]
+	Expandiendo el término cuadrático y agrupando:
+	\[ U(x,y) = \frac{e^{ikz}}{i\lambda z} e^{i\frac{k}{2z}(x^2+y^2)} \iint \left[ U_0(\xi,\eta) e^{i\frac{k}{2z}(\xi^2+\eta^2)} \right] e^{-i\frac{k}{z}(x\xi + y\eta)} d\xi d\eta \]
+	Discretizando en un sensor de $N \times M$ píxeles, con pasos $\Delta \xi, \Delta \eta$ en el holograma y $\Delta x, \Delta y$ en la imagen, y aproximando por sumatoria:
+	\[ U(k',l') = C e^{i\frac{\pi}{\lambda z}(k'^2\Delta x^2 + l'^2\Delta y^2)} \sum_{m=0}^{N-1} \sum_{n=0}^{M-1} \left[ U_0(m,n) e^{i\frac{\pi}{\lambda z}(m^2\Delta \xi^2 + n^2\Delta \eta^2)} \right] e^{-i\frac{2\pi}{\lambda z}(k' m \Delta x \Delta \xi + l' n \Delta y \Delta \eta)} \]
+	Para aplicar la FFT, se debe cumplir la condición $\frac{\Delta x \Delta \xi}{\lambda z} = \frac{1}{N}$. Sustituyendo esto, obtenemos la Transformada Discreta:
+	\[ U(k',l') = C e^{i\frac{\pi}{\lambda z}(k'^2\Delta x^2 + l'^2\Delta y^2)} \cdot \text{FFT} \left\{ U_0(m,n) e^{i\frac{\pi}{\lambda z}(m^2\Delta \xi^2 + n^2\Delta \eta^2)} \right\} \]
+	
+	\section{Explique el efecto Talbot y sus aplicaciones.}
+	El efecto Talbot es un fenómeno de difracción de campo cercano (auto-imagen). Cuando una onda plana coherente ilumina una estructura periódica, la imagen exacta de la rejilla se repite por sí misma a ciertas distancias regulares a lo largo del eje óptico (planos de Talbot).
+	
+	\noindent \textbf{Aplicaciones:} Pruebas de lentes, sensores Shack-Hartmann, interferometría de Talbot-Lau, y litografía óptica.
+	
+	\section{Deduzca las siguientes ecuaciones (longitud de Talbot) y explíquelas:}
+	\begin{enumerate}[label=\alph*)]
+		\item $\displaystyle z_T = \frac{2a^2}{\lambda}$
+		
+		\textit{Deducción:} Propagando una rejilla de periodo $a$ con Fresnel, el desfase es $e^{-i \pi \lambda z (m/a)^2}$. Para la primera auto-imagen, el desfase del primer orden ($m=1$) debe ser $2\pi$. Entonces, $\pi \lambda z / a^2 = 2\pi \Rightarrow z_T = 2a^2/\lambda$.
+		
+		\textit{Explicación:} Es la distancia en la aproximación paraxial a la cual los órdenes de difracción se recombinan en fase.
+		
+		\item $\displaystyle z = \frac{a}{\pm \sqrt{1 - \frac{\lambda^2}{a^2}}}$
+		
+		\textit{Deducción:} Sin aproximación paraxial, la difracción se rige por $\sin\theta = \lambda/a$. Para que la luz del primer orden interfiera consigo misma, debe desplazarse transversalmente un periodo $a$. La distancia longitudinal geométrica es $z = a / \tan\theta$. Sabiendo que $\tan\theta = \sin\theta / \sqrt{1-\sin^2\theta}$, sustituimos y obtenemos la ecuación.
+		
+		\textit{Explicación:} Relación exacta no paraxial del camino óptico del primer orden de difracción.
+	\end{enumerate}
+	
+	\section{Describa completamente los siguientes temas:}
+	\begin{enumerate}[label=\alph*)]
+		\item \textbf{Luz Estructurada:} Método de visión 3D activo que proyecta un patrón de luz conocido sobre una escena para analizar su deformación y reconstruir la forma topográfica.
+		\item \textbf{Técnicas y aplicaciones:} Códigos binarios, Phase-Shifting y Speckle. Aplicaciones en control de calidad, biometría y digitalización 3D.
+		\item \textbf{Técnica de proyección de franjas:} Proyecta un patrón sinusoidal y captura varias imágenes desplazando la fase. Permite una medición densa y precisa de la altura topográfica.
+		\item \textbf{Técnica de moiré:} Superpone ópticamente dos patrones periódicos (proyectado y de referencia) generando un patrón de interferencia de baja frecuencia (franjas de Moiré) que actúan como curvas de nivel del objeto.
+	\end{enumerate}
+	
+	\section{Deduzca la siguiente ecuación y explique cada término.}
+	\[ h(x,y) = \frac{\phi(x,y)}{2\pi} \frac{p}{\tan \alpha} \]
+	\textit{Deducción:} Un objeto tridimensional de altura $h$ desplaza lateralmente la franja proyectada una distancia $\Delta x = h \tan \alpha$. Sabiendo que un desplazamiento $\Delta x$ corresponde a un cambio de fase dentro de un periodo $p$ de forma proporcional: $\frac{\phi}{2\pi} = \frac{\Delta x}{p}$. Sustituyendo $\Delta x$, obtenemos la ecuación mostrada. \\
+	\textit{Términos:} $h(x,y)$ es la altura, $\phi(x,y)$ la fase óptica calculada, $p$ el periodo de la franja sobre el plano y $\alpha$ el ángulo de triangulación.
+	
+	\section{Explique los siguientes términos:} 
+	\begin{itemize}
+		\item \textbf{Fase de envoltura:} Fase obtenida matemáticamente por arcotangente, limitada al intervalo $[-\pi, \pi]$ (presenta saltos bruscos).
+		\item \textbf{Fase desenrollada:} Fase real y continua del objeto obtenida tras eliminar los saltos de $2\pi$.
+		\item \textbf{Patrones de franjas:} Imágenes estructuradas formadas por líneas claras y oscuras que codifican profundidad.
+		\item \textbf{Periodo del patrón:} Distancia física o en píxeles que existe entre dos máximos consecutivos de una franja.
+	\end{itemize}
+	
+	\section{Describa el método: Holografía sin lentes.}
+	No interviene ningún elemento formador de imagen (lente) entre la muestra y el sensor. Un láser se expande por un pinhole generando una onda puntual que ilumina directamente una muestra semitransparente. La luz dispersada (onda objeto) y la no dispersada (onda de referencia) interfieren sobre el sensor CMOS a escasos milímetros.
+	
+	\section{Deduzca las siguientes ecuaciones para el efecto moiré.}
+	Multiplicando las intensidades de dos rejillas $T_1(x) = \frac{1}{2}[1 + \cos(2\pi f_1 x)]$ y $T_2(x) = \frac{1}{2}[1 + \cos(2\pi f_2 x)]$, el producto produce términos de alta y baja frecuencia. El término envolvente visible de baja frecuencia surge de la identidad trigonométrica de cosenos: $\frac{1}{2}\cos(2\pi(f_1-f_2)x)$. Por lo tanto, la frecuencia visible de Moiré es $f_M = |f_1 - f_2|$, y su periodo correspondiente es $p_M = \frac{1}{|f_1 - f_2|} = \frac{p_1 p_2}{|p_2 - p_1|}$.
+	
+	\section{Describa completamente los siguientes métodos para recuperar la forma:}
+	\begin{enumerate}[label=\alph*)]
+		\item \textbf{Dos puntos de iluminación:} Iluminar desde dos ángulos ligeramente diferentes genera dos frentes de onda sobre el objeto. Al restar las fases de ambos estados, se producen contornos de nivel. La sensibilidad (distancia entre franjas de altura) se ajusta cambiando la separación angular de los puntos de luz.
+		\item \textbf{Dos longitudes de onda:} Grabar dos hologramas sucesivos con $\lambda_1$ y $\lambda_2$. Su diferencia de fase matemática equivale a iluminar el objeto con una longitud de onda sintética muy grande $\Lambda = \frac{\lambda_1 \lambda_2}{|\lambda_1 - \lambda_2|}$. Es ideal para objetos rugosos o macroscópicos.
+	\end{enumerate}
+	
+	\section{Realice los arreglos ópticos para:} 
+	\vspace{0.5cm}
+	
+	\begin{enumerate}[label=\alph*)]
+		\item \textbf{Holografía sin lentes}
+		
+		\begin{center}
+			\begin{tikzpicture}
+				% Laser
+				\node[draw, thick, fill=blue!10, minimum width=2cm, minimum height=1cm] (laser) at (0,0) {Láser};
+				% Pinhole
+				\draw[thick] (2.5, -1) -- (2.5, -0.1);
+				\draw[thick] (2.5, 0.1) -- (2.5, 1);
+				\fill (2.5,0) circle (2pt) node[above right] {Pinhole};
+				\draw[-{Stealth}, blue, thick] (laser.east) -- (2.5,0);
+				% Beam
+				\fill[blue!10, opacity=0.5] (2.5,0) -- (6,2) -- (6,-2) -- cycle;
+				\draw[blue, dashed] (2.5,0) -- (6,2);
+				\draw[blue, dashed] (2.5,0) -- (6,-2);
+				% Sample
+				\draw[thick, fill=green!20] (6,-1.5) rectangle (6.2,1.5) node[midway, sloped, above] {Muestra};
+				% Sensor
+				\draw[thick, fill=gray!30] (8,-2) rectangle (8.2,2) node[midway, sloped, above] {Sensor CMOS};
+				% Waves
+				\draw[-{Stealth}, blue, thick, decorate, decoration={snake, amplitude=.4mm, segment length=3mm, post length=1mm}] (6.2,0.8) -- (8,0.8) node[midway, above] {Onda Objeto};
+				\draw[-{Stealth}, blue, thick] (6.2,-0.8) -- (8,-0.8) node[midway, below] {Onda Referencia};
+			\end{tikzpicture}
+		\end{center}
+		
+		\vspace{1cm}
+		\item \textbf{Holografía digital interferométrica (Mach-Zehnder)}
+		
+		\begin{center}
+			\begin{tikzpicture}[scale=0.9, transform shape]
+				\node[draw, thick, fill=blue!10, minimum width=1.5cm, minimum height=1cm] (laser) at (0,0) {Láser};
+				\node[draw, thick, fill=gray!20, rotate=45, minimum width=1cm] (bs1) at (3,0) {BS1};
+				\node[draw, thick, fill=gray!80, rotate=-45, minimum width=1cm] (m1) at (3,4) {M1};
+				\node[draw, thick, fill=gray!80, rotate=-45, minimum width=1cm] (m2) at (7,0) {M2};
+				\node[draw, thick, fill=gray!20, rotate=45, minimum width=1cm] (bs2) at (7,4) {BS2};
+				\node[draw, ellipse, fill=green!20, minimum width=1.5cm, minimum height=1cm] (obj) at (5,4) {Objeto};
+				\node[draw, thick, fill=black, text=white, minimum width=1.5cm, minimum height=1cm] (ccd) at (10,4) {CCD};
+				
+				\draw[-{Stealth}, blue, thick] (laser) -- (bs1);
+				\draw[-{Stealth}, blue, thick] (bs1) -- (m1) node[midway, left] {Brazo Objeto};
+				\draw[-{Stealth}, blue, thick] (m1) -- (obj);
+				\draw[-{Stealth}, blue, thick] (obj) -- (bs2);
+				
+				\draw[-{Stealth}, red, thick] (bs1) -- (m2) node[midway, below] {Brazo Referencia};
+				\draw[-{Stealth}, red, thick] (m2) -- (bs2);
+				
+				\draw[-{Stealth}, purple, thick] (bs2) -- (ccd) node[midway, above] {Interferencia};
+			\end{tikzpicture}
+		\end{center}
+		
+		\vspace{1cm}
+		\item \textbf{Proyección de Franjas}
+		
+		\begin{center}
+			\begin{tikzpicture}
+				\node[draw, thick, fill=yellow!20, minimum width=2cm, minimum height=1cm] (proj) at (0,3) {Proyector};
+				\node[draw, thick, fill=black, text=white, minimum width=2cm, minimum height=1cm] (cam) at (6,3) {Cámara};
+				
+				% Object surface
+				\draw[ultra thick] (1,0) to[out=20,in=160] (3,0.5) to[out=-20,in=180] (5,0) node[below right] {Superficie 3D};
+				
+				% Proj rays
+				\draw[-{Stealth}, orange, thick, dashed] (proj.south) -- (2, 0.25);
+				\draw[-{Stealth}, orange, thick, dashed] (proj.south) -- (3, 0.5) node[midway, left] {Franjas};
+				\draw[-{Stealth}, orange, thick, dashed] (proj.south) -- (4, 0.2);
+				
+				% Cam rays
+				\draw[-{Stealth}, blue, thick] (2, 0.25) -- (cam.south);
+				\draw[-{Stealth}, blue, thick] (3, 0.5) -- (cam.south) node[midway, right] {Observación};
+				\draw[-{Stealth}, blue, thick] (4, 0.2) -- (cam.south);
+			\end{tikzpicture}
+		\end{center}
+		
+		\vspace{1cm}
+		\item \textbf{Moiré por sombras}
+		
+		\begin{center}
+			\begin{tikzpicture}
+				\node[draw, circle, thick, fill=yellow!50] (light) at (0,4) {Luz};
+				\node[draw, thick, fill=black, text=white, minimum width=1.5cm, minimum height=1cm] (cam) at (5,4) {Cámara};
+				
+				% Grating
+				\draw[thick, step=0.15cm] (2,1.5) grid (6,1.65);
+				\node[right] at (6.1,1.57) {Rejilla de referencia};
+				
+				% Object
+				\draw[thick, fill=gray!20] (2.5,0) arc (180:0:1.5cm and 0.8cm) -- cycle;
+				\node[below] at (4,0) {Objeto};
+				
+				% Light rays
+				\draw[-{Stealth}, orange, thick] (light.south east) -- (4,1.65);
+				\draw[-{Stealth}, orange, thick, dashed] (4,1.5) -- (4,0.8); % Shadow
+				
+				% Camera observation
+				\draw[-{Stealth}, blue, thick] (4,0.8) -- (cam.south); % from object
+				\draw[-{Stealth}, blue, thick, dashed] (4,1.65) -- (cam.south); % from grating
+			\end{tikzpicture}
+		\end{center}
+	\end{enumerate}
+	
+\end{document}

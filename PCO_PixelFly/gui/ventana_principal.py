@@ -14,6 +14,9 @@ from procesamiento.Metodos_desenvolvedores_de_fase import ProcesadorFase
 # NUEVO: Importamos el simulador desde su archivo propio 'Simulador_franjas.py'
 from procesamiento.Simulador_franjas import SimuladorFranjas
 
+# Para simbolos especiales que se muestren
+from PIL import Image, ImageDraw, ImageFont
+
 
 class VisorInteractivo(QtWidgets.QLabel):
     """Visor que detecta dos clics para dibujar un rectángulo de selección."""
@@ -252,25 +255,46 @@ class VentanaPrincipal(QtWidgets.QMainWindow):
         # --- PANEL IZQUIERDO: CUADRÍCULA DE VISORES (GRID) ---
         layout_visores = QtWidgets.QGridLayout()
         
-        # 1. Visor Superior (Interferogramas)
-        self.label_sim_top = QtWidgets.QLabel("Interferogramas Generados")
+        # 1. Sección Superior: Franjas Originales
+        label_titulo_top = QtWidgets.QLabel("<b>Franjas Originales</b>")
+        label_titulo_top.setAlignment(QtCore.Qt.AlignCenter)
+        
+        self.label_sim_top = QtWidgets.QLabel("Genera una simulación...")
         self.label_sim_top.setAlignment(QtCore.Qt.AlignCenter)
         self.label_sim_top.setStyleSheet("background-color: #1e1e1e; color: white; border: 1px solid gray;")
+        self.label_sim_top.setMinimumSize(450, 300)
         
-        # 2. Visor Inferior Izquierdo (Fase Envuelta)
-        self.label_sim_env = QtWidgets.QLabel("Fase Envuelta\n(-π a π)")
+        # 2. Sección Inferior Izquierda: Fase Envuelta
+        label_titulo_env = QtWidgets.QLabel("<b>Fase Envuelta (-π a π)</b>")
+        label_titulo_env.setAlignment(QtCore.Qt.AlignCenter)
+        
+        self.label_sim_env = QtWidgets.QLabel("Esperando procesamiento...")
         self.label_sim_env.setAlignment(QtCore.Qt.AlignCenter)
         self.label_sim_env.setStyleSheet("background-color: #1e1e1e; color: white; border: 1px solid gray;")
+        self.label_sim_env.setMinimumSize(220, 220)
         
-        # 3. Visor Inferior Derecho (Fase Desenvuelta)
-        self.label_sim_desenv = QtWidgets.QLabel("Fase Desenvuelta\n(Continua)")
+        # 3. Sección Inferior Derecha: Fase Desenvuelta
+        label_titulo_desenv = QtWidgets.QLabel("<b>Fase Desenvuelta (Continua)</b>")
+        label_titulo_desenv.setAlignment(QtCore.Qt.AlignCenter)
+        
+        self.label_sim_desenv = QtWidgets.QLabel("Esperando procesamiento...")
         self.label_sim_desenv.setAlignment(QtCore.Qt.AlignCenter)
         self.label_sim_desenv.setStyleSheet("background-color: #1e1e1e; color: white; border: 1px solid gray;")
+        self.label_sim_desenv.setMinimumSize(220, 220)
         
-        # Añadir al Grid: (widget, fila, columna, alto_filas, ancho_columnas)
-        layout_visores.addWidget(self.label_sim_top, 0, 0, 1, 2) # Arriba, abarca 2 columnas
-        layout_visores.addWidget(self.label_sim_env, 1, 0)       # Abajo Izquierda
-        layout_visores.addWidget(self.label_sim_desenv, 1, 1)    # Abajo Derecha
+        # --- DISTRIBUCIÓN EN LA CUADRÍCULA (GRID) ---
+        # Fila 0: Título superior
+        layout_visores.addWidget(label_titulo_top, 0, 0, 1, 2)
+        # Fila 1: Visor superior (ocupa 2 columnas)
+        layout_visores.addWidget(self.label_sim_top, 1, 0, 1, 2)
+        
+        # Fila 2: Títulos inferiores
+        layout_visores.addWidget(label_titulo_env, 2, 0)
+        layout_visores.addWidget(label_titulo_desenv, 2, 1)
+        
+        # Fila 3: Visores inferiores lado a lado
+        layout_visores.addWidget(self.label_sim_env, 3, 0)
+        layout_visores.addWidget(self.label_sim_desenv, 3, 1)
         
         # --- PANEL DERECHO: CONTROLES ---
         layout_derecho = QtWidgets.QVBoxLayout()
@@ -281,9 +305,12 @@ class VentanaPrincipal(QtWidgets.QMainWindow):
         label_titulo.setAlignment(QtCore.Qt.AlignCenter)
         
         self.combo_tipo_franja = QtWidgets.QComboBox()
-        self.combo_tipo_franja.addItems(["Lineales (Tilt)", "Circulares (Desenfocamiento)", "Chirp exponencial"])
+        self.combo_tipo_franja.addItems([
+            "Lineales (Tilt)", 
+            "Circulares (Desenfocamiento)",
+            "Chirp Exponencial"
+        ])
         
-        # NUEVO: Selector de método para automatizar la extracción
         self.combo_metodo_sim = QtWidgets.QComboBox()
         self.combo_metodo_sim.addItems(["3 Pasos", "4 Pasos", "Carré (4 Pasos)", "Hariharan (5 Pasos)"])
         
@@ -291,7 +318,7 @@ class VentanaPrincipal(QtWidgets.QMainWindow):
         self.btn_guardar_sim = QtWidgets.QPushButton("💾 Guardar Stack (.tif)")
         self.btn_guardar_sim.setEnabled(False)
         
-        # Ensamblaje
+        # Ensamblaje del panel de controles
         layout_derecho.addWidget(label_titulo)
         layout_derecho.addWidget(QtWidgets.QLabel("Patrón Geométrico:"))
         layout_derecho.addWidget(self.combo_tipo_franja)
@@ -309,7 +336,7 @@ class VentanaPrincipal(QtWidgets.QMainWindow):
         espaciador = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         layout_derecho.addItem(espaciador)
         
-        # --- ENSAMBLAR TODO AL FINAL ---
+        # --- ENSAMBLAR TODO EN LA PESTAÑA ---
         layout_principal.addLayout(layout_visores, stretch=1)
         layout_principal.addLayout(layout_derecho, stretch=0)
         
@@ -340,6 +367,11 @@ class VentanaPrincipal(QtWidgets.QMainWindow):
         self.label_analisis.corte_seleccionado.connect(self.registrar_corte_fourier)
         self.btn_generar.clicked.connect(self.ejecutar_simulacion)
 
+        # Conexiones del Simulador
+        self.btn_generar.clicked.connect(self.ejecutar_simulacion)
+        
+        # ---> AGREGA ESTA LÍNEA <---
+        self.btn_guardar_sim.clicked.connect(self.guardar_stack_simulado)
 
 
     # NUEVO: Función para actualizar el texto visual
@@ -762,22 +794,32 @@ class VentanaPrincipal(QtWidgets.QMainWindow):
             QtWidgets.QMessageBox.information(self, "Guardado Exitoso", "El mapa de fase se ha exportado correctamente.")
 
     def guardar_stack_simulado(self):
-        if self.stack_simulado is None:
+        if not hasattr(self, 'ultima_panoramica'):
             return
             
-        # Agregamos QtWidgets.
-        carpeta_destino = QtWidgets.QFileDialog.getExistingDirectory(self, "Seleccionar Carpeta para Guardar Simulación")
+        opciones = QtWidgets.QFileDialog.Options()
+        ruta_archivo, _ = QtWidgets.QFileDialog.getSaveFileName(
+            self,
+            "Guardar Reporte Visual",
+            "reporte_simulacion",
+            "Imagen PNG (*.png);;Imagen JPEG (*.jpg)",
+            options=opciones
+        )
         
-        if carpeta_destino:
-            tipo = self.combo_tipo_franja.currentText().split()[0].lower()
+        if ruta_archivo:
+            # 1. Generamos la imagen compuesta
+            reporte_final = self.generar_reporte_visual(
+                self.ultima_panoramica, 
+                self.ultima_envuelta, 
+                self.ultima_desenvuelta
+            )
             
-            for i, matriz in enumerate(self.stack_simulado):
-                nombre_archivo = f"simulacion_{tipo}_paso_{i+1:02d}.tif"
-                ruta_completa = os.path.join(carpeta_destino, nombre_archivo)
-                cv2.imwrite(ruta_completa, matriz.astype(np.float32))
+            # 2. Asegurar extensión y guardar
+            if not ruta_archivo.lower().endswith(('.png', '.jpg', '.jpeg')):
+                ruta_archivo += '.png'
                 
-            # Agregamos QtWidgets. aquí también
-            QtWidgets.QMessageBox.information(self, "Guardado Exitoso", f"Se guardaron {len(self.stack_simulado)} imágenes en:\n{carpeta_destino}")
+            cv2.imwrite(ruta_archivo, reporte_final)
+            QtWidgets.QMessageBox.information(self, "Éxito", f"Reporte gráfico guardado correctamente en:\n{ruta_archivo}")
 
     def actualizar_radio(self, valor):
         """Actualiza en tiempo real el tamaño del círculo de corte."""
@@ -796,8 +838,6 @@ class VentanaPrincipal(QtWidgets.QMainWindow):
         self.btn_procesar.setEnabled(True)
 
     def ejecutar_simulacion(self):
-        # print("¡El botón fue presionado, iniciando simulación!") # <--- ESTO ES NUEVO
-        
         tipo_texto = self.combo_tipo_franja.currentText().lower()
         metodo_texto = self.combo_metodo_sim.currentText()
         
@@ -807,17 +847,34 @@ class VentanaPrincipal(QtWidgets.QMainWindow):
         else: pasos = 4  # 4 Pasos clásico o Carré
             
         if "lineales" in tipo_texto: tipo_fase = 'lineal'
-        elif "circulares" in tipo_texto: tipo_fase = 'circular'
+        elif "circulares" in tipo_texto: tipo_fase = 'circulares'
+        elif "espiral" in tipo_texto: tipo_fase = 'espiral'
         elif "chirp" in tipo_texto: tipo_fase = 'chirp'
             
         try:
-            # --- FASE 1: GENERACIÓN ---
+            # --- FASE 1: GENERACIÓN DEL STACK ---
             self.stack_simulado, _ = self.simulador_core.generar_stack_phase_shifting(
                 tipo_fase=tipo_fase, pasos=pasos)
             
-            # Mostramos el primer frame arriba
-            imagen_visual = (self.stack_simulado[0] * 255).astype(np.uint8)
-            self.mostrar_imagen_en_label(imagen_visual, self.label_sim_top)
+            # --- MOSTRAR TODAS LAS IMÁGENES CON UN ESPACIO SEPARADOR ---
+            stack_uint8 = [(img * 255).astype(np.uint8) for img in self.stack_simulado]
+            
+            # 1. Creamos una barra separadora vertical negra de 4 píxeles de ancho
+            alto, ancho = stack_uint8[0].shape
+            separador = np.zeros((alto, 50), dtype=np.uint8) # Fondo negro de separación
+            
+            # 2. Intercalamos las imágenes con el separador
+            stack_con_separacion = []
+            for i, img in enumerate(stack_uint8):
+                stack_con_separacion.append(img)
+                if i < len(stack_uint8) - 1:  # Evita poner separador después de la última imagen
+                    stack_con_separacion.append(separador)
+            
+            # 3. Unimos todo en una sola vista panorámica con espacios divisorios claros
+            self.ultima_panoramica = np.hstack(stack_con_separacion)
+            
+            # La mostramos en el visor superior
+            self.mostrar_imagen_en_label(self.ultima_panoramica, self.label_sim_top)
             
             # --- FASE 2: EXTRACCIÓN (FASE ENVUELTA) ---
             if "3 Pasos" in metodo_texto:
@@ -829,21 +886,102 @@ class VentanaPrincipal(QtWidgets.QMainWindow):
             else:
                 fase_env = self.procesador_fase.phase_shifting_4_pasos(self.stack_simulado)
                 
-            # Convertimos la fase de [-pi, pi] a [0, 255] para verla en pantalla
-            f_env_vis = ((fase_env + np.pi) / (2 * np.pi) * 255).astype(np.uint8)
-            self.mostrar_imagen_en_label(f_env_vis, self.label_sim_env)
+            self.ultima_envuelta = ((fase_env + np.pi) / (2 * np.pi) * 255).astype(np.uint8)
+            self.mostrar_imagen_en_label(self.ultima_envuelta, self.label_sim_env)
             
             # --- FASE 3: DESENVOLVIMIENTO ---
             fase_desenv = self.procesador_fase.desenvolvimiento_robusto(fase_env)
             if fase_desenv is None:
                 fase_desenv = self.procesador_fase.desenvolvimiento_basico(fase_env)
                 
-            # Convertimos los radianes desenrollados a [0, 255]
             f_min, f_max = np.min(fase_desenv), np.max(fase_desenv)
-            f_desenv_vis = ((fase_desenv - f_min) / (f_max - f_min + 1e-8) * 255).astype(np.uint8)
-            self.mostrar_imagen_en_label(f_desenv_vis, self.label_sim_desenv)
+            self.ultima_desenvuelta = ((fase_desenv - f_min) / (f_max - f_min + 1e-8) * 255).astype(np.uint8)
+            self.mostrar_imagen_en_label(self.ultima_desenvuelta, self.label_sim_desenv)
             
             self.btn_guardar_sim.setEnabled(True)
             
         except Exception as e:
             QtWidgets.QMessageBox.critical(self, "Error", f"Fallo al simular: {e}")
+
+
+
+    def generar_reporte_visual(self, img_superior, img_izq, img_der, 
+                               titulo_sup="Franjas Originales", 
+                               titulo_izq="Fase Envuelta (-π a π)", 
+                               titulo_der="Fase Desenvuelta (Continua)"):
+        """
+        Construye un canvas de alta resolución con OpenCV y Pillow 
+        para renderizar correctamente símbolos Unicode (como π).
+        """
+        # 1. Convertir a BGR para el fondo
+        if len(img_superior.shape) == 2: img_superior = cv2.cvtColor(img_superior, cv2.COLOR_GRAY2BGR)
+        if len(img_izq.shape) == 2: img_izq = cv2.cvtColor(img_izq, cv2.COLOR_GRAY2BGR)
+        if len(img_der.shape) == 2: img_der = cv2.cvtColor(img_der, cv2.COLOR_GRAY2BGR)
+
+        h_sup, w_sup = img_superior.shape[:2]
+        h_izq, w_izq = img_izq.shape[:2]
+        h_der, w_der = img_der.shape[:2]
+
+        espacio_x = 20
+        margen = 40
+        espacio_y_titulos = 35
+
+        ancho_inf = w_izq + espacio_x + w_der
+        ancho_lienzo = max(w_sup, ancho_inf) + (margen * 2)
+        alto_lienzo = margen + espacio_y_titulos + h_sup + margen + espacio_y_titulos + max(h_izq, h_der) + margen
+
+        # 2. Crear el fondo oscuro con NumPy
+        lienzo = np.full((alto_lienzo, ancho_lienzo, 3), 34, dtype=np.uint8)
+
+        # 3. Colocar las imágenes y dibujar bordes con OpenCV
+        y_txt_sup = margen
+        y_img_sup = y_txt_sup + 20
+        y_txt_inf = y_img_sup + h_sup + 40
+        y_img_inf = y_txt_inf + 20
+
+        x_sup = (ancho_lienzo - w_sup) // 2
+        lienzo[y_img_sup:y_img_sup+h_sup, x_sup:x_sup+w_sup] = img_superior
+
+        x_izq = (ancho_lienzo - ancho_inf) // 2
+        x_der = x_izq + w_izq + espacio_x
+
+        lienzo[y_img_inf:y_img_inf+h_izq, x_izq:x_izq+w_izq] = img_izq
+        lienzo[y_img_inf:y_img_inf+h_der, x_der:x_der+w_der] = img_der
+
+        color_borde = (100, 100, 100)
+        cv2.rectangle(lienzo, (x_sup-1, y_img_sup-1), (x_sup+w_sup, y_img_sup+h_sup), color_borde, 1)
+        cv2.rectangle(lienzo, (x_izq-1, y_img_inf-1), (x_izq+w_izq, y_img_inf+h_izq), color_borde, 1)
+        cv2.rectangle(lienzo, (x_der-1, y_img_inf-1), (x_der+w_der, y_img_inf+h_der), color_borde, 1)
+
+        # ==========================================
+        # 4. RENDERIZADO DE TEXTO CON PILLOW
+        # ==========================================
+        # Convertir de OpenCV (BGR) a Pillow (RGB)
+        lienzo_pil = Image.fromarray(cv2.cvtColor(lienzo, cv2.COLOR_BGR2RGB))
+        draw = ImageDraw.Draw(lienzo_pil)
+
+        # Cargar fuente cruzada (Windows/Mac)
+        try:
+            fuente = ImageFont.truetype("arial.ttf", 22)
+        except IOError:
+            try:
+                fuente = ImageFont.truetype("Arial.ttf", 22) # Formato común en Mac
+            except IOError:
+                fuente = ImageFont.load_default()
+
+        def poner_texto_pil(texto, y, ancho_total, x_offset=0):
+            # Calcular dimensiones del texto para centrarlo
+            caja = draw.textbbox((0, 0), texto, font=fuente)
+            ancho_texto = caja[2] - caja[0]
+            x = x_offset + (ancho_total - ancho_texto) // 2
+            # Dibujar en blanco puro
+            draw.text((x, y), texto, font=fuente, fill=(255, 255, 255))
+
+        # Escribir los títulos
+        poner_texto_pil(titulo_sup, y_txt_sup - 20, ancho_lienzo)
+        poner_texto_pil(titulo_izq, y_txt_inf - 20, w_izq, x_izq)
+        poner_texto_pil(titulo_der, y_txt_inf - 20, w_der, x_der)
+
+        # 5. Regresar el lienzo al formato de OpenCV (BGR) para el guardado
+        lienzo_final = cv2.cvtColor(np.array(lienzo_pil), cv2.COLOR_RGB2BGR)
+        return lienzo_final
