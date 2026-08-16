@@ -10,11 +10,6 @@
 \usepackage{xcolor}
 \usepackage{hyperref}
 
-\usepackage{graphicx}    % Necesario para insertar las imágenes
-\usepackage{subcaption}  % Moderno y recomendado para crear subfiguras
-\usepackage{float}
-
-
 % Configuración de los márgenes
 \geometry{
 	top=2.5cm,
@@ -46,13 +41,13 @@
 	
 	\vspace{0.5cm}
 	\noindent \textbf{NOMBRE:} Jonathan Francisco Rojas Martínez \\
-	\textbf{FECHA:} \today \vspace{0.5cm}
+	\textbf{FECHA:} 23 de julio de 2026 \vspace{0.5cm}
 	
 	\noindent \textbf{INSTRUCCIONES.-} Conteste de manera completa las siguientes preguntas.
 	
 	\vspace{0.8cm}
 	% ---------------- PREGUNTA A ---------------- %
-	\noindent \section*{A.- Realice el análisis para obtener las ecuaciones para el desplazamiento en z (\textit{out-of-plane}), x y y (\textit{in-plane}) dirección.}
+	\noindent \textbf{A.- Realice el análisis para obtener las ecuaciones para el desplazamiento en z (\textit{out-of-plane}), x y y (\textit{in-plane}) dirección.}
 	
 	\textbf{Respuesta:}
 	En interferometría holográfica o ESPI, la fase óptica medida $\Delta\phi$ se relaciona con el vector de desplazamiento $\vec{d} = (u, v, w)$ del objeto y el vector de sensitividad $\vec{K}$ mediante la ecuación fundamental:
@@ -88,8 +83,9 @@
 	\]
 	Un análisis idéntico rotando el sistema 90 grados proporciona el desplazamiento $v$ en el eje $y$.
 	
+	\vspace{0.8cm}
 	% ---------------- PREGUNTA B ---------------- %
-	\section*{B.- Explique los siguientes términos: \textit{wrap phase}, \textit{unwrapped phase}, \textit{fringe patterns}, \textit{period of fringe pattern}.}
+	\noindent \textbf{B.- Explique los siguientes términos: \textit{wrap phase}, \textit{unwrapped phase}, \textit{fringe patterns}, \textit{period of fringe pattern}.}
 	
 	\textbf{Respuesta:}
 	\begin{itemize}
@@ -99,8 +95,9 @@
 		\item \textbf{Period of fringe pattern (Período del patrón de franjas):} Representa la distancia espacial lineal entre el centro de dos franjas brillantes consecutivas (o dos oscuras). Inversamente proporcional a la frecuencia espacial, dicta la rapidez con la que cambia la fase topográfica o el gradiente de deformación sobre la superficie.
 	\end{itemize}
 	
+	\vspace{0.8cm}
 	% ---------------- PREGUNTA C ---------------- %
-	\section*{C.- Explique "\textit{Spatial Sampling with CCD arrays}", "\textit{Spatial Resolution}" y "\textit{Sampling Theorem}".}
+	\noindent \textbf{C.- Explique "\textit{Spatial Sampling with CCD arrays}", "\textit{Spatial Resolution}" y "\textit{Sampling Theorem}".}
 	
 	\textbf{Respuesta:}
 	\begin{itemize}
@@ -109,8 +106,9 @@
 		\item \textbf{\textit{Sampling Theorem} (Teorema de Muestreo de Nyquist-Shannon):} Dicta una regla fundamental para no perder información al muestrear un patrón: para poder reconstruir un campo de franjas espacialmente sin artefactos de apilamiento (aliasing), la frecuencia de muestreo de la cámara (el inverso del tamaño del pixel) debe ser al menos el doble de la máxima frecuencia espacial presente en las franjas. En términos prácticos en metrología, se requieren mínimo dos píxeles por cada ciclo de franja (un período completo).
 	\end{itemize}
 	
+	\vspace{0.8cm}
 	% ---------------- PREGUNTA D ---------------- %
-	\section*{D.- Explique vector de sensitividad? Calcule los componentes del vector de sensitividad $K_x$, $K_y$ y $K_z$.}
+	\noindent \textbf{D.- Explique vector de sensitividad? Calcule los componentes del vector de sensitividad $K_x$, $K_y$ y $K_z$.}
 	
 	\textbf{Respuesta:}
 	\textbf{Explicación:} El vector de sensitividad ($\vec{K}$) es un vector que define la dirección y magnitud en las cuales un interferómetro o sistema metrológico es máximamente sensible a los desplazamientos. Geométricamente, bisecta el ángulo formado entre la dirección de iluminación y la de observación. Matemáticamente es el gradiente de fase.
@@ -132,13 +130,13 @@
 	K_z = \frac{2\pi}{\lambda} (\cos\gamma_o - \cos\gamma_i)
 	\]
 	
-	\newpage
+	\vspace{0.8cm}
 	% ---------------- PREGUNTA E ---------------- %
-	\section*{E.- Encuentre los vectores de iluminación, observación y el vector de sensitividad tomando en cuenta la siguiente información:}
+	\noindent \textbf{E.- Encuentre los vectores de iluminación, observación y el vector de sensitividad tomando en cuenta la siguiente información:\\
 		$\lambda = 0.473~\mu m$\\
 		$R_1 = (-21.01, 0, 58.8)$ Posición del vector de iluminación.\\
 		$R_2 = (0, 0, 0)$ Posición del vector de observación.\\
-		$R_p = (0, 0, 112.02)$ Posición del vector objeto.
+		$R_p = (0, 0, 112.02)$ Posición del vector objeto.}
 	
 	\textbf{Respuesta:}
 	\textbf{Paso 1: Vector unitario de iluminación ($\hat{n}_i$).}
@@ -163,11 +161,11 @@
 	\vec{K} \approx 13283.68 \times (-0.3672, 0, -1.9301) = (-4877.77, 0, -25638.83) \text{ rad/mm}
 	\]
 	
-	\newpage
+	\vspace{0.8cm}
 	% ---------------- PREGUNTA F ---------------- %
-	\section*{F.- Describe la teoría de \textit{phase shifting} y \textit{phase stepping} métodos para obtener la fase óptica.}
+	\noindent \textbf{F.- Describe la teoría de \textit{phase shifting} y \textit{phase stepping} métodos para obtener la fase óptica.\\
 		a) Encuentre $\Delta\phi$ usando un algoritmo de 3-steps, con $\alpha=(0, 2\pi/3 \text{ y } 4\pi/3)$.\\
-		b) Encuentre $\Delta\varphi$ y $\gamma$ usando un algoritmo de 5-steps, con pasos de $\alpha=90^\circ$.
+		b) Encuentre $\Delta\varphi$ y $\gamma$ usando un algoritmo de 5-steps, con pasos de $\alpha=90^\circ$.}
 	
 	\textbf{Respuesta:}
 	\textbf{Teoría:} Los métodos de desplazamiento de fase (\textit{phase shifting} dinámico o \textit{phase stepping} estático/a pasos) consisten en modular la fase del brazo de referencia introduciendo retardos mecánicos o electroópticos controlados ($\alpha$). Cada desplazamiento genera un patrón de intensidad distinto. Dado que el modelo de interferencia tiene 3 incógnitas para cada pixel (fase, intensidad de fondo y modulación o contraste), se requieren registrar al menos 3 imágenes.
@@ -216,48 +214,74 @@
 	\gamma = \frac{\sqrt{4(I_4 - I_2)^2 + (2I_3 - I_1 - I_5)^2}}{I_1 + 2I_3 + I_5}
 	\]
 	
-	\newpage
+	\vspace{0.8cm}
 	% ---------------- PREGUNTA G ---------------- %
-	\section*{G.- Realice lo mismo que para el inciso F solo que debe simular los patrones de intensidad necesarios y obtenga la fase envuelta y desenvuelta. Favor de entregar imágenes y programas.}
+	\noindent \textbf{G.- Realice lo mismo que para el inciso F solo que debe simular los patrones de intensidad necesarios y obtenga la fase envuelta y desenvuelta. Favor de entregar imágenes y programas.}
 	
-	El código está en la app desarrollada adjunta al correo.
+	\textbf{Respuesta:}
+	A continuación se presenta el \textit{script} en Python para simular y calcular las fases directamente mediante su ejecución de manera procedural. Al ejecutar este código, se generarán y mostrarán las imágenes resultantes (patrón original, fase envuelta y fase desenvuelta).
 	
-	
-	\begin{figure}[H]
-		\centering
+	\begin{lstlisting}
+		import numpy as np
+		import matplotlib.pyplot as plt
 		
-		% Fila superior (2 imágenes)
-		\begin{subfigure}[b]{0.5\textwidth}
-			\centering
-			\includegraphics[width=\textwidth]{TresPasos_lineas.png}
-			\caption{Tres pasos lineas}
-			\label{fig:img_sup_izq}
-		\end{subfigure}
-		\hfill
-		\begin{subfigure}[b]{0.5\textwidth}
-			\centering
-			\includegraphics[width=\textwidth]{4pasos_circ.png}
-			\caption{Cuatro pasos circulares}
-			\label{fig:img_sup_der}
-		\end{subfigure}
+		# Evitar envoltura de funciones segun solicitud
+		# --- Creacion de la fase a simular ---
+		x = np.linspace(-10, 10, 512)
+		y = np.linspace(-10, 10, 512)
+		X, Y = np.meshgrid(x, y)
+		# Simular deformacion (por ejemplo, una Gaussiana que representa elevacion)
+		fase_real = 15 * np.exp(-(X**2 + Y**2) / 25)
 		
-		\vspace{0.5cm} % Espacio vertical entre las filas
+		# Variables generales del arreglo
+		I_dc = 128.0
+		I_ac = 100.0
 		
-		% Fila inferior (1 imagen centrada)
-		\begin{subfigure}[b]{0.7\textwidth} % Puedes aumentar a 0.6\textwidth si la quieres más grande
-			\centering
-			\includegraphics[width=\textwidth]{5pasos_chirp.png}
-			\caption{Cinco pasos Chirp}
-			\label{fig:img_inf}
-		\end{subfigure}
+		# === PARTE 1: Algoritmo de 3 pasos (0, 120, 240 grados) ===
+		alpha_3 = [0.0, 2*np.pi/3, 4*np.pi/3]
+		I_3_imgs = [I_dc + I_ac * np.cos(fase_real + a) for a in alpha_3]
 		
-		\caption{Algunos métodos y sus simulaciones de linea con su fase envuelta y desenvuelta.}
-		\label{fig:piramide}
-	\end{figure}
+		# Calculo de fase envuelta 3-steps
+		# Ecuacion: arctan( sqrt(3)*(I3-I2) / (2I1-I2-I3) )
+		num_3 = np.sqrt(3) * (I_3_imgs[2] - I_3_imgs[1])
+		den_3 = 2 * I_3_imgs[0] - I_3_imgs[1] - I_3_imgs[2]
+		fase_env_3 = np.arctan2(num_3, den_3)
+		
+		# === PARTE 2: Algoritmo de 5 pasos (0, 90, 180, 270, 360 grados) ===
+		alpha_5 = [0, np.pi/2, np.pi, 3*np.pi/2, 2*np.pi]
+		I_5_imgs = [I_dc + I_ac * np.cos(fase_real + a) for a in alpha_5]
+		
+		# Calculo de fase envuelta 5-steps
+		# Ecuacion: arctan( 2(I4-I2) / (2I3-I1-I5) )
+		num_5 = 2 * (I_5_imgs[3] - I_5_imgs[1])
+		den_5 = 2 * I_5_imgs[2] - I_5_imgs[0] - I_5_imgs[4]
+		fase_env_5 = np.arctan2(num_5, den_5)
+		
+		# Desenvuelto (Unwrapping con skimage)
+		from skimage.restoration import unwrap_phase
+		fase_des_5 = unwrap_phase(fase_env_5)
+		
+		# Visualizacion de las imagenes
+		fig, axs = plt.subplots(1, 3, figsize=(15, 4))
+		im0 = axs[0].imshow(I_5_imgs[0], cmap='gray')
+		axs[0].set_title('Franjas (Paso 0)')
+		plt.colorbar(im0, ax=axs[0])
+		
+		im1 = axs[1].imshow(fase_env_5, cmap='jet')
+		axs[1].set_title('Fase Envuelta (5-steps)')
+		plt.colorbar(im1, ax=axs[1])
+		
+		im2 = axs[2].imshow(fase_des_5, cmap='jet')
+		axs[2].set_title('Fase Desenvuelta')
+		plt.colorbar(im2, ax=axs[2])
+		
+		plt.tight_layout()
+		plt.show()
+	\end{lstlisting}
 	
-	
+	\vspace{0.8cm}
 	% ---------------- PREGUNTA H ---------------- %
-	\section*{H.- Explicar, inferir y describir la utilidad de los algoritmos de carré y Hariharan. De un ejemplo.}
+	\noindent \textbf{H.- Explicar, inferir y describir la utilidad de los algoritmos de carré y Hariharan. De un ejemplo.}
 	
 	\textbf{Respuesta:}
 	\textbf{Algoritmo de Carré:}
@@ -266,16 +290,16 @@
 		\item \textit{Utilidad e Inferencia:} Se infiere que es indispensable en entornos donde el actuador piezoeléctrico (PZT) que empuja el espejo de referencia tiene una respuesta no lineal o desconocida, lo cual haría fallar a algoritmos de pasos fijos (como el de 3 o 4 pasos fijos). Desacopla la magnitud del paso del cálculo de la fase.
 	\end{itemize}
 	
-	\textbf{Algoritmo de Hariharan \\(5-steps adaptado, comúnmente simétrico $\alpha = -\pi, -\pi/2, 0, \pi/2, \pi$):}
+	\textbf{Algoritmo de Hariharan (5-steps adaptado, comúnmente simétrico $\alpha = -\pi, -\pi/2, 0, \pi/2, \pi$):}
 	\begin{itemize}
 		\item \textit{Explicación:} Es un método de 5 imágenes con desplazamientos nominales de $90^\circ$. Combina simetría par e impar alrededor del tercer fotograma para el cálculo del numerador y denominador del arcotangente.
 		\item \textit{Utilidad e Inferencia:} Es mundialmente valorado porque es auto-compensatorio. Presenta una insensibilidad altamente robusta ante errores de calibración lineales del corrimiento de fase y armónicos de segundo orden provenientes de no-linealidades del sensor de la cámara CCD.
 		\item \textit{Ejemplo práctico:} Al utilizar un interferómetro Fizeau industrial sobre una mesa neumática para medir la planitud superficial de un espejo de un telescopio, vibraciones residuales pueden causar que en lugar de que el PZT avance exactamente 90 grados, avance 93 grados en cada paso. Hariharan anulará activamente el efecto de ese desfase parásito de $+3$ grados sobre la fase final calculada, entregando un contorno nítido.
 	\end{itemize}
 	
-	\newpage
+	\vspace{0.8cm}
 	% ---------------- PREGUNTA I ---------------- %
-	\section*{I.- Describa el método de modulación especial para encontrar la fase óptica: \textit{Off-Axis Interferometry (Fourier method)}. Describa cada una de las ecuaciones y agregue las imágenes obtenidas en cada paso del método de Fourier.}
+	\noindent \textbf{I.- Describa el método de modulación especial para encontrar la fase óptica: \textit{Off-Axis Interferometry (Fourier method)}. Describa cada una de las ecuaciones y agregue las imágenes obtenidas en cada paso del método de Fourier.}
 	
 	\textbf{Respuesta:}
 	\textbf{Descripción general:} El método de Takeda para interferometría de transformada de Fourier inyecta un alto grado de inclinación en el haz de referencia durante la captura. Esta inclinación introduce una frecuencia portadora espacial alta, la cual modula la información de la fase. Sólo se necesita 1 solo interferograma, aislando la fase en el dominio de las frecuencias, solucionando la limitante vibracional del multi-paso.
@@ -309,12 +333,12 @@
 	\]
 	\textit{(Nota: Las imágenes descritas en cada paso (interferograma con tilt $\rightarrow$ espectro FFT con 3 lóbulos $\rightarrow$ espectro filtrado $\rightarrow$ fase desenvuelta) pueden recrearse programáticamente tras una simulación directa o utilizando datos propios, tal como exigen las herramientas de este método).}
 	
-	\newpage
+	\vspace{0.8cm}
 	% ---------------- PREGUNTA J ---------------- %
-	\section*{J.- Deduzca la siguiente ecuación}
+	\noindent \textbf{J.- Deduzca la siguiente ecuación:
 		\[
 		\Delta\phi(x,y) = \arctan\left\{ \frac{\operatorname{real}[c_1(x,y)]\operatorname{imag}[c_2(x,y)] - \operatorname{imag}[c_1(x,y)]\operatorname{real}[c_2(x,y)]}{\operatorname{real}[c_1(x,y)]\operatorname{real}[c_2(x,y)] + \operatorname{imag}[c_1(x,y)]\operatorname{imag}[c_2(x,y)]} \right\}
-		\]
+		\]}
 	
 	\textbf{Respuesta:}
 	\textbf{Deducción matemática:}

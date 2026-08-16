@@ -848,7 +848,6 @@ class VentanaPrincipal(QtWidgets.QMainWindow):
             
         if "lineales" in tipo_texto: tipo_fase = 'lineal'
         elif "circulares" in tipo_texto: tipo_fase = 'circular'
-        elif "espiral" in tipo_texto: tipo_fase = 'espiral'
         elif "chirp" in tipo_texto: tipo_fase = 'chirp'
             
         try:
