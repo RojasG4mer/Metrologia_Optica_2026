@@ -847,8 +847,7 @@ class VentanaPrincipal(QtWidgets.QMainWindow):
         else: pasos = 4  # 4 Pasos clásico o Carré
             
         if "lineales" in tipo_texto: tipo_fase = 'lineal'
-        elif "circulares" in tipo_texto: tipo_fase = 'circulares'
-        elif "espiral" in tipo_texto: tipo_fase = 'espiral'
+        elif "circulares" in tipo_texto: tipo_fase = 'circular'
         elif "chirp" in tipo_texto: tipo_fase = 'chirp'
             
         try:
