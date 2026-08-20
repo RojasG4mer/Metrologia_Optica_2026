@@ -636,6 +636,35 @@ class VentanaPrincipal(QtWidgets.QMainWindow):
             self.stack_imagenes = []
             self.mapa_fase_desenvuelta = None
 
+            # --- PARÁMETROS FÍSICOS (PROYECCIÓN DE FRANJAS) ---
+            label_fisica = QtWidgets.QLabel("<b>Parámetros de Proyección</b>")
+            label_fisica.setAlignment(QtCore.Qt.AlignCenter)
+            
+            # Frecuencia Espacial (f)
+            self.spin_frecuencia = QtWidgets.QDoubleSpinBox()
+            self.spin_frecuencia.setRange(0.0001, 10.0)
+            self.spin_frecuencia.setValue(0.04) # Corresponde a 1/25.0 de tu script
+            self.spin_frecuencia.setDecimals(4)
+            self.spin_frecuencia.setToolTip("Frecuencia espacial (f)")
+            
+            # Ángulo de Proyección (theta) en grados
+            self.spin_angulo = QtWidgets.QDoubleSpinBox()
+            self.spin_angulo.setRange(0.1, 89.9)
+            self.spin_angulo.setValue(36.0) # Corresponde a np.pi/5 rad (36 grados)
+            self.spin_angulo.setSuffix(" °")
+            
+            self.btn_reconstruir_3d = QtWidgets.QPushButton("🧊 Reconstrucción 3D")
+            self.btn_reconstruir_3d.setStyleSheet("background-color: #2b5b84; color: white; font-weight: bold;")
+            self.btn_reconstruir_3d.setEnabled(False)
+
+            # Ensamblar en el layout derecho
+            layout_derecho.addWidget(label_fisica)
+            layout_derecho.addWidget(QtWidgets.QLabel("Frecuencia Espacial (f):"))
+            layout_derecho.addWidget(self.spin_frecuencia)
+            layout_derecho.addWidget(QtWidgets.QLabel("Ángulo de Proyección (\u03B8):"))
+            layout_derecho.addWidget(self.spin_angulo)
+            layout_derecho.addWidget(self.btn_reconstruir_3d)
+
     # =========================================================================
     # LÓGICA DE LA PESTAÑA DE ANÁLISIS DE FASE
     # =========================================================================

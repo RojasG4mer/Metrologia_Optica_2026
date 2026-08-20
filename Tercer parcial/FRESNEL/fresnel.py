@@ -1,109 +1,122 @@
 import numpy as np
-import cv2
 import matplotlib.pyplot as plt
+from skimage import io
+from scipy.ndimage import gaussian_filter
 
-def reconstruir_holograma_fresnel(ruta_imagen, d, lam, dx, dy):
-    """
-    Reconstruye un holograma digital utilizando la aproximación discreta de difracción de Fresnel.
-    
-    Parámetros:
-    - ruta_imagen: str, ruta al archivo del holograma.
-    - d: float, distancia de propagación en metros.
-    - lam: float, longitud de onda del láser en metros.
-    - dx, dy: float, tamaño físico del píxel del CCD en metros.
-    """
-    
-    # 1. Cargar el holograma [ A(x_h, y_h) ]
-    # Se carga en escala de grises y se convierte a flotante para evitar desbordamientos
-    holograma = cv2.imread(ruta_imagen, cv2.IMREAD_GRAYSCALE)
-    if holograma is None:
-        raise ValueError(f"No se pudo cargar la imagen en la ruta: {ruta_imagen}")
-    
-    holograma = holograma.astype(np.float64)
-    M, N = holograma.shape  # M filas (y), N columnas (x)
-    
-    # 2. Crear las coordenadas espaciales discretas en el plano del holograma
-    # Se centran en cero para mantener la simetría al aplicar la FFT
-    x = (np.arange(N) - N / 2) * dx
-    y = (np.arange(M) - M / 2) * dy
-    X, Y = np.meshgrid(x, y)
-    
-    # 3. Haz de referencia conjugado [ R*(x_h, y_h) ]
-    # Asumimos una onda plana incidiendo normalmente (R=1).
-    # Si tu montaje es 'off-axis' (fuera de eje), deberás introducir aquí 
-    # la portadora espacial con el ángulo respectivo.
-    R_conj = np.ones((M, N), dtype=np.complex128)
-    
-    # 4. Calcular la Función Chirp (Factor exponencial cuadrático)
-    # exp[ i * pi / (lambda * d) * (x_h^2 + y_h^2) ]
-    fase_esferica = np.exp(1j * (np.pi / (lam * d)) * (X**2 + Y**2))
-    
-    # 5. Modulación del campo en el plano del holograma
-    # Multiplicamos la transmitancia del holograma por la referencia y el chirp
-    campo_modulado = holograma * R_conj * fase_esferica
-    
-    # 6. Propagación numérica mediante Transformada Rápida de Fourier (FFT 2D)
-    # fftshift centra las frecuencias espaciales nulas en el origen
-    U = np.fft.fftshift(np.fft.fft2(campo_modulado))
-    
-    # 7. Extracción de los resultados físicos
-    intensidad = np.abs(U)**2
-    # Aplicamos un logaritmo para comprimir el rango dinámico y mejorar 
-    # la visualización de los órdenes de difracción.
-    intensidad_log = np.log(1 + intensidad)
-    
-    # Fase óptica envuelta entre [-pi, pi]
-    fase = np.angle(U)
-    
-    return holograma, intensidad_log, fase
+# %% Función de reconstrucción de Fresnel
+def reconstruir(holo, d, lam, d_xi, d_eta):
+    # Tamaño del holograma
+    M, N = holo.shape
 
-# ==========================================
-# Ejecución del algoritmo
-# ==========================================
-if __name__ == "__main__":
-    # Parámetros físicos (Ajustables según tu montaje optomecatrónico de laboratorio)
-    lam_laser = 532e-9     # Longitud de onda Nd:YAG (532 nm) en metros
-    distancia = 0.425      # Distancia de enfoque d = 42.5 cm en metros
-    tam_pixel = 5.2e-6     # Tamaño de pixel del CCD (5.2 um) en metros
+    # Resoluciones del plano reconstruido
+    d_x = (d * lam) / (N * d_xi)
+    d_y = (d * lam) / (M * d_eta)
+
+    # Índices centrados
+    i_M = np.arange(-M//2, M//2)
+    i_N = np.arange(-N//2, N//2)
+
+    # Malla del plano del holograma
+    xi, eta = np.meshgrid(i_N * d_xi, i_M * d_eta)
+
+    # Ejes del plano reconstruido
+    x = i_N * d_x
+    y = i_M * d_y
+
+    # Reconstrucción (Propagación)
+    U = np.exp(1j * np.pi * (xi**2 + eta**2) / (d * lam))
+    U = U * holo
+    U = np.fft.fftshift(np.fft.fft2(np.fft.ifftshift(U))) 
     
-    # Ruta de tu holograma (asegúrate de que apunte a tu imagen capturada)
-    ruta_holograma = 'images/Holograma.png' 
+    return U, x, y
+
+# %% Función auxiliar para generar las 3 imágenes por objeto
+def mostrar_resultados(holo, U, x_rec, y_rec, d_xi, d_eta, d_z, titulo, p_min, p_max):
+    M, N = holo.shape
+    eps = np.finfo(float).eps
     
-    try:
-        # Ejecutar propagación
-        holograma_base, espectro_intensidad, mapa_fase = reconstruir_holograma_fresnel(
-            ruta_imagen=ruta_holograma, 
-            d=distancia, 
-            lam=lam_laser, 
-            dx=tam_pixel, 
-            dy=tam_pixel
-        )
-        
-        # Configurar la figura de Matplotlib para visualizar resultados
-        plt.figure(figsize=(18, 6))
-        
-        # Gráfica 1: Holograma de entrada
-        plt.subplot(1, 3, 1)
-        plt.title('Holograma Digital Original')
-        plt.imshow(holograma_base, cmap='gray')
-        plt.axis('off')
-        
-        # Gráfica 2: Reconstrucción de Intensidad
-        plt.subplot(1, 3, 2)
-        plt.title(f'Intensidad Reconstruida (d = {distancia*100} cm)')
-        plt.imshow(espectro_intensidad, cmap='gray')
-        plt.axis('off')
-        
-        # Gráfica 3: Reconstrucción de Fase
-        plt.subplot(1, 3, 3)
-        plt.title('Fase Óptica Envuelta $\phi$')
-        # El colormap 'hsv' o 'jet' son idóneos para visualizar ciclos de fase de -pi a pi
-        im_fase = plt.imshow(mapa_fase, cmap='hsv') 
-        plt.colorbar(im_fase, fraction=0.046, pad=0.04)
-        plt.axis('off')
-        
-        plt.tight_layout()
-        plt.show()
-        
-    except Exception as e:
-        print(f"Error durante el procesamiento: {e}")
+    # 1. Ejes del holograma en milímetros [mm]
+    x_holo = np.arange(-N//2, N//2) * d_xi * 1e3
+    y_holo = np.arange(-M//2, M//2) * d_eta * 1e3
+    extent_holo = [x_holo[0], x_holo[-1], y_holo[-1], y_holo[0]]
+    
+    # 2. Transformada de Fourier 2D del Holograma (Intensidad en log10)
+    FFT_holo = np.fft.fftshift(np.fft.fft2(np.fft.ifftshift(holo)))
+    L_fft = np.log10(np.abs(FFT_holo)**2 + eps)
+    
+    # Ejes de la Transformada en frecuencias espaciales [mm^-1]
+    fx = np.fft.fftshift(np.fft.fftfreq(N, d=d_xi)) / 1e3 
+    fy = np.fft.fftshift(np.fft.fftfreq(M, d=d_eta)) / 1e3
+    extent_fft = [fx[0], fx[-1], fy[-1], fy[0]]
+    
+    # 3. Intensidad Reconstruida [mm]
+    I_rec = np.abs(U)**2
+    L_rec = np.log10(I_rec + eps)
+    extent_rec = [x_rec[0]*1e3, x_rec[-1]*1e3, y_rec[-1]*1e3, y_rec[0]*1e3]
+    
+    # Crear la figura para este objeto
+    fig, axes = plt.subplots(1, 3, figsize=(18, 5))
+    fig.suptitle(f'{titulo} (d = {d_z*1e3:.1f} mm)', fontsize=16, fontweight='bold')
+    
+    # Subplot 1: Holograma
+    im0 = axes[0].imshow(holo, cmap='gray', extent=extent_holo)
+    axes[0].set_title('Holograma Original')
+    axes[0].set_xlabel('x [mm]')
+    axes[0].set_ylabel('y [mm]')
+    fig.colorbar(im0, ax=axes[0], shrink=0.8)
+    
+    # Subplot 2: Transformada de Fourier
+    # Ajustamos percentiles entre 50 y 99.9 para que destaquen los órdenes de difracción (DC, +1, -1)
+    vmin_fft, vmax_fft = np.percentile(L_fft, [50, 99.9]) 
+    im1 = axes[1].imshow(L_fft, cmap='gray', extent=extent_fft, vmin=vmin_fft, vmax=vmax_fft)
+    axes[1].set_title('Transformada de Fourier')
+    axes[1].set_xlabel('f_x [mm⁻¹]')
+    axes[1].set_ylabel('f_y [mm⁻¹]')
+    fig.colorbar(im1, ax=axes[1], shrink=0.8)
+    
+    # Subplot 3: Intensidad Reconstruida
+    vmin_rec, vmax_rec = np.percentile(L_rec, [p_min, p_max])
+    im2 = axes[2].imshow(L_rec, cmap='gray', extent=extent_rec, vmin=vmin_rec, vmax=vmax_rec)
+    axes[2].set_title('Intensidad Reconstruida')
+    axes[2].set_xlabel('x [mm]')
+    axes[2].set_ylabel('y [mm]')
+    fig.colorbar(im2, ax=axes[2], shrink=0.8)
+    
+    plt.tight_layout()
+    plt.show()
+
+# %% Parámetros de Entrada
+d_xi = 6.45e-6   # Tamaño píxel horizontal
+d_eta = 6.45e-6  # Tamaño píxel vertical
+lam = 555e-9     # Láser verde
+d_prueba = 0.850 # Distancia objeto de prueba
+d_pequeno = 0.115 # Dado pequeño
+d_grande = 0.200 # Dado grande
+
+# %% Carga de imágenes
+HOLO_ref = io.imread('Tercer parcial\FRESNEL\holograma900mm.tif', as_gray=True).astype(np.float64)
+HOLO_peq = io.imread('Tercer parcial\FRESNEL\Dadopequenochido_00001.tif', as_gray=True).astype(np.float64)
+HOLO_gra = io.imread('Tercer parcial\FRESNEL\Dadograndechido_00009.tif', as_gray=True).astype(np.float64)
+
+# %% Filtrado Gaussiano
+HOLO_ref = HOLO_ref - gaussian_filter(HOLO_ref, sigma=3)
+HOLO_peq = HOLO_peq - gaussian_filter(HOLO_peq, sigma=1)
+HOLO_gra = HOLO_gra - gaussian_filter(HOLO_gra, sigma=1)
+
+# %% Llamada a la función de reconstrucción
+U_ref, x_ref, y_ref = reconstruir(HOLO_ref, d_prueba, lam, d_xi, d_eta)
+U_peq, x_peq, y_peq = reconstruir(HOLO_peq, d_pequeno, lam, d_xi, d_eta)
+U_gra, x_gra, y_gra = reconstruir(HOLO_gra, d_grande, lam, d_xi, d_eta)
+
+# %% Graficado de las 3 ventanas separadas (Holograma, Fourier e Intensidad)
+# Objeto de referencia
+mostrar_resultados(HOLO_ref, U_ref, x_ref, y_ref, d_xi, d_eta, d_prueba, 
+                   titulo='Objeto de referencia', p_min=20, p_max=100)
+
+# Dado pequeño
+mostrar_resultados(HOLO_peq, U_peq, x_peq, y_peq, d_xi, d_eta, d_pequeno, 
+                   titulo='Dado pequeño', p_min=60, p_max=99)
+
+# Dado grande
+mostrar_resultados(HOLO_gra, U_gra, x_gra, y_gra, d_xi, d_eta, d_grande, 
+                   titulo='Dado grande', p_min=65, p_max=99)

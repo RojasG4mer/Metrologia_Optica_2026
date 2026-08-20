@@ -119,10 +119,9 @@ class ProcesadorFase:
         return np.unwrap(np.unwrap(fase_envuelta, axis=0), axis=1)
 
     def desenvolvimiento_robusto(self, fase_envuelta):
-        """ Desarrollado robusto utilizando scikit-image. """
         try:
             from skimage.restoration import unwrap_phase
             return unwrap_phase(fase_envuelta)
         except ImportError:
-            print("Error: scikit-image no está instalado. Retornando None.")
-            return None
+            # Desenvolvimiento 2D simplificado de respaldo
+            return np.unwrap(np.unwrap(fase_envuelta, axis=0), axis=1)

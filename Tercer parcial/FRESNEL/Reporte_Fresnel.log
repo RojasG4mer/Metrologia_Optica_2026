@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.2.28)  19 AUG 2026 23:37
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.2.28)  19 AUG 2026 23:23
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**./Practica_DSPI_JFRM.tex
-(Practica_DSPI_JFRM.tex
+**./Reporte_Fresnel.tex
+(Reporte_Fresnel.tex
 LaTeX2e <2025-11-01>
 L3 programming layer <2025-12-24>
 (C:\Users\PC\AppData\Local\Programs\MiKTeX\tex/latex/base\article.cls
@@ -712,13 +712,20 @@ s\pgflibrarydecorations.pathreplacing.code.tex))
 .def
 File: l3backend-pdftex.def 2025-10-09 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count339
-) (Practica_DSPI_JFRM.aux
+) (Reporte_Fresnel.aux
 LaTeX Info: Redefining \. on input line 8.
 LaTeX Info: Redefining \% on input line 8.
 Package babel Info: 'spanish' activates 'spanish' shorthands.
 (babel)             Reported on input line 8.
+
+
+LaTeX Warning: Label `fig:fase' multiply defined.
+
+
+LaTeX Warning: Label `fig:fase' multiply defined.
+
 )
-\openout1 = `Practica_DSPI_JFRM.aux'.
+\openout1 = `Reporte_Fresnel.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 31.
 LaTeX Font Info:    ... okay on input line 31.
@@ -811,12 +818,12 @@ Package: ragged2e 2023/06/22 v3.6 ragged2e Package
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-LaTeX Font Info:    Trying to load font information for U+msa on input line 88.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 60.
 
 (C:\Users\PC\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 88.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 60.
 
 
 (C:\Users\PC\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
@@ -832,16 +839,15 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 [1{C:/Users/PC/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}
 
 ]
-<PriHol.png, id=12, 1293.633pt x 392.4261pt>
-File: PriHol.png Graphic file (type png)
-<use PriHol.png>
-Package pdftex.def Info: PriHol.png  used on input line 117.
-(pdftex.def)             Requested size: 231.01561pt x 70.07677pt.
-<SegHolo.png, id=14, 1293.633pt x 392.4261pt>
-File: SegHolo.png Graphic file (type png)
-<use SegHolo.png>
-Package pdftex.def Info: SegHolo.png  used on input line 124.
-(pdftex.def)             Requested size: 231.01561pt x 70.07677pt.
+Underfull \hbox (badness 10000) in paragraph at lines 114--114
+[]|\OT1/cmr/m/n/10 Emisi^^Son del l^^Saser
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 114--114
+[]|\OT1/cmr/m/n/10 6.45 $\OML/cmm/m/it/10 ^^V$\OT1/cmr/m/n/10 m $\OMS/cmsy/m/n/
+10 ^^B$
+ []
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -850,7 +856,23 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-10.82503pt}.
 
-[2 <./PriHol.png> <./SegHolo.png>]
+[2]
+<ob_ref.png, id=22, 1300.86pt x 361.35pt>
+File: ob_ref.png Graphic file (type png)
+<use ob_ref.png>
+Package pdftex.def Info: ob_ref.png  used on input line 152.
+(pdftex.def)             Requested size: 472.03123pt x 131.11697pt.
+<dado_pequeno.png, id=24, 1300.86pt x 361.35pt>
+File: dado_pequeno.png Graphic file (type png)
+<use dado_pequeno.png>
+Package pdftex.def Info: dado_pequeno.png  used on input line 159.
+(pdftex.def)             Requested size: 472.03123pt x 131.11697pt.
+<dado_grande.png, id=25, 1300.86pt x 361.35pt>
+File: dado_grande.png Graphic file (type png)
+<use dado_grande.png>
+Package pdftex.def Info: dado_grande.png  used on input line 166.
+(pdftex.def)             Requested size: 472.03123pt x 131.11697pt.
+
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 22.82503pt, for example:
@@ -858,7 +880,8 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-10.82503pt}.
 
-[3] (Practica_DSPI_JFRM.aux
+[3 <./ob_ref.png> <./dado_pequeno.png> <./dado_grande.png>]
+(Reporte_Fresnel.aux
 LaTeX Info: Redefining \. on input line 8.
 LaTeX Info: Redefining \% on input line 8.
 )
@@ -866,26 +889,34 @@ LaTeX Info: Redefining \% on input line 8.
 LaTeX2e <2025-11-01>
 L3 programming layer <2025-12-24>
  ***********
+
+
+LaTeX Warning: There were multiply-defined labels.
+
  ) 
 Here is how much of TeX's memory you used:
- 17020 strings out of 467871
- 344300 string characters out of 5419828
- 750138 words of memory out of 5000000
- 45594 multiletter control sequences out of 15000+600000
+ 17031 strings out of 467871
+ 344504 string characters out of 5419828
+ 751149 words of memory out of 5000000
+ 45605 multiletter control sequences out of 15000+600000
  631279 words of font info for 54 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 84i,12n,94p,1124b,578s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 84i,12n,94p,967b,583s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/PC/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmb
 x10.pfb><C:/Users/PC/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/
 cm/cmbx12.pfb><C:/Users/PC/AppData/Local/Programs/MiKTeX/fonts/type1/public/ams
 fonts/cm/cmcsc10.pfb><C:/Users/PC/AppData/Local/Programs/MiKTeX/fonts/type1/pub
 lic/amsfonts/cm/cmmi10.pfb><C:/Users/PC/AppData/Local/Programs/MiKTeX/fonts/typ
-e1/public/amsfonts/cm/cmr10.pfb><C:/Users/PC/AppData/Local/Programs/MiKTeX/font
-s/type1/public/amsfonts/cm/cmr9.pfb><C:/Users/PC/AppData/Local/Programs/MiKTeX/
-fonts/type1/public/amsfonts/cm/cmti10.pfb>
-Output written on Practica_DSPI_JFRM.pdf (3 pages, 1745974 bytes).
+e1/public/amsfonts/cm/cmmi7.pfb><C:/Users/PC/AppData/Local/Programs/MiKTeX/font
+s/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/PC/AppData/Local/Programs/MiKTeX
+/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/PC/AppData/Local/Programs/Mi
+KTeX/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/Users/PC/AppData/Local/Program
+s/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/PC/AppData/Local/P
+rograms/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/PC/AppData/Lo
+cal/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb>
+Output written on Reporte_Fresnel.pdf (3 pages, 1830974 bytes).
 PDF statistics:
- 55 PDF objects out of 1000 (max. 8388607)
+ 77 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 23 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 28 words of extra memory for PDF output out of 10000 (max. 10000000)
 
